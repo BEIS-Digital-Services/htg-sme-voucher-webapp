@@ -1,0 +1,64 @@
+﻿@model BEIS.HelpToGrow.Voucher.Web.Models.Voucher.FCASociety
+@{
+  ViewData["Title"] = "Check your company details";
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-action="GetFCANumber">Back</a>
+  </nav>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form asp-controller="applicant" asp-action="" method="get" novalidate="">
+        <span class="govuk-caption-l">Section 2 of 4</span>
+        <h1 class="govuk-heading-l">Check your company details</h1>
+        <div class="govuk-summary-list govuk-!-margin-bottom-9">
+          <dl class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Society name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              @Model.SocietyName
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <span class="govuk-visually-hidden"> Society Name</span>
+            </dd>
+          </dl>
+          <dl class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Registration Number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              @Model.FullRegistrationNumber
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a asp-action="GetFCANumber">
+                Change
+                <span class="govuk-visually-hidden"> company number</span>
+              </a>
+            </dd>
+          </dl>
+          <dl class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Registered office
+            </dt>
+            <dd class="govuk-summary-list__value">
+              @Html.Raw(Html.Encode(Model.SocietyAddress).Replace(",", @"<br />"))
+            </dd>
+          </dl>
+        </div>
+
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-warning-text__assistive">Warning</span>
+            Continue only if this is your company or the company you work for and you would like to apply to the Help to Grow: Digital business software scheme.
+          </strong>
+        </div>
+
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Confirm and continue
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

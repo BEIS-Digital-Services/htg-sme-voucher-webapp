@@ -1,0 +1,61 @@
+﻿@model UsefulLinksViewModel
+
+<div class="govuk-grid-column-one-third">
+    <aside class="app-related-items" role="complementary">
+        <h2 class="govuk-heading-m" id="subsection-title">
+            Useful links
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+            <ul class="govuk-list govuk-!-font-size-16">
+                @if (!Model.IsTermsConditionsHidden)
+                {
+                    <li>
+                        <a href="/termsandconditions/terms" class="govuk-link">
+                            Terms and conditions
+                        </a>
+                    </li>
+                }
+                @if (!Model.IsPrivacyPolicyHidden)
+                {
+                    <li>
+                        <a href="/termsandconditions/privacy" class="govuk-link">
+                            Privacy policy
+                        </a>
+                    </li>
+                }
+                @if (!Model.IsHelpToGrowHidden)
+                {
+                    <li>
+                        <a href="@Model.LearningPlatformURL" class="govuk-link">
+                            Help to Grow: Digital website
+                        </a>
+                    </li>
+                }
+                @if (!Model.IsApplyForDiscountHidden)
+                {
+                    <li>
+                        <a href="/" class="govuk-link">
+                            Apply for a discount on business software
+                        </a>
+                    </li>
+                }
+                @if (!Model.IsGeneralGuidanceHidden)
+                {
+                    <li>
+                        <a href="/guidance" class="govuk-link">
+                            General guidance
+                        </a>
+                    </li>
+                }
+                @if (!Model.IsGetInTouchHidden)
+                {
+                    <li>
+                        <a href="/getintouch" class="govuk-link">
+                            How to get in touch
+                        </a>
+                    </li>
+                }
+                </ul>
+        </nav>
+    </aside>
+</div>

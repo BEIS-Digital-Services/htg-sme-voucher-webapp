@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>BEIS.HelpToGrow.Voucher.Web.Tests</RootNamespace>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="eligibilityRules-one-disabled.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CsvHelper" Version="27.1.1" />
+        <PackageReference Include="HttpContextMoq" Version="1.2.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.12" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+        <PackageReference Include="Moq" Version="4.16.1" />
+        <PackageReference Include="NUnit" Version="3.13.1" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+        <PackageReference Include="coverlet.collector" Version="3.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\beis-htg-sme-voucher-webapp\BEIS.HelpToGrow.Voucher.Web.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Beis.Htg.VendorSme.Database">
+        <HintPath>..\BEIS.HelpToGrow.Core\library\Beis.Htg.VendorSme.Database.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>

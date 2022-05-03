@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Is your business buying this product for the first time?";
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link" href="/selectsoftware">Back</a>
+  </nav>
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+          <form class="form" action="/majorupgrade" method="get">
+              <div class="govuk-form-group">
+                  <fieldset class="govuk-fieldset">
+                      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                          <h1 class="govuk-fieldset__heading">
+                              Is your business buying @Model.SelectedProduct.product_name for the first time?
+                          </h1>
+                      </legend>
+                      <div class="govuk-radios govuk-radios--inline">
+                          @if(Model.FirsTime == null){
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="new-to-software-1" name="firstTime" type="radio" value="Yes">
+                                  <label class="govuk-label govuk-radios__label" for="new-to-software-1">
+                                      Yes
+                                  </label>
+                              </div>
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="new-to-software-1" name="firstTime" type="radio" value="No">
+                                  <label class="govuk-label govuk-radios__label" for="new-to-software-1">
+                                      No
+                                  </label>
+                              </div>
+                          }
+                          @if (Model.FirsTime == "Yes")
+                          {
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="new-to-software-1" name="firstTime" type="radio" value="Yes" checked>
+                                  <label class="govuk-label govuk-radios__label" for="new-to-software-1">
+                                      Yes
+                                  </label>
+                              </div>
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="new-to-software-1" name="firstTime" type="radio" value="No">
+                                  <label class="govuk-label govuk-radios__label" for="new-to-software-1">
+                                      No
+                                  </label>
+                              </div>
+                          }
+                          @if (Model.FirsTime == "No")
+                          {
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="new-to-software-1" name="firstTime" type="radio" value="Yes">
+                                  <label class="govuk-label govuk-radios__label" for="new-to-software-1">
+                                      Yes
+                                  </label>
+                              </div>
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="new-to-software-1" name="firstTime" type="radio" value="No" checked>
+                                  <label class="govuk-label govuk-radios__label" for="new-to-software-1">
+                                      No
+                                  </label>
+                              </div>
+                          }
+                      </div>
+                  </fieldset>
+              </div>
+              <button class="govuk-button" data-module="govuk-button">Continue</button>
+          </form>
+      </div>
+  </div>
+</div>

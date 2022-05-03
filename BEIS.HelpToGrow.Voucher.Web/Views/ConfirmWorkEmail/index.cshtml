@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Is your work email address correct?";
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link" href="workemail?workEmail=@Model.WorkEmail">Back</a>
+  </nav>
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+          <form class="form" action="termsandconditions" method="get">
+              <div class="govuk-form-group">
+                  <fieldset class="govuk-fieldset">
+                      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                          <h1 class="govuk-fieldset__heading">
+                              Is "@Model.WorkEmail" your work email address?
+                          </h1>
+                      </legend>
+                      <div class="govuk-radios govuk-radios--inline">
+                          @if (Model.WorkEmail == null)
+                          {
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="confirm-work-email-1" name="confirm-work-email" type="radio" value="Yes">
+                                  <label class="govuk-label govuk-radios__label" for="confirm-work-email-1">
+                                      Yes
+                                  </label>
+                              </div>
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="confirm-work-email-2" name="confirm-work-email" type="radio" value="No">
+                                  <label class="govuk-label govuk-radios__label" for="confirm-work-email-2">
+                                      No
+                                  </label>
+                              </div>
+                          }
+                          @if (Model.WorkEmail == "Yes")
+                          {
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="confirm-work-email-1" name="confirm-work-email" type="radio" value="Yes" checked>
+                                  <label class="govuk-label govuk-radios__label" for="confirm-work-email-1">
+                                      Yes
+                                  </label>
+                              </div>
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="confirm-work-email-2" name="confirm-work-email" type="radio" value="No">
+                                  <label class="govuk-label govuk-radios__label" for="confirm-work-email-2">
+                                      No
+                                  </label>
+                              </div>
+                          }
+                          @if (Model.WorkEmail == "No")
+                          {
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="confirm-work-email-1" name="confirm-work-email" type="radio" value="Yes">
+                                  <label class="govuk-label govuk-radios__label" for="confirm-work-email-1">
+                                      Yes
+                                  </label>
+                              </div>
+                              <div class="govuk-radios__item">
+                                  <input class="govuk-radios__input" id="confirm-work-email-2" name="confirm-work-email" type="radio" value="No" checked>
+                                  <label class="govuk-label govuk-radios__label" for="confirm-work-email-2">
+                                      No
+                                  </label>
+                              </div>
+                          }
+                      </div>
+                  </fieldset>
+              </div>
+              <button class="govuk-button" data-module="govuk-button">Continue</button>
+          </form>
+      </div>
+  </div>
+</div>

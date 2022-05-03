@@ -1,0 +1,87 @@
+@{
+    ViewData["Title"] = "Check your company details";
+}
+<div class="govuk-width-container">
+    <nav class="govuk-!-margin-bottom-9">
+      <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-controller="CompaniesHouseNumber" asp-action="Index">Back</a>
+    </nav>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <form action="../applicant" method="get" novalidate="">
+                <span class="govuk-caption-l">Section 2 of 4</span>
+                <h1 class="govuk-heading-l">Check your company details</h1>
+                <div class="govuk-summary-list govuk-!-margin-bottom-9">
+                    <dl class="govuk-summary-list__row"> 
+                        <dt class="govuk-summary-list__key">
+                            Company name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            @Model.CompanyHouseResponse.CompanyName
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                              <span class="govuk-visually-hidden"> company name</span>
+                        </dd>
+                    </dl>
+                    <dl class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Companies House number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            @Model.CompanyHouseResponse.CompanyNumber
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a asp-controller="CompaniesHouseNumber" asp-action="Index">
+                                Change
+                                <span class="govuk-visually-hidden"> company number</span>
+                            </a>
+                        </dd>
+                    </dl>
+                    <dl class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Registered office
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            @if (Model.CompanyHouseResponse.RegisteredOfficeAddress.AddressLine1 != null)
+                            {
+                                @Model.CompanyHouseResponse.RegisteredOfficeAddress.AddressLine1
+                                <br>
+                            }
+                            @if (Model.CompanyHouseResponse.RegisteredOfficeAddress.AddressLine2 != null)
+                            {
+                                @Model.CompanyHouseResponse.RegisteredOfficeAddress.AddressLine2
+                                <br>
+                            }
+                            @if (Model.CompanyHouseResponse.RegisteredOfficeAddress.Locality != null)
+                            {
+                                @Model.CompanyHouseResponse.RegisteredOfficeAddress.Locality
+                                <br>
+                            }
+                            @if (Model.CompanyHouseResponse.RegisteredOfficeAddress.Country != null)
+                            {
+                                @Model.CompanyHouseResponse.RegisteredOfficeAddress.Country
+                                <br>
+                            }
+                            @if (Model.CompanyHouseResponse.RegisteredOfficeAddress.PostalCode != null)
+                            {
+                                @Model.CompanyHouseResponse.RegisteredOfficeAddress.PostalCode
+                                <br>
+                            }
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="govuk-warning-text">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-warning-text__assistive">Warning</span>
+                        Continue only if this is your company or the company you work for and you would like to apply to the Help to Grow: Digital business software scheme.
+                    </strong>
+                </div>
+
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Confirm and continue
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

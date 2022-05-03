@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "There was a problem verifying your email address";
+}
+<div class="govuk-width-container">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-l">There was a problem verifying your email address.</h1>
+            <p class="govuk-body">Please try clicking the link in your verification email again.</p>
+            <p class="govuk-body">Select the link in the email to continue with your application.</p>
+            <h2 class="govuk-heading-m">I didn't get the email</h2>
+            <p class="govuk-body">Check your junk email folder. If the email is not there:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>you can <a asp-controller="ApplicantEmailAddress" asp-action="" class="govuk-link">enter your work email address again</a></li>
+                <li>we can <a  asp-controller="ApplicantEmailAddress" asp-action="CheckEmailAddress" class="govuk-link">resend the email</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

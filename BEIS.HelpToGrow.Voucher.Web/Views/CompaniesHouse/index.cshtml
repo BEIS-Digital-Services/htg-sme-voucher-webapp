@@ -1,0 +1,45 @@
+@model BEIS.HelpToGrow.Voucher.Web.Models.CompaniesHouse.CompaniesHouseViewModel;
+@{
+    ViewData["Title"] = "Does the business have a Companies House number?";
+    var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="companysize">Back</a>
+  </nav>
+  <partial name="_ValidationSummary" model="ViewData.ModelState" />
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" asp-action="GotANumber" method="post">
+        <div class="govuk-form-group @verticalErrorStyle">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <span class="govuk-caption-l">Section 2 of 4</span>
+              <h1 class="govuk-fieldset__heading">
+                Does the business have a Companies House number?
+              </h1>
+            </legend>
+            <p class="govuk-body">This is also known as a company registration number.</p>
+            <p class="govuk-body">You can find the Companies House number on the certificate of incorporation. You can also <a href="https://find-and-update.company-information.service.gov.uk" class="govuk-link" target="_blank">search the Companies House register  (opens in new tab)</a>.</p>
+            <span asp-validation-for="HasCompaniesHouseNumber" id="hasCompanyNumber" class="govuk-error-message"></span>
+            <div class="govuk-radios govuk-radios--inline">
+              <div class="govuk-radios__item">
+                <input asp-for="HasCompaniesHouseNumber" class="govuk-radios__input" id="companyNumber-yes" name="hasCompaniesHouseNumber" type="radio" value="Yes">
+                <label class="govuk-label govuk-radios__label" for="companyNumber-yes">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input asp-for="HasCompaniesHouseNumber" class="govuk-radios__input" id="companyNumber-no" name="hasCompaniesHouseNumber" type="radio" value="No">
+                <label class="govuk-label govuk-radios__label" for="companyNumber-no">
+                  No
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <button class="govuk-button company-house" data-module="govuk-button">Continue</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "The Companies House number could not be found";
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-controller="CompaniesHouseNumber" asp-action="Index">Back</a>
+  </nav>
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+          <div class="govuk-form-group">
+              <h1 class="govuk-label-wrapper">
+                  <label class="govuk-label govuk-label--l" for="companies-house-number">
+                      The Companies House number could not be found
+                  </label>
+              </h1>
+              <p class="govuk-body">Check that you have entered the correct Companies House number. You can find this:</p>
+              <ul class="govuk-list govuk-list--bullet">
+                  <li>on the certificate of incorporation</li>
+                  <li>by searching the <a href="https://find-and-update.company-information.service.gov.uk" target="_blank" class="govuk-link">Companies House register  (opens in new tab)</a> for the company number</li>
+              </ul>
+              <p class="govuk-body">When you have found the Companies House number, please <a href="/companieshousenumber/index" class="govuk-link">re-enter it</a>  to continue with your application.</p>
+              <div class="govuk-inset-text">
+                  <p class="govuk-body">If the Companies House number can not be found in the register, you will <strong>not</strong> be able to continue with your application.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

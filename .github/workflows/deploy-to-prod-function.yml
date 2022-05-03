@@ -1,0 +1,44 @@
+name: CI Deploy FunctionApp PROD
+
+on:
+ workflow_dispatch:
+ 
+env:
+  AZURE_FUNCTIONAPP_NAME: htg-prod-voucher-function-app
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'BEIS.HelpToGrow.Voucher.FunctionApp'
+
+jobs:
+  build-prod:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core 5.0
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Setup .NET Core 3.1
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build "BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj" --no-restore
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_PROD_CREDENTIALS }}
+
+    - name: Publish Function App for Release
+      run: dotnet publish "BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj" --configuration Release --output ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
+
+    - name: 'Deploy to Azure Function App'
+      uses: azure/functions-action@v1
+      with:
+        app-name: '${{ env.AZURE_FUNCTIONAPP_NAME }}'
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+
+    - name: Azure logout
+      run: |
+        az logout

@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "What is your work email address?";
+}
+<div class="govuk-width-container">
+    <nav class="govuk-!-margin-bottom-9">
+        <a class="govuk-back-link" href="companyeligible">Back</a>
+    </nav>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <form class="form" action="confirmworkemail" method="get">
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            <h1 class="govuk-fieldset__heading">
+                                What is your work email address?
+                            </h1>
+                        </legend>
+                        <p class="govuk-body">We will use this to send your Help to Grow: Digital software token.</p>
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="email">
+                                Work email address
+                            </label>
+                            <input class="govuk-input govuk-!-width-three-quarters" id="workemail" name="workemail" type="text" value="@Model.WorkEmail">
+                        </div>
+                    </fieldset>
+                </div>
+                <button class="govuk-button" data-module="govuk-button">Continue</button>
+            </form>
+        </div>
+    </div>
+</div>

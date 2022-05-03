@@ -1,0 +1,145 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
+using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using BEIS.HelpToGrow.Voucher.Web.Models;
+using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
+using BEIS.HelpToGrow.Voucher.Web.Services;
+using BEIS.HelpToGrow.Core.Enums;
+
+namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+{
+    public class ApplicantEmailAddressController : Controller
+    {
+        private readonly ILogger<ApplicantEmailAddressController> _logger;
+        private readonly ISessionService _sessionService;
+        private readonly IEmailVerificationService _emailVerificationService;
+        private readonly IApplicationStatusService _applicationStatusService;
+
+        public ApplicantEmailAddressController(
+            ILogger<ApplicantEmailAddressController> logger,
+            ISessionService sessionService,
+            IEmailVerificationService emailVerificationService, 
+            IApplicationStatusService applicationStatusService)
+        {
+            _logger = logger;
+            _sessionService = sessionService;
+            _emailVerificationService = emailVerificationService;
+            _applicationStatusService = applicationStatusService;
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var userVoucherDto = _sessionService.Get<UserVoucherDto>("userVoucherDto", HttpContext);
+
+            if (string.IsNullOrWhiteSpace(userVoucherDto?.ApplicantDto.EmailAddress))
+            {
+                return View();
+            }
+
+            var model = new EmailAddressViewModel
+            {
+                EmailAddress = userVoucherDto.ApplicantDto.EmailAddress
+            };
+
+            return View(model);
+        }
+        
+        public async Task<IActionResult> CheckEmailAddress()
+        {
+            var userVoucherDto = _sessionService.Get<UserVoucherDto>("userVoucherDto", HttpContext);
+
+            var model = new EmailAddressViewModel();
+
+            if (string.IsNullOrWhiteSpace(userVoucherDto?.ApplicantDto.EmailAddress))
+            {
+                model = new EmailAddressViewModel
+                {
+                    EmailAddress = userVoucherDto?.ApplicantDto?.EmailAddress
+                };
+
+                return View(model);
+            }
+
+            var companyHouseNumber = userVoucherDto.CompanyHouseResponse?.CompanyNumber ?? userVoucherDto.CompanyHouseNumber;
+
+            if (userVoucherDto.ApplicantDto.EnterpriseId == 0 && !await _emailVerificationService.CompanyNumberIsUnique(companyHouseNumber, userVoucherDto.FCANumber))
+            {
+                var applicationStatus = await _applicationStatusService.GetApplicationStatus(userVoucherDto.CompanyHouseResponse?.CompanyNumber, userVoucherDto.FCANumber);
+                switch (applicationStatus)
+                {
+                    default:
+                        {
+                            // continue
+                            break;
+                        }
+                    case ApplicationStatus.ActiveTokenNotRedeemed:
+                    case ApplicationStatus.CancelledCannotReApply:
+                    case ApplicationStatus.Ineligible:
+                        {
+                            return View("CompanyAlreadyExists", userVoucherDto);                            
+                        }
+                    case ApplicationStatus.EmailNotVerified:
+                    case ApplicationStatus.EmailVerified:
+                    case ApplicationStatus.ActiveTokenRedeemed:
+                    case ApplicationStatus.TokenReconciled:
+                   
+                        {
+                            return View("CompanyAlreadyExists", userVoucherDto);
+                        }
+
+                }
+               
+            }
+
+            var saveResult = await _emailVerificationService.CreateOrUpdateEnterpriseDetailsAsync(userVoucherDto);
+
+            if (saveResult.IsFailed)
+            {
+                return RedirectToAction("error", "home");
+            }
+
+            userVoucherDto = _sessionService.Get<UserVoucherDto>("userVoucherDto", HttpContext); // todo - consider returning the dto from the service
+
+            var verificationCode = _emailVerificationService.GetVerificationCode(userVoucherDto);
+
+            userVoucherDto.ApplicantDto.EmailVerificationLink = GetVerificationLink(verificationCode, Urls.EmailVerificationUrl);
+
+            var result = await _emailVerificationService.SendVerifyEmailNotificationAsync(userVoucherDto.ApplicantDto);
+            if(result.IsFailed)
+            {
+                return View("ServiceUnavailable");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Index(EmailAddressViewModel model)
+        {
+            if (!ModelState.IsValid || string.IsNullOrWhiteSpace(model.EmailAddress)) // model state validity evaluated incorrectly in unit test!
+            {
+                return View("Index", model);
+            }
+
+            var userVoucherDto = _sessionService.Get<UserVoucherDto>("userVoucherDto", HttpContext) ?? new UserVoucherDto();
+            userVoucherDto.ApplicantDto ??= new ApplicantDto();
+            userVoucherDto.ApplicantDto.EmailAddress = model.EmailAddress.Trim();
+            _sessionService.Set("userVoucherDto", userVoucherDto, HttpContext);
+
+            return RedirectToAction("Index", "TermsAndConditions");
+        }
+
+        private static string GetVerificationLink(string verificationCode, string path)
+        {
+            var param = new Dictionary<string, string> { { "verificationCode", verificationCode } };
+
+            return new Uri(QueryHelpers.AddQueryString(path, param)).ToString();
+        }
+    }
+}

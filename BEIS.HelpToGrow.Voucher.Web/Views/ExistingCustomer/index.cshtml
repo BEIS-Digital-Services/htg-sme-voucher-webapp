@@ -1,0 +1,46 @@
+﻿@model ExistingCustomerViewModel
+@{
+    ViewData["Title"] = "Existing Customer";
+    var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="newtosoftware">Back</a>
+  </nav>
+  <partial name="_ValidationSummary" model="ViewData.ModelState" />
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" asp-action="Forward" method="post">
+        <div class="govuk-form-group @verticalErrorStyle">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <span class="govuk-caption-l">Section 1 of 4</span>
+              <h1 class="govuk-fieldset__heading">
+                Are you an existing customer of @Model.VendorName?
+              </h1>
+            </legend>
+            <p class="govuk-body">
+                If you have an existing contract or an active subscription with this supplier, please select yes.
+            </p>
+            <span asp-validation-for="ExistingCustomer" id="ExistingCustomer" class="govuk-error-message"></span>
+            <div class="govuk-radios govuk-radios--inline">
+              <div class="govuk-radios__item">
+                <input asp-for="ExistingCustomer" class="govuk-radios__input" id="ExistingCustomer-yes" name="existingCustomer" type="radio" value="Yes">
+                <label class="govuk-label govuk-radios__label" for="ExistingCustomer-yes">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input asp-for="ExistingCustomer" class="govuk-radios__input" id="ExistingCustomer-no" name="existingCustomer" type="radio" value="No">
+                <label class="govuk-label govuk-radios__label" for="ExistingCustomer-no">
+                  No
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+      </form>
+    </div>
+  </div>
+</div>

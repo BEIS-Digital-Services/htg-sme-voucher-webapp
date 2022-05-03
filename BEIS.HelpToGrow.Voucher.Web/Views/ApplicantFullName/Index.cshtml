@@ -1,0 +1,28 @@
+﻿@model FullNameViewModel
+@{
+  ViewData["Title"] = "What is your name?";
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-controller="CompaniesHouseNumber" asp-action="Index" >Back</a>
+  </nav>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" asp-action="index" method="post">
+        <partial name="_ValidationSummary" model="ViewData.ModelState" />
+          <div class="govuk-form-group">
+            <span class="govuk-caption-l">Section 3 of 4</span>
+            <h1 class="govuk-label-wrapper">
+              <label class="govuk-label govuk-label--l" for="applicant-name">
+                What is your name?
+              </label>
+            </h1>
+            <div id="applicant-name-hint" class="govuk-hint">Full name</div>
+            <span asp-validation-for="Name" class="govuk-error-message"></span>
+            <input id="applicant-name" asp-for="@Model.Name" class="govuk-input" spellcheck="false" autocomplete="name" aria-describedby="applicant-name-hint">
+          </div>
+          <button class="govuk-button applicant-name" data-module="govuk-button">Continue</button>
+      </form>
+    </div>
+  </div>
+</div>

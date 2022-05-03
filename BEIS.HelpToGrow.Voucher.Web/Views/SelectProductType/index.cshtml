@@ -1,0 +1,60 @@
+@model BEIS.HelpToGrow.Voucher.Web.Models.Product.ProductTypeViewModel
+@{
+    ViewData["Title"] = "What type of business software do you want to buy?";
+    var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="../">Back</a>
+  </nav>
+  <partial name="_ValidationSummary" model="ViewData.ModelState" />
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <form class="form" asp-action="index" method="post">
+          <div class="govuk-form-group @verticalErrorStyle">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <span class="govuk-caption-l">Section 1 of 4</span>
+                <h1 class="govuk-fieldset__heading">
+                  What type of business software do you want to buy?
+                </h1>
+              </legend>
+              <div id="software-category-hint" class="govuk-hint">
+                Select one option.
+              </div>
+              <span asp-validation-for="ProductType" class="govuk-error-message"></span>
+              <div class="govuk-radios">
+                @{
+                  var itemIndex = 0;
+                  foreach (var item in Model.ProductTypeList)
+                  {
+                    if (item.item_name == Model.SelectedProductType?.item_name)
+                    {
+                      <div class="govuk-radios__item">
+                        <input asp-for="@Model.ProductType" class="govuk-radios__input" id="product_type-@itemIndex" type="radio" value="@item.id" checked>
+                        <label class="govuk-label govuk-radios__label" for="product_type-@itemIndex">
+                          @item.item_name
+                        </label>
+                      </div>
+                    }
+                    else
+                    {
+                      <div class="govuk-radios__item">
+                        <input asp-for="@Model.ProductType" class="govuk-radios__input" id="product_type-@itemIndex" type="radio" value="@item.id">
+                        <label class="govuk-label govuk-radios__label" for="product_type-@itemIndex">
+                          @item.item_name
+                        </label>
+                      </div>
+                    }
+
+                    itemIndex++;
+                  }
+                }
+              </div>
+            </fieldset>
+          </div>
+          <button class="govuk-button product-type" data-module="govuk-button">Continue</button>
+        </form>
+      </div>
+    </div>
+</div>

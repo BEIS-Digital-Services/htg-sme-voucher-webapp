@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Sorry, there's a problem with the Companies House register";
+}
+<div class="govuk-width-container">
+    <nav class="govuk-!-margin-bottom-9">
+      <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-controller="companieshouse" asp-action="Index">Back</a>
+    </nav>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <form class="form" action="check-company-details" method="post" novalidate="">
+                <div class="govuk-form-group">
+                    <h1 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--l" for="companies-house-number">
+                            Sorry, there's a problem with the Companies House register
+                        </label>
+                    </h1>
+                    <p class="govuk-body">Continue with your application later when the Companies House register is available.</p>
+                    <p class="govuk-body">You may have to start your application from the beginning, as your data may not have been saved.</p>
+                    <div class="govuk-inset-text">
+                        <p class="govuk-body">You will <strong>not</strong> be able to complete your application until you have confirmed the Companies House number.</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

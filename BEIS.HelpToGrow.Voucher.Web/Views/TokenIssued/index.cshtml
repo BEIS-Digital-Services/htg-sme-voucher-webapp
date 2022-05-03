@@ -1,0 +1,33 @@
+@model BEIS.HelpToGrow.Voucher.Web.Models.Voucher.UserVoucherDto
+@{
+  ViewData["Title"] = "Your application has been successful";
+}
+<div class="govuk-width-container">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-panel govuk-panel--confirmation">
+        <h1 class="govuk-panel__title">Your application has been successful</h1>
+        <div class="govuk-panel__body">
+          <div class="govuk-!-font-size-27">
+            Your software purchase link is:
+          </div>
+          <a href="@Model.tokenPurchaseLink" class="govuk-link govuk-link--inverse govuk-!-font-size-24"><strong>Help to Grow: Digital discount</strong></a>
+        </div>
+      </div>
+      <p class="govuk-body">We have also sent your software purchase link for <strong>@Model.SelectedProduct.product_name</strong> to: <strong>@Model.ApplicantDto.EmailAddress</strong></p>
+      <h2 class="govuk-heading-m">What you need to do next</h2>
+      <ol class="govuk-list govuk-list--number">
+        <li>Follow the link, which will take you to the software supplier's website.</li>
+        <li>Check that the software product and Help to Grow: Digital discount are correct.</li>
+        <li>Complete your purchase.</li>
+      </ol>
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Warning</span>
+          Your unique link is valid for 30 days. After this, your software discount will expire and the unique link will become invalid.
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>

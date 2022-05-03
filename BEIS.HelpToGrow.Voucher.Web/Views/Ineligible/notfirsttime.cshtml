@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Your business is not eligible due to the product version";
+}
+<div class="govuk-width-container">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-l">Your business is not eligible</h1>
+            <p class="govuk-body">This is because <strong>@Model.SelectedProduct.product_name</strong> is  <strong>not</strong> being bought by the business for the first time.</p>
+            <h2 class="govuk-heading-m">Contact us</h2>
+            <p class="govuk-body">If you would like to enquire about the decision, you can contact the Help to Grow: Digital team at <a href="mailto:sme.helptogrow@beis.gov.uk">sme.helptogrow@beis.gov.uk</a>.</p>
+            <p class="govuk-body">
+                For further guidance on Help to Grow: Digital please visit: <a href="/guidance" class="govuk-link">general guidance</a>. 
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+﻿using System;
+using Beis.Htg.VendorSme.Database.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
+using NUnit.Framework;
+using BEIS.HelpToGrow.Voucher.Web.Controllers;
+using BEIS.HelpToGrow.Voucher.Web.Models;
+using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
+using BEIS.HelpToGrow.Voucher.Web.Services;
+
+namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+{
+    [TestFixture]
+    public class TermsAndConditionsControllerTests
+    {
+        private TermsAndConditionsController _sut;
+        private Mock<ISessionService> _mockSessionService;
+
+        [SetUp]
+        public void Setup()
+        {
+            _mockSessionService = new Mock<ISessionService>();
+            _sut = new TermsAndConditionsController(_mockSessionService.Object);
+        }
+
+        [Test]
+        public void HandlesMissingSession()
+        {
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns((UserVoucherDto) null);
+
+            var viewResult = (ViewResult) _sut.Index();
+
+            Assert.That(viewResult.Model is TermsConditionsViewModel);
+            Assert.Null(((TermsConditionsViewModel) viewResult.Model).SelectedProduct);
+        }
+
+        [Test]
+        public void HandlesMissingTermsAndConditions()
+        {
+            var userVoucherDto = new UserVoucherDto
+            {
+                ConsentTermsConditions = null,
+                SelectedProduct = new product
+                {
+                    product_name = "fake product name"
+                }
+            };
+
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns(userVoucherDto);
+
+            var viewResult = (ViewResult) _sut.Index();
+
+            Assert.That(viewResult.Model is TermsConditionsViewModel);
+            Assert.AreEqual("fake product name", ((TermsConditionsViewModel) viewResult.Model).SelectedProduct);
+            Assert.Null(((TermsConditionsViewModel) viewResult.Model).TermsConditions);
+            Assert.Null(((TermsConditionsViewModel) viewResult.Model).PrivacyPolicy);
+            Assert.Null(((TermsConditionsViewModel) viewResult.Model).SubsidyControl);
+        }
+
+        [Test]
+        public void GetIndex()
+        {
+            var userVoucherDto = new UserVoucherDto
+            {
+                ConsentTermsConditions = "fake positive value",
+                SelectedProduct = new product
+                {
+                    product_name = "fake product name"
+                }
+            };
+
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns(userVoucherDto);
+
+            var viewResult = (ViewResult) _sut.Index();
+
+            Assert.That(viewResult.Model is TermsConditionsViewModel);
+            Assert.AreEqual("fake product name", ((TermsConditionsViewModel) viewResult.Model).SelectedProduct);
+            Assert.AreEqual("on", ((TermsConditionsViewModel) viewResult.Model).TermsConditions);
+            Assert.AreEqual("on", ((TermsConditionsViewModel) viewResult.Model).PrivacyPolicy);
+            Assert.AreEqual("on", ((TermsConditionsViewModel) viewResult.Model).SubsidyControl);
+        }
+
+        [Test]
+        public void PostIndexInvalidModel()
+        {
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns(new UserVoucherDto());
+
+            var viewModel = new TermsConditionsViewModel();
+
+            var viewResult = (ViewResult)_sut.Index(viewModel);
+
+            Assert.That(viewResult.Model is TermsConditionsViewModel);
+            Assert.Null(viewResult.ViewName);
+        }
+
+        [Test]
+        public void PostIndex()
+        {
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns(new UserVoucherDto());
+
+            var viewModel = new TermsConditionsViewModel
+            {
+                PrivacyPolicy = "fake answer #1",
+                SubsidyControl = "fake answer #2",
+                TermsConditions = "fake answer #3",
+            };
+
+            var actionResult = (RedirectToActionResult)_sut.Index(viewModel);
+
+            Assert.AreEqual("ConfirmApplicant", actionResult.ControllerName);
+            Assert.AreEqual("Index", actionResult.ActionName);
+        }
+
+        [Test]
+        public void Terms()
+        {
+            Environment.SetEnvironmentVariable("LEARNING_PLATFORM_URL", "https://fake.url.com/");
+
+            var viewResult = (ViewResult)_sut.Terms();
+            var viewModel = viewResult.Model as TermsConditionsViewModel;
+
+            Assert.IsEmpty(viewResult.ViewData);
+            Assert.NotNull(viewModel);
+            Assert.AreEqual(new Uri("https://fake.url.com/eligibility"), TermsConditionsViewModel.BusinessEligibilityUrl);
+        }
+
+        [Test]
+        public void Privacy()
+        {
+            var viewResult = (ViewResult)_sut.Privacy();
+
+            Assert.AreEqual(0, viewResult.ViewData.Count);
+        }
+
+        [Test]
+        public void Subsidy()
+        {
+            var viewResult = (ViewResult)_sut.Subsidy();
+
+            Assert.AreEqual(0, viewResult.ViewData.Count);
+        }
+    }
+}

@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Confirm this is the software you want to buy";
+}
+<div class="govuk-width-container">
+    <nav class="govuk-!-margin-bottom-9">
+      <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="selectsoftware">Back</a>
+    </nav>
+    @if (Model.errorMessage != null)
+    {
+        <div class="govuk-error-summary" role="alert" tabindex="-1" data-module="govuk-error-summary">
+            <h2 class="govuk-error-summary__title" id="error-summary-title">
+                There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+                <ul class="govuk-list govuk-error-summary__list">
+                    <li>
+                        <a href="#passport-issued-day">
+                            Error Code: @Model.errorCode
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#postcode-input">@Model.errorMessage</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div tabindex="-1" role="group" id="errorSummary" class="govuk-error-summary moj-hidden" data-module="error-summary">
+        </div>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds-from-desktop">
+                <span class="govuk-caption-l">Section 1 of 4</span>
+                <h1 class="govuk-heading-l">Confirm this is the software you want to buy</h1>
+                <div class="govuk-summary-list govuk-!-margin-bottom-9">
+                    <dl class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Software name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            @Model.SelectedProduct.product_name
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a href="selectsoftware">
+                                Change
+                                <span class="govuk-visually-hidden">Software product</span>
+                            </a>
+                        </dd>
+                    </dl>
+                </div>
+                <table class="govuk-table govuk-!-margin-bottom-9">
+                    <caption class="govuk-table__caption govuk-table__caption--m">Discount details</caption>
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">Price before discount</th>
+                            <th scope="col" class="govuk-table__header">Price after discount</th>
+                            <th scope="col" class="govuk-table__header">Discount period</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">£@Model.SelectedProduct.price</td>
+                            <td class="govuk-table__cell">£@(int.Parse(Model.SelectedProduct.price) - (int.Parse(Model.SelectedProduct.price) * int.Parse(Model.SelectedProduct.sales_discount.Split("%")[0]))/100)</td>
+                            <td class="govuk-table__cell">Nov 2021 to Nov 2022</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form action="newtosoftware" method="post" novalidate="">
+                    <input type="hidden" name="answers-checked" value="true">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Confirm and continue
+                    </button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

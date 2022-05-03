@@ -1,0 +1,24 @@
+{
+  "name": "wwwroot",
+  "version": "1.0.0",
+  "description": "Help to Grow: Digital",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "Help",
+    "to",
+    "Grow:",
+    "Digital"
+  ],
+  "author": "Rene Lingofe",
+  "license": "ISC",
+  "dependencies": {
+    "@ministryofjustice/frontend": "^0.2.5",
+    "govuk-frontend": "^3.13.0"
+  }
+}

@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "This business has already applied for a financial discount";
+}
+<div class="govuk-width-container">
+    <nav class="govuk-!-margin-bottom-9">
+        <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-controller="CompaniesHouseNumber" asp-action="Index">Back</a>
+    </nav>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+            <form class="form" action="check-company-details" method="post" novalidate="">
+
+                <div class="govuk-form-group">
+                    <h1 class="govuk-label-wrapper">
+                        <label class="govuk-label govuk-label--l" for="companies-house-number">
+                            This business has already applied for a financial discount.
+                        </label>
+                    </h1>
+
+                    <p class="govuk-body">You cannot continue with this application because this business has already applied for, or received, a financial discount through the Help to Grow: Digital scheme.</p>
+                    <p class="govuk-body">If you have entered the wrong Companies House number, you can change it <a asp-action="" class="govuk-link">here</a>.</p>
+                    <p class="govuk-body">A business can only apply for one financial discount. For full eligibility criteria, please refer to the Help to Grow: Digital <a asp-controller="guidance" asp-action="" target="_blank">general guidance  (opens in new tab)</a>.</p>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

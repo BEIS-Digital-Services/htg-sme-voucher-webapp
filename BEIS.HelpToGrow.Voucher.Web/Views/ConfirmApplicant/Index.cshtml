@@ -1,0 +1,184 @@
+﻿@model ConfirmApplicantViewModel
+@{
+    ViewData["Title"] = "Check applicant details";
+}
+<div class="govuk-width-container">
+  <nav class="govuk-!-margin-bottom-9">
+    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="/termsandconditions">Back</a>
+  </nav>
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+          <div class="govuk-form-group">
+              <span class="govuk-caption-l">Section 3 of 4</span>
+              <h1 class="govuk-label-wrapper">
+                  <label class="govuk-label govuk-label--l" for="applicant-name">
+                      Check applicant details
+                  </label>
+              </h1>
+              <div class="govuk-summary-list govuk-!-margin-bottom-9">
+                <dl class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Software name
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    @Model.SoftwareProduct
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a href="@Model.ComparisonToolURL">
+                      Change
+                      <span class="govuk-visually-hidden">select software</span>
+                    </a>
+                  </dd>
+                </dl>
+                
+                @if (!string.IsNullOrEmpty(Model.ProductPrice))
+                {
+                  <dl class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                      Price<br/>(excl. VAT)
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                      From &#163;@Model.ProductPrice
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                    </dd>
+                  </dl>
+                }
+
+                <dl class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Company name
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    @Model.CompanyName
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a asp-action="" asp-controller="CompaniesHouse">
+                      Change
+                      <span class="govuk-visually-hidden">company details</span>
+                    </a>
+                  </dd>
+                </dl>
+                <dl class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Company number
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    @Model.CompanyNumber
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a asp-action="" asp-controller="CompaniesHouse">
+                      Change
+                      <span class="govuk-visually-hidden">company details</span>
+                    </a>
+                  </dd>
+                </dl>
+                <dl class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Applicant name
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    @Model.FullName
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a asp-action="" asp-controller="applicant">
+                      Change
+                      <span class="govuk-visually-hidden"> Name</span>
+                    </a>
+                  </dd>
+                </dl>
+                <dl class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Applicant role
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    @Model.Role
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a href="applicantrole">
+                      Change
+                      <span class="govuk-visually-hidden"> Role</span>
+                    </a>
+                  </dd>
+                </dl>
+                <dl class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Applicant work email address
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    @Model.EmailAddress
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a asp-action="" asp-controller="applicantEmailAddress">
+                      Change
+                      <span class="govuk-visually-hidden"> work email address</span>
+                    </a>
+                  </dd>
+                </dl>
+              </div>
+              <div class="govuk-summary-list govuk-!-margin-bottom-9">
+                  <h2 class="govuk-heading-m">Consent</h2>
+                  <dl class="govuk-summary-list__row">
+                      <dt class="govuk-summary-list__key">
+                          Terms and conditions
+                      </dt>
+                      <dd class="govuk-summary-list__value">
+                          Accepted
+                      </dd>
+                      <dd class="govuk-summary-list__actions">
+                      </dd>
+                  </dl>
+
+                  <dl class="govuk-summary-list__row">
+                      <dt class="govuk-summary-list__key">
+                          Privacy policy
+                      </dt>
+                      <dd class="govuk-summary-list__value">
+                          Accepted
+                      </dd>
+                      <dd class="govuk-summary-list__actions">
+                      </dd>
+                  </dl>
+
+                  <dl class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                      Subsidy Control
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                      Accepted
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                    </dd>
+                  </dl>
+
+                <dl class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Marketing Consent
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    @Model.MarketingConsentResponse
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a asp-action="" asp-controller="TermsAndConditions">
+                      Change
+                      <span class="govuk-visually-hidden"> marketing consent</span>
+                    </a>
+                  </dd>
+                </dl>
+              </div>
+          </div>
+          <div class="govuk-warning-text">
+              <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+              <strong class="govuk-warning-text__text">
+                  <span class="govuk-warning-text__assistive">Warning</span>
+                  By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.
+              </strong>
+            </div>
+              <form class="form" asp-action="CheckEmailAddress" asp-controller="ApplicantEmailAddress" method="post">
+                  <button class="govuk-button confirm-applicant" data-module="govuk-button">
+                      Confirm and continue
+                  </button>
+              </form>
+          </div>
+      </div>
+</div>

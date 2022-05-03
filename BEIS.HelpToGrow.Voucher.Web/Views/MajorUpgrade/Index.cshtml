@@ -1,0 +1,52 @@
+@model MajorUpgradeViewModel
+@{
+    ViewData["Title"] = "Is this a major upgrade from a previous version?";
+    var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
+
+}
+<div class="govuk-width-container">
+    <nav class="govuk-!-margin-bottom-9">
+        <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="existingcustomer">Back</a>
+    </nav>
+    <partial name="_ValidationSummary" model="ViewData.ModelState" />
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <form class="form" asp-action="forward" method="get">
+                <div class="govuk-form-group @verticalErrorStyle">
+                    <span class="govuk-caption-l">Section 1 of 4</span>
+
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            <h1 class="govuk-fieldset__heading">
+                                Is this a major software upgrade for your business?
+                            </h1>
+                        </legend>
+                        <p class="govuk-body">
+                            A purchase that represents a significant shift and change in operations is permitted and classed as a major upgrade - for example, from desktop-based applications to cloud-based software as a service. This includes major upgrades offered by your existing software supplier.
+                        </p>
+                        <p class="govuk-body">
+                            A software purchase which moves between defined product variations from the same supplier - for example, from Bronze to Silver - is not permitted.
+                        </p>
+
+                        <span asp-validation-for="MajorUpgrade" id="majorUpgrade" class="govuk-error-message"></span>
+                        <div class="govuk-radios govuk-radios--inline">
+                            <div class="govuk-radios__item">
+                                <input asp-for="MajorUpgrade" class="govuk-radios__input" id="majorUpgrade-yes" name="majorUpgrade" type="radio" value="Yes">
+                                <label class="govuk-label govuk-radios__label" for="majorUpgrade-yes">
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input asp-for="MajorUpgrade" class="govuk-radios__input" id="majorUpgrade-no" name="majorUpgrade" type="radio" value="No">
+                                <label class="govuk-label govuk-radios__label" for="majorUpgrade-no">
+                                    No
+                                </label>
+                            </div>
+                        </div>                  
+                    </fieldset>
+                </div>
+                <button class="govuk-button" data-module="govuk-button">Continue</button>
+            </form>
+        </div>
+    </div>
+</div>
