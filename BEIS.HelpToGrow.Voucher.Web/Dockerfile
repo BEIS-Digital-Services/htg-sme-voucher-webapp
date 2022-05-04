@@ -8,7 +8,7 @@ WORKDIR /src
 COPY beis-htg-sme-voucher-webapp/BEIS.HelpToGrow.Voucher.Web.csproj .
 RUN dotnet restore "./BEIS.HelpToGrow.Voucher.Web.csproj"
 COPY . .
-WORKDIR "/src/beis-htg-sme-voucher-webapp"
+WORKDIR "/src/BEIS.HelpToGrow.Voucher.Web"
 RUN dotnet build "BEIS.HelpToGrow.Voucher.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
