@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY beis-htg-sme-voucher-webapp/BEIS.HelpToGrow.Voucher.Web.csproj .
+COPY BEIS.HelpToGrow.Voucher.Web/BEIS.HelpToGrow.Voucher.Web.csproj .
 RUN dotnet restore "./BEIS.HelpToGrow.Voucher.Web.csproj"
 COPY . .
 WORKDIR "/src/BEIS.HelpToGrow.Voucher.Web"
