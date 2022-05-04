@@ -29,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\beis-htg-sme-voucher-webapp\BEIS.HelpToGrow.Voucher.Web.csproj" />
+      <ProjectReference Include="..\BEIS.HelpToGrow.Voucher.Web\BEIS.HelpToGrow.Voucher.Web.csproj" />
     </ItemGroup>
 
     <ItemGroup>
