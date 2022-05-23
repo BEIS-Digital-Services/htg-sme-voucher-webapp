@@ -30,6 +30,9 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
             _mockOptions
                 .Setup(_ => _.IssueTokenTemplateId)
                 .Returns(() => "fake template id");
+            _mockOptions
+                .Setup(_ => _.EmailVerificationUrl)
+                .Returns(() => "https://localhost:44326/VerifyEmailAddress");
 
             _mockLogger = new Mock<ILogger<NotifyService>>();
             _mockHostEnvironment = new Mock<IWebHostEnvironment>();

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.ApplicationInsights;
@@ -12,17 +13,22 @@ namespace BEIS.HelpToGrow.Voucher.Web
             CreateHostBuilder(args).Build().Run();
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
+                .ConfigureAppConfiguration(configuration =>
                 {
-                    webBuilder
-                        .UseStartup<Startup>()
-                        .ConfigureLogging(_ =>
-                        {
-                            _.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Debug);
-                            _.AddFilter<ApplicationInsightsLoggerProvider>("Microsoft", LogLevel.Warning);
-                        });
+                    var connectionString = configuration.Build().GetConnectionString("AppConfig");
+                    if (connectionString != null)
+                    {
+                        configuration.AddAzureAppConfiguration(connectionString);
+                    }
+                }).ConfigureLogging(_ =>
+                {
+                    _.AddFilter<ApplicationInsightsLoggerProvider>(string.Empty, LogLevel.Debug);
+                    _.AddFilter<ApplicationInsightsLoggerProvider>("Microsoft", LogLevel.Warning);
                 });
+        }
     }
 }

@@ -1,17 +1,21 @@
-using Microsoft.AspNetCore.Mvc;
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Models;
 using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
     public class TermsAndConditionsController: Controller
     {
         private readonly ISessionService _sessionService;
+        private readonly UrlOptions _urlOptions;
 
-        public TermsAndConditionsController(ISessionService sessionService)
+        public TermsAndConditionsController(ISessionService sessionService, IOptions<UrlOptions> urlOptions)
         {
             _sessionService = sessionService;
+            _urlOptions = urlOptions.Value;
         }
 
         [HttpGet]
@@ -48,7 +52,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
         {
             var viewModel = new TermsConditionsViewModel 
             {
-                IsTermsConditionsHidden = true
+                IsTermsConditionsHidden = true,
+                LearningPlatformUrl = _urlOptions.LearningPlatformUrl
             };
 
             return View(viewModel);

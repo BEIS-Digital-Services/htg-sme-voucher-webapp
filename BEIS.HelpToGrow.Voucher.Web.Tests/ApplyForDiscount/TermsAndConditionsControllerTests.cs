@@ -1,4 +1,5 @@
 ﻿using System;
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using Beis.Htg.VendorSme.Database.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using BEIS.HelpToGrow.Voucher.Web.Controllers;
 using BEIS.HelpToGrow.Voucher.Web.Models;
 using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
+using Microsoft.Extensions.Options;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
@@ -21,7 +23,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         public void Setup()
         {
             _mockSessionService = new Mock<ISessionService>();
-            _sut = new TermsAndConditionsController(_mockSessionService.Object);
+            _sut = new TermsAndConditionsController(_mockSessionService.Object, Options.Create(new UrlOptions { LearningPlatformUrl = "https://fake.url.com/" }));
         }
 
         [Test]
@@ -125,14 +127,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [Test]
         public void Terms()
         {
-            Environment.SetEnvironmentVariable("LEARNING_PLATFORM_URL", "https://fake.url.com/");
-
             var viewResult = (ViewResult)_sut.Terms();
             var viewModel = viewResult.Model as TermsConditionsViewModel;
 
             Assert.IsEmpty(viewResult.ViewData);
             Assert.NotNull(viewModel);
-            Assert.AreEqual(new Uri("https://fake.url.com/eligibility"), TermsConditionsViewModel.BusinessEligibilityUrl);
+            Assert.AreEqual("https://fake.url.com/eligibility",  $"{viewModel.LearningPlatformUrl}eligibility");
         }
 
         [Test]

@@ -31,7 +31,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services
             _notifyService = notifyService;
             _enterpriseService = enterpriseService;
             _encryptionService = encryptionService;
-            _salt = configuration["EMAIL_VERIFICATION_SALT"];
+            _salt = configuration["EmailVerificationSalt"];
         }
 
         public string GetVerificationCode(UserVoucherDto userVoucher)

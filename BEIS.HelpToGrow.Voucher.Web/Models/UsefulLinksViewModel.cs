@@ -1,15 +1,8 @@
-﻿using System;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Models
+﻿namespace BEIS.HelpToGrow.Voucher.Web.Models
 {
     public class UsefulLinksViewModel
     {
-        public Uri LearningPlatformURL => new(Urls.LearningPlatformUrl);
-        public Uri ComparisonToolURL => Urls.ComparisonToolUrl;
-
-        public Uri ComparisonToolNoJsURL => Urls.ComparisonToolNoJsUrl;
-
-        public Uri LearningPlatformEligibilityURL => Urls.BusinessEligibilityUrl;
+        public string LearningPlatformUrl { get; set; }
         public bool IsTermsConditionsHidden { get; set; }
         public bool IsPrivacyPolicyHidden { get; set; }
         public bool IsHelpToGrowHidden { get; set; }

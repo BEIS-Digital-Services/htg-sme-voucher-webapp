@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
+﻿using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
 using FluentResults;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Notify.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Services
 {
@@ -47,7 +46,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services
                     {"work email address" , applicant.EmailAddress},
                     {"verification link", applicant.EmailVerificationLink },
                     {"subscribed", applicant.HasProvidedMarketingConsent ? "yes" : "no" },
-                    {"unsubscribe link", applicant.HasProvidedMarketingConsent ? getUnsubscribeLink(applicant) : string.Empty }
+                    {"unsubscribe link", applicant.HasProvidedMarketingConsent ? getUnsubscribeLink(applicant, _settings.EmailVerificationUrl) : string.Empty }
 
                 };
                 
@@ -78,16 +77,16 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services
 
         private dynamic getCancelLink(ApplicantDto applicant)
         {
-            var baseUri = new Uri(Urls.EmailVerificationUrl);
+            var baseUri = new Uri(_settings.EmailVerificationUrl);
 
             var uriBuilder = new UriBuilder("https", baseUri.Host, baseUri.Port, "cancelvoucher", $"?enterpriseId={applicant.EnterpriseId}&emailAddress={applicant.EmailAddress}");
 
             return uriBuilder.ToString();
         }
 
-        private static string getUnsubscribeLink(ApplicantDto applicant)
+        private static string getUnsubscribeLink(ApplicantDto applicant, string emailVerificationUrl)
         {
-            var baseUri = new Uri(Urls.EmailVerificationUrl);
+            var baseUri = new Uri(emailVerificationUrl);
 
             var uriBuilder = new UriBuilder("https", baseUri.Host, baseUri.Port, "unsubscribed", $"?enterpriseId={applicant.EnterpriseId}&emailAddress={applicant.EmailAddress}");
 

@@ -10,8 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+ using BEIS.HelpToGrow.Voucher.Web.Config;
+ using Microsoft.Extensions.Options;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class CancelVoucherControllerTests
@@ -24,13 +26,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [SetUp]
         public void Setup()
         {
-            Environment.SetEnvironmentVariable("LEARNING_PLATFORM_URL", "https://www.mocklpurl.com");
             _mockVoucherCancellationService = new Mock<IVoucherCancellationService>();
             _mockVoucherCancellationService.Setup(x => x.CancelVoucherFromEmailLink(It.IsAny<long>(), It.IsAny<string>()))            
             .ReturnsAsync((long eid, string email) => _cancellationResponse);
 
             _mockLogger = new Mock<ILogger<CancelVoucherController>>();
-            _sut = new CancelVoucherController(_mockVoucherCancellationService.Object, _mockLogger.Object);
+            _sut = new CancelVoucherController(_mockVoucherCancellationService.Object, _mockLogger.Object, Options.Create(new UrlOptions { LearningPlatformUrl = "https://localhost:44326" }));
         }
 
         [Test]

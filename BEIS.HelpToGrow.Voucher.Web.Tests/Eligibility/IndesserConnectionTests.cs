@@ -45,11 +45,11 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
             _companyId = "fakeCompanyId";
             _fakeOptions = Options.Create<IndesserConnectionOptions>(new IndesserConnectionOptions
             {
-                INDESSER_TOKEN_URL = _tokenConnectionUrl,
-                INDESSER_CLIENT_ID = _clientKey,
-                INDESSER_CLIENT_SECRET = _clientSecret,
-                INDESSER_COMPANY_CHECK_URL = _companyCheckUrl,
-                ConnectionTimeOut = _connectionTimeOut
+                IndesserTokenUrl = _tokenConnectionUrl,
+                IndesserClientId = _clientKey,
+                IndesserClientSecret = _clientSecret,
+                IndesserCompanyCheckUrl = _companyCheckUrl,
+                IndesserConnectionTimeOut = _connectionTimeOut
             });
         }
 

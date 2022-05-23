@@ -23,7 +23,7 @@
               Your business must be purchasing the approved software for the first time. You cannot apply for a software product that you already own or have an active subscription to.
             </p>
             <p class="govuk-body">
-                If you already have software with a supplier listed on the <a href="@Model.ComparisonToolURL" target="_blank" class="govuk-link">Help to Grow: Digital website  (opens in new tab)</a>, you can still apply for other types of software provided by the same supplier. Major software upgrades are permitted.
+                If you already have software with a supplier listed on the <a href="@Urls.GetComparisonToolUrl(Model.LearningPlatformUrl)" target="_blank" class="govuk-link">Help to Grow: Digital website  (opens in new tab)</a>, you can still apply for other types of software provided by the same supplier. Major software upgrades are permitted.
             </p>
             <span asp-validation-for="FirstTime" id="firstTime" class="govuk-error-message"></span>
             <div class="govuk-radios govuk-radios--inline">

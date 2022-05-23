@@ -1,34 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
+﻿using BEIS.HelpToGrow.Core.Enums;
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
+using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
+using BEIS.HelpToGrow.Voucher.Web.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Core.Enums;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
     public class ApplicantEmailAddressController : Controller
     {
-        private readonly ILogger<ApplicantEmailAddressController> _logger;
+        private readonly UrlOptions _options;
         private readonly ISessionService _sessionService;
         private readonly IEmailVerificationService _emailVerificationService;
         private readonly IApplicationStatusService _applicationStatusService;
 
         public ApplicantEmailAddressController(
-            ILogger<ApplicantEmailAddressController> logger,
             ISessionService sessionService,
             IEmailVerificationService emailVerificationService, 
-            IApplicationStatusService applicationStatusService)
+            IApplicationStatusService applicationStatusService,
+            IOptions<UrlOptions> options)
         {
-            _logger = logger;
             _sessionService = sessionService;
             _emailVerificationService = emailVerificationService;
             _applicationStatusService = applicationStatusService;
+            _options = options.Value;
         }
 
         [HttpGet]
@@ -107,7 +107,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 
             var verificationCode = _emailVerificationService.GetVerificationCode(userVoucherDto);
 
-            userVoucherDto.ApplicantDto.EmailVerificationLink = GetVerificationLink(verificationCode, Urls.EmailVerificationUrl);
+            userVoucherDto.ApplicantDto.EmailVerificationLink = GetVerificationLink(verificationCode, _options.EmailVerificationUrl);
 
             var result = await _emailVerificationService.SendVerifyEmailNotificationAsync(userVoucherDto.ApplicantDto);
             if(result.IsFailed)

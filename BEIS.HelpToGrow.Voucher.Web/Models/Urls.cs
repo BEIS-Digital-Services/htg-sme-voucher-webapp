@@ -4,20 +4,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Models
 {
     public static class Urls
     {
-        public static string LearningPlatformUrl =>
-            Environment.GetEnvironmentVariable("LEARNING_PLATFORM_URL").ToLower()
-            ?? throw new NullReferenceException("Missing Learning Platform URL");
+        public static Uri GetComparisonToolUrl(string learningPlatformUrl) => new(new Uri(learningPlatformUrl), "comparison-tool");
 
-        public static Uri ComparisonToolUrl => new(new Uri(LearningPlatformUrl), "comparison-tool");
+        public static Uri GetComparisonToolNoJsUrl(string learningPlatformUrl) => new(new Uri(learningPlatformUrl), "comparison-toolNoJs");
 
-        public static Uri ComparisonToolNoJsUrl => new(new Uri(LearningPlatformUrl), "comparison-toolNoJs");
+        public static Uri GetSatisfactionSurveyUrl(string learningPlatformUrl) => new(new Uri(learningPlatformUrl), "satisfaction-surve");
 
-        public static Uri SatisfactionSurveyUrl => new(new Uri(LearningPlatformUrl), "satisfaction-survey");
-
-        public static Uri BusinessEligibilityUrl => new(new Uri(LearningPlatformUrl), "eligibility");
-
-        public static string EmailVerificationUrl =>
-            Environment.GetEnvironmentVariable("EMAIL_VERIFICATION_LINK_URL").ToLower()
-                 ?? throw new NullReferenceException("Missing Learning Platform URL");
+        public static Uri GetBusinessEligibilityUrl(string learningPlatformUrl) => new(new Uri(learningPlatformUrl), "eligibility");
     }
 }

@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-    <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>BEIS.HelpToGrow.Voucher.Web</AssemblyName>
-    </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>BEIS.HelpToGrow.Voucher.Web</AssemblyName>
+		<UserSecretsId>9540fee8-4fce-48b6-b2fc-b555da46be37</UserSecretsId>
+	</PropertyGroup>
 
     <ItemGroup>
       <Compile Remove="library\**" />
@@ -41,6 +42,7 @@
         <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="5.0.12" />
         <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="5.0.12" />
         <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+        <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="5.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.12" />
         <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
