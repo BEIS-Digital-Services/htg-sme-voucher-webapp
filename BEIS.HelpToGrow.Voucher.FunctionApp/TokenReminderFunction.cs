@@ -1,18 +1,15 @@
+using Beis.HelpToGrow.Core.Repositories.Interface;
+using Beis.Htg.VendorSme.Database.Models;
+using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.WebUtilities;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-using Beis.Htg.VendorSme.Database.Models;
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
-using Microsoft.Extensions.Logging;
 
 namespace BEIS.HelpToGrow.Voucher.FunctionApp
 {
@@ -26,7 +23,7 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
         private readonly IEmailClientService _emailClientService;
         private readonly IVoucherGenerationService _voucherGenerationService;
 
-        private readonly INotifyServiceSettings _settings;
+        private readonly TokenReminderOptions _options;
         private readonly ILogger<TokenReminderFunction> _logger;
         private readonly IConfiguration _configuration;
 
@@ -37,7 +34,7 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
             IEmailClientService emailClientService,
             IVoucherGenerationService voucherGenerationService,
             IConfiguration configuration,
-            INotifyServiceSettings settings,
+            IOptions<TokenReminderOptions> options,
             ILogger<TokenReminderFunction> logger)
         {
             _enterpriseRepository = enterpriseRepository;
@@ -48,7 +45,7 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
             _emailClientService = emailClientService;
             _voucherGenerationService = voucherGenerationService;
             _configuration = configuration;
-            _settings = settings;
+            _options = options.Value;
             _logger = logger;
         }
 
@@ -93,9 +90,9 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
 
         private async Task SendEmail(token eligibleToken, enterprise eligibleEnterprise, bool reminder1, bool reminder2, bool reminder3)
         {
-            var templateId = reminder1 ? _settings.TokenRedeemEmailReminder1TemplateId
-                                : reminder2 ? _settings.TokenRedeemEmailReminder2TemplateId
-                                            : _settings.TokenRedeemEmailReminder3TemplateId;
+            var templateId = reminder1 ? _options.TokenRedeemEmailReminder1TemplateId
+                                : reminder2 ? _options.TokenRedeemEmailReminder2TemplateId
+                                            : _options.TokenRedeemEmailReminder3TemplateId;
             var eligibleProduct = await _productRepository.GetProductSingle(eligibleToken.product);
             _logger.LogInformation($"SendEmail fetched product info for product id: {eligibleToken.product}.");
             var vendor = await _vendorCompanyRepository.GetVendorCompanySingle(eligibleProduct.vendor_id);

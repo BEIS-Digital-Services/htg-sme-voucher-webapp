@@ -4,18 +4,12 @@ using Beis.Htg.VendorSme.Database;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using BEIS.HelpToGrow.Voucher.Web.Services.Config;
 using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-using BEIS.HelpToGrow.Voucher.Web.Services.Models;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BEIS.HelpToGrow.Voucher.FunctionApp.Extenstions
+namespace BEIS.HelpToGrow.Voucher.FunctionApp.Extensions
 {
     public static class RegisterFunctionAppServicesExtension
     {
@@ -24,10 +18,15 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp.Extenstions
             services.AddHttpClient();
             services.AddOptions();
             services.Configure<EncryptionSettings>(options => configuration.Bind(options));
-            services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(configuration["HELPTOGROW_CONNECTIONSTRING"]));
+            services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(configuration["HelpToGrowDbConnectionString"]));
             services.AddDataProtection().PersistKeysToDbContext<HtgVendorSmeDbContext>();
 
-            services.AddTransient<INotifyServiceSettings, NotifyServiceSettings>();
+            services.Configure<TokenReminderOptions>(o =>
+            {
+                o.TokenRedeemEmailReminder1TemplateId = configuration["TokenRedeemEmailReminder1TemplateId"];
+                o.TokenRedeemEmailReminder2TemplateId = configuration["TokenRedeemEmailReminder2TemplateId"];
+                o.TokenRedeemEmailReminder3TemplateId = configuration["TokenRedeemEmailReminder3TemplateId"];
+            });
 
             services.AddTransient<IEnterpriseRepository, EnterpriseRepository>();
             services.AddTransient<ITokenRepository, TokenRepository>();
