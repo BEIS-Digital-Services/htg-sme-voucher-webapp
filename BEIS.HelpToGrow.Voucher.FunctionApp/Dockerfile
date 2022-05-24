@@ -1,32 +1,26 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS installer-env
-# Build requires 3.1 SDK
-COPY --from=mcr.microsoft.com/dotnet/core/sdk:3.1 /usr/share/dotnet /usr/share/dotnet
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-COPY . /src/dotnet-function-app
-RUN cd /src/dotnet-function-app
-RUN mkdir -p /home/site/wwwroot
-#RUN dotnet publish *.csproj --output /home/site/wwwroot
+FROM mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated6.0 AS base
+WORKDIR /home/site/wwwroot
+EXPOSE 80
 
+FROM mcr.microsoft.com/dotnet/runtime:3.1 as runtime3_1
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+# Copy .NET Core 3.1 runtime from the 3.1 image
+COPY --from=runtime3_1 /usr/share/dotnet/host /usr/share/dotnet/host
+COPY --from=runtime3_1 /usr/share/dotnet/shared /usr/share/dotnet/shared
 WORKDIR /src
-COPY BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj .
-RUN dotnet restore "./BEIS.HelpToGrow.Voucher.FunctionApp.csproj"
+COPY ["BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj", "BEIS.HelpToGrow.Voucher.FunctionApp/"]
+RUN dotnet restore "BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj"
 COPY . .
 WORKDIR "/src/BEIS.HelpToGrow.Voucher.FunctionApp"
-RUN dotnet build -c Release -o app/build
+RUN dotnet build "BEIS.HelpToGrow.Voucher.FunctionApp.csproj" -c Release -o /app/build
+
 FROM build AS publish
-RUN dotnet publish "BEIS.HelpToGrow.Voucher.FunctionApp.csproj" -c Release -o /home/site/wwwroot
+RUN dotnet publish "BEIS.HelpToGrow.Voucher.FunctionApp.csproj" -c Release -o /app/publish
 
-#RUN dotnet publish "BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj" -c Release -o /home/site/wwwroot
-
-#COPY BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj .
-#RUN dotnet restore "./BEIS.HelpToGrow.Voucher.FunctionApp.csproj"
-#COPY . .
-#RUN dotnet publish "BEIS.HelpToGrow.Voucher.FunctionApp.csproj" -c Release -o /home/site/wwwroot
-
-# To enable ssh & remote debugging on app service change the base image to the one below
-# FROM mcr.microsoft.com/azure-functions/dotnet-isolated:3.0-dotnet-isolated5.0-appservice
-FROM mcr.microsoft.com/azure-functions/dotnet-isolated:3.0-dotnet-isolated5.0
+FROM base AS final
+WORKDIR /home/site/wwwroot
+COPY --from=publish /app/publish .
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true
-
-COPY --from=installer-env ["/home/site/wwwroot", "/home/site/wwwroot"]
