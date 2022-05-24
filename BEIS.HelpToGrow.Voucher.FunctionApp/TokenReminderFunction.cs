@@ -3,7 +3,6 @@ using Beis.Htg.VendorSme.Database.Models;
 using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -25,7 +24,6 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
 
         private readonly TokenReminderOptions _options;
         private readonly ILogger<TokenReminderFunction> _logger;
-        private readonly IConfiguration _configuration;
 
         public TokenReminderFunction(IEnterpriseRepository enterpriseRepository,
             ITokenRepository tokenRepository,
@@ -33,7 +31,6 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
             IVendorCompanyRepository vendorCompanyRepository,
             IEmailClientService emailClientService,
             IVoucherGenerationService voucherGenerationService,
-            IConfiguration configuration,
             IOptions<TokenReminderOptions> options,
             ILogger<TokenReminderFunction> logger)
         {
@@ -44,7 +41,6 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
 
             _emailClientService = emailClientService;
             _voucherGenerationService = voucherGenerationService;
-            _configuration = configuration;
             _options = options.Value;
             _logger = logger;
         }
@@ -54,14 +50,11 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
         {
             _logger.LogInformation($"Scheduled reminder email started processing for invocation: {context.InvocationId}.");
 
-            var reminder1Days = _configuration.GetValue<int>("ReminderConfig:Reminder1Days");
-            await ProcessScheduledReminder(reminder1Days, true, false, false);
+            await ProcessScheduledReminder(_options.TokenRedeemReminder1Days, true, false, false);
 
-            var reminder2Days = _configuration.GetValue<int>("ReminderConfig:Reminder2Days");
-            await ProcessScheduledReminder(reminder2Days, false, true, false);
+            await ProcessScheduledReminder(_options.TokenRedeemReminder2Days, false, true, false);
 
-            var reminder3Days = _configuration.GetValue<int>("ReminderConfig:Reminder3Days");
-            await ProcessScheduledReminder(reminder3Days, false, false, true);
+            await ProcessScheduledReminder(_options.TokenRedeemReminder3Days, false, false, true);
             _logger.LogInformation($"Scheduled reminder email processing completed successfully for invocation: {context.InvocationId}.");
         }
 
