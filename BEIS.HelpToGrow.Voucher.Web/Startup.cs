@@ -49,7 +49,7 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.AddOptions();
             services.Configure<EligibilityRules>(_configuration.GetSection("EligibilityRules"));
             services.Configure<CookieNamesConfiguration>(_configuration.GetSection("CookieNamesConfiguration"));
-            services.Configure<IndesserConnectionOptions>(_configuration.GetSection("IndesserConnection"));
+            services.Configure<IndesserConnectionOptions>(options => _configuration.Bind(options));
             services.Configure<EncryptionSettings>(options => _configuration.Bind(options));
             services.Configure<UrlOptions>(o =>
             {
