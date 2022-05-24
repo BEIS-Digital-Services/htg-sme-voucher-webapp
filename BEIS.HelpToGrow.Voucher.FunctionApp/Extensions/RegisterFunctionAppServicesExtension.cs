@@ -4,6 +4,7 @@ using Beis.Htg.VendorSme.Database;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using BEIS.HelpToGrow.Voucher.Web.Services.Config;
 using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
+using BEIS.HelpToGrow.Voucher.Web.Services.Models;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +30,8 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp.Extensions
             services.AddTransient<IEmailClientService, EmailClientService>();
             services.AddTransient<IVoucherGenerationService, VoucherGenerationService>();
             services.AddTransient<IEncryptionService, EncryptionService>();
-            
+            services.AddScoped<INotifyServiceSettings, NotifyServiceSettings>();
+
             return services;
         }
     }

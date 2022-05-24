@@ -4,7 +4,7 @@
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <OutputType>Exe</OutputType>
     <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
-    <UserSecretsId>e6c83251-a8fe-4cf3-b6df-5c0b08aaee7a</UserSecretsId>
+    <UserSecretsId>e88c3a20-0dfb-48ce-aa8a-0679ae7abbf9</UserSecretsId>
   </PropertyGroup>
   <!--<Target Name="CopyRuntimes" AfterTargets="AfterBuild" Condition=" '$(OS)' == 'UNIX' ">
     --><!-- To workaround a bug where the files aren't copied correctly for non-Windows platforms --><!--
@@ -43,10 +43,6 @@
     </None>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="local.settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
 </Project>

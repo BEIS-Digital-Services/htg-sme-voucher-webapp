@@ -1,3 +1,4 @@
+using System.IO;
 using BEIS.HelpToGrow.Voucher.FunctionApp.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -11,18 +12,17 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
         public static Task Main(string[] args)
         {
             IConfiguration configuration = null;
-            var host = new HostBuilder()
+            return new HostBuilder()
                 .ConfigureFunctionsWorkerDefaults((hostBuilderContext, workerApplicationBuilder) =>
                 {
                     workerApplicationBuilder.UseFunctionExecutionMiddleware();
                 })
                 .ConfigureAppConfiguration((context, configurationBuilder) =>
                 {
-                    configuration = configurationBuilder.Build();
-                    var connectionString = configuration.GetConnectionString("AppConfig");
+                    var connectionString =  configurationBuilder.Build().GetConnectionString("AppConfig");
                     if (connectionString != null)
                     {
-                        configurationBuilder.AddAzureAppConfiguration(connectionString);
+                        configuration = configurationBuilder.AddAzureAppConfiguration(connectionString).Build();
                     }
                 })
                 .ConfigureLogging((context, loggerBuilder) =>
@@ -33,10 +33,7 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
                 {
                     services.RegisterFunctionAppServices(configuration);                    
                 })
-                .Build();
-
-
-            return host.RunAsync();
+                .Build().RunAsync();
         }
     }
 }
