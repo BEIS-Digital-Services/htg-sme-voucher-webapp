@@ -25,10 +25,10 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services
 
         public EncryptionService(IOptions<EncryptionSettings> options)
         {
-            _salt = options.Value.VOUCHER_ENCRYPTION_SALT;
-            _passwordIterations = options.Value.VOUCHER_ENCRYPTION_ITERATION;
-            _initialVector = options.Value.VOUCHER_ENCRYPTION_INITIAL_VECTOR;
-            _keySize = options.Value.VOUCHER_ENCRYPTION_KEY_SIZE;
+            _salt = options.Value.VoucherEncryptionSalt;
+            _passwordIterations = options.Value.VoucherEncryptionIteration;
+            _initialVector = options.Value.VoucherEncryptionInitialVector;
+            _keySize = options.Value.VoucherEncryptionKeySize;
         }
 
         public string Encrypt(string plainText, string vendorSalt)

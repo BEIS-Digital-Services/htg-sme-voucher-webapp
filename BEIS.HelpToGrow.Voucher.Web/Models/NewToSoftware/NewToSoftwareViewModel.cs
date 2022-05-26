@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Beis.Htg.VendorSme.Database.Models;
 using System.ComponentModel.DataAnnotations;
-using Beis.Htg.VendorSme.Database.Models;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Models.NewToSoftware
 {
@@ -10,6 +9,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Models.NewToSoftware
         public string FirstTime { get; set; }
 
         public product SelectedProduct { get; set; }
-        public Uri ComparisonToolURL => Urls.ComparisonToolUrl;
+
+        public string LearningPlatformUrl { get; set; }
     }
 }

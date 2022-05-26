@@ -1,7 +1,8 @@
-﻿using System;
+﻿using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Controllers;
 using BEIS.HelpToGrow.Voucher.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
@@ -15,9 +16,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [SetUp]
         public void Setup()
         {
-            _sut = new GuidanceController();
-
-            Environment.SetEnvironmentVariable("LEARNING_PLATFORM_URL", LearningPlatformUrl);
+            _sut = new GuidanceController(Options.Create(new UrlOptions { LearningPlatformUrl = LearningPlatformUrl }));
         }
 
         [Test]
@@ -27,8 +26,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             var viewModel = viewResult.Model as GuidanceViewModel;
 
             Assert.NotNull(viewModel);
-            Assert.AreEqual(new Uri(LearningPlatformUrl) , viewModel.LearningPlatformURL);
-            Assert.AreEqual(new Uri($"{LearningPlatformUrl}comparison-tool"), viewModel.ComparisonToolURL);
+            Assert.AreEqual(LearningPlatformUrl , viewModel.LearningPlatformUrl);
         }
     }
 }

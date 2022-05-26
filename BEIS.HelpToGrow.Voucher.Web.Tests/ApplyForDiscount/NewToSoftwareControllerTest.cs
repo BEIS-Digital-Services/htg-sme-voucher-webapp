@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Beis.HelpToGrow.Core.Repositories.Interface;
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ using BEIS.HelpToGrow.Voucher.Web.Controllers;
 using BEIS.HelpToGrow.Voucher.Web.Models.NewToSoftware;
 using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
+using Microsoft.Extensions.Options;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
@@ -31,7 +33,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             _controllerContext = SetupControllerContext(_controllerContext);
             SetupProductRepository(_productRepository);
 
-            _sut = new NewToSoftwareController(_mockLogger.Object, _mockSessionService.Object)
+            _sut = new NewToSoftwareController(_mockLogger.Object, _mockSessionService.Object, Options.Create(new UrlOptions { LearningPlatformUrl = "https://localhost:/"}))
             {
                 ControllerContext = _controllerContext
             };
@@ -68,9 +70,10 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 .Returns(new UserVoucherDto { SelectedProduct = null });
 
             var viewResult = (ViewResult) _sut.Forward(new NewToSoftwareViewModel());
-
-            Assert.That(viewResult.Model is NewToSoftwareViewModel);
             Assert.AreEqual("Index", viewResult.ViewName);
+            var model = viewResult.Model as NewToSoftwareViewModel;
+            Assert.NotNull(model);
+            Assert.AreEqual("https://localhost:/", model.LearningPlatformUrl);
         }
 
         [Test]
@@ -83,8 +86,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 .Returns(expectedModel);
 
             var controllerResult = (ViewResult)_sut.Index();
-            
-            Assert.That(((NewToSoftwareViewModel)controllerResult.Model).SelectedProduct.product_id == 1);
+
+            Assert.NotNull(controllerResult);
+            var model = controllerResult.Model as NewToSoftwareViewModel;
+            Assert.NotNull(model);
+            Assert.That(model.SelectedProduct.product_id == 1);
+            Assert.AreEqual("https://localhost:/", model.LearningPlatformUrl);
         }
 
         [Test]

@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Models
 {
@@ -20,7 +19,5 @@ namespace BEIS.HelpToGrow.Voucher.Web.Models
             string.IsNullOrWhiteSpace(TermsConditions) ||
             string.IsNullOrWhiteSpace(PrivacyPolicy) ||
             string.IsNullOrWhiteSpace(SubsidyControl);
-
-        public static Uri BusinessEligibilityUrl => Urls.BusinessEligibilityUrl;
     }
 }

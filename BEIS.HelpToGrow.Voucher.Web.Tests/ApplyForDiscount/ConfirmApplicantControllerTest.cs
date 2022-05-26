@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Beis.HelpToGrow.Core.Repositories.Interface;
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -10,6 +11,7 @@ using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
 using Beis.Htg.VendorSme.Database.Models;
+using Microsoft.Extensions.Options;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
@@ -35,13 +37,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             _sut = new ConfirmApplicantController(
                 _mockSessionService.Object,
                 _mockFCASocietyService.Object,
-                _mockProductPriceService.Object);
+                _mockProductPriceService.Object,
+                Options.Create(new UrlOptions { LearningPlatformUrl = "https://test-fake-webapp.azurewebsites.net/" }));
 
             _sut.ControllerContext = _controllerContext;
 
             SetupProductRepository(_productRepository);
-
-            Environment.SetEnvironmentVariable("LEARNING_PLATFORM_URL", "https://test-fake-webapp.azurewebsites.net/");
         }
 
         [Test]

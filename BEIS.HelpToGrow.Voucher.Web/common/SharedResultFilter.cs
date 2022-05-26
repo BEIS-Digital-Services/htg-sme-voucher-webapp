@@ -1,17 +1,22 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Models;
+﻿using BEIS.HelpToGrow.Voucher.Web.Config;
+using BEIS.HelpToGrow.Voucher.Web.Models;
 using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Options;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Common
 {
     public class SharedResultFilter : IResultFilter
     {
         private readonly ISessionService _sessionService;
-        public SharedResultFilter(ISessionService sessionService)
+        private readonly UrlOptions _options;
+
+        public SharedResultFilter(ISessionService sessionService, IOptions<UrlOptions> options)
         {
             _sessionService = sessionService;
+            _options = options.Value;
         }
 
         public void OnResultExecuting(ResultExecutingContext context)
@@ -26,7 +31,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Common
 
         private void SetupSatisfactionSurveyUrl(Controller controller)
         {
-            controller.ViewData["SatisfactionSurveyUrl"] = Urls.SatisfactionSurveyUrl;
+            controller.ViewData["SatisfactionSurveyUrl"] = Urls.GetSatisfactionSurveyUrl(_options.LearningPlatformUrl);
         }
 
         public void OnResultExecuted(ResultExecutedContext context)

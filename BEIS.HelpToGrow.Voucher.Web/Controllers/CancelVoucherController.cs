@@ -1,13 +1,10 @@
 ﻿using BEIS.HelpToGrow.Core.Enums;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
-
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
@@ -16,11 +13,13 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
     {
         private readonly IVoucherCancellationService _voucherCancellationService;
         private readonly ILogger<CancelVoucherController> _logger;
+        private readonly UrlOptions _urlOptions;
 
-        public CancelVoucherController(IVoucherCancellationService voucherCancellationService, ILogger<CancelVoucherController> logger)
+        public CancelVoucherController(IVoucherCancellationService voucherCancellationService, ILogger<CancelVoucherController> logger, IOptions<UrlOptions> urlOptions)
         {
             _voucherCancellationService = voucherCancellationService;
             _logger = logger;
+            _urlOptions = urlOptions.Value;
         }
 
         [HttpGet]
@@ -34,14 +33,13 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
                 case CancellationResponse.TokenExpired:
        
                 {
-                        return View(new Uri(Urls.LearningPlatformUrl));                  
+                        return View(new Uri(_urlOptions.LearningPlatformUrl));                  
                 }
                 default:
                     {
                         return View("CantCancel");
                     }
             }
-
         }
     }
 }

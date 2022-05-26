@@ -23,7 +23,6 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
         private Mock<INotifyService> _mockNotifyService;
         private Mock<IEnterpriseService> _mockEnterpriseService;
         private Mock<IEncryptionService> _mockEncryptionService;
-        private Mock<IConfiguration> _mockConfiguration;
         private string _salt;
 
         [SetUp]
@@ -33,13 +32,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
             _mockNotifyService = new Mock<INotifyService>();
             _mockEnterpriseService = new Mock<IEnterpriseService>();
             _mockEncryptionService = new Mock<IEncryptionService>();
-            _mockConfiguration = new Mock<IConfiguration>();
             _salt = "exampleemailvericationsalt";
 
 
             var inMemorySettings = new Dictionary<string, string>
             {
-                {"EMAIL_VERIFICATION_SALT", "exampleemailvericationsalt"}
+                {"EmailVerificationSalt", "exampleemailvericationsalt"}
             };
 
             IConfiguration configuration = new ConfigurationBuilder()
