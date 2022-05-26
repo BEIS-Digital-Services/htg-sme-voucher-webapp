@@ -29,6 +29,14 @@ using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
 using BEIS.HelpToGrow.Voucher.Web.Services.Models;
 using IEncryptionService = BEIS.HelpToGrow.Voucher.Web.Services.Interfaces.IEncryptionService;
 using BEIS.HelpToGrow.Voucher.Web.Services.Config;
+using BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Text.Json;
+using System.IO;
+using System.Text;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using BEIS.HelpToGrow.Voucher.Web.Constants;
 
 namespace BEIS.HelpToGrow.Voucher.Web
 {
@@ -170,8 +178,11 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
 
             services.AddSingleton<IEncryptionService, EncryptionService>();
-
-            
+            services.AddHealthChecks()
+                .AddCheck<CompanyHouseHealthCheckService>("Company House Api")
+                .AddCheck<DatabaseHealthCheckService>("Database")
+                .AddCheck<EncryptionHealthCheckService>("Encryption", failureStatus: HealthStatus.Unhealthy,
+                    tags: new[] { "Encryption" });
 
             services.AddScoped<IVoucherGenerationService, VoucherGenerationService>();
         }
@@ -201,9 +212,54 @@ namespace BEIS.HelpToGrow.Voucher.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    ResponseWriter = WriteHealthResponse
+                });
                 endpoints.MapControllers();
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
             });
+        }
+        private static Task WriteHealthResponse(HttpContext context, HealthReport healthReport)
+        {
+            context.Response.ContentType = "application/json; charset=utf-8";
+
+            var options = new JsonWriterOptions { Indented = true };
+
+            using var memoryStream = new MemoryStream();
+            using (var jsonWriter = new Utf8JsonWriter(memoryStream, options))
+            {
+                jsonWriter.WriteStartObject();
+                jsonWriter.WriteString("status", healthReport.Status.ToString());
+                jsonWriter.WriteStartObject("results");
+
+                foreach (var healthReportEntry in healthReport.Entries)
+                {
+                    jsonWriter.WriteStartObject(healthReportEntry.Key);
+                    jsonWriter.WriteString("status",
+                        healthReportEntry.Value.Status.ToString());
+                    jsonWriter.WriteString("description",
+                        healthReportEntry.Value.Description);
+                    jsonWriter.WriteStartObject("data");
+
+                    foreach (var item in healthReportEntry.Value.Data)
+                    {
+                        jsonWriter.WritePropertyName(item.Key);
+
+                        JsonSerializer.Serialize(jsonWriter, item.Value,
+                            item.Value?.GetType() ?? typeof(object));
+                    }
+
+                    jsonWriter.WriteEndObject();
+                    jsonWriter.WriteEndObject();
+                }
+
+                jsonWriter.WriteEndObject();
+                jsonWriter.WriteEndObject();
+            }
+
+            return context.Response.WriteAsync(
+                Encoding.UTF8.GetString(memoryStream.ToArray()));
         }
     }
 }
