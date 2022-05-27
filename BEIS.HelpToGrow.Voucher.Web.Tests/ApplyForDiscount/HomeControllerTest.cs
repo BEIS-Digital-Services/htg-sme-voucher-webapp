@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using Beis.HelpToGrow.Core.Repositories.Interface;
+﻿using Beis.HelpToGrow.Core.Repositories.Interface;
 using Beis.Htg.VendorSme.Database.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Controllers;
 using BEIS.HelpToGrow.Voucher.Web.Models;
-using System.Threading.Tasks;
 using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Moq;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
@@ -29,7 +31,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             _mockSessionService.Object,
             _cookieService.Object,
             _productRepository.Object,
-            _mockLogger.Object);
+            _mockLogger.Object,
+            Options.Create(new UrlOptions { LearningPlatformUrl = "https://fake-test-webapp.azurewebsites.net/" }));
 
         [SetUp]
         public void Setup()
@@ -42,8 +45,6 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             SetupProductRepository(_productRepository);
             _sut = HomeControllerObject();
             _sut.ControllerContext = _controllerContext;
-
-            Environment.SetEnvironmentVariable("LEARNING_PLATFORM_URL", "https://fake-test-webapp.azurewebsites.net/");
         }
 
         [Test]
@@ -115,8 +116,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             Assert.Null(viewResult.ViewName);
             Assert.NotNull(viewModel);
             Assert.AreEqual(0, viewResult.ViewData.Count);
-            Assert.AreEqual(new Uri("https://fake-test-webapp.azurewebsites.net/"), viewModel.LearningPlatformURL);
-            Assert.AreEqual(new Uri("https://fake-test-webapp.azurewebsites.net/comparison-tool"), viewModel.ComparisonToolURL);
+            Assert.AreEqual(new Uri("https://fake-test-webapp.azurewebsites.net/"), viewModel.LearningPlatformUrl);
         }
 
         [Test]
@@ -252,7 +252,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             
             Assert.NotNull(viewModel);
             Assert.IsEmpty(viewResult.ViewData);
-            Assert.AreEqual(new Uri("https://fake-test-webapp.azurewebsites.net/comparison-tool"), viewModel.ComparisonToolURL);
+            Assert.AreEqual("https://fake-test-webapp.azurewebsites.net/comparison-tool", $"{viewModel.LearningPlatformUrl}comparison-tool");
         }
 
         [Test]

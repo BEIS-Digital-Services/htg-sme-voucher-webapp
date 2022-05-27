@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Beis.HelpToGrow.Core.Repositories.Interface;
+using BEIS.HelpToGrow.Voucher.Web.Config;
+using BEIS.HelpToGrow.Voucher.Web.Models;
+using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
+using BEIS.HelpToGrow.Voucher.Web.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using Microsoft.Extensions.Logging;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
@@ -16,6 +18,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
         private readonly ISessionService _sessionService;
         private readonly ICookieService _cookieService;
         private readonly IProductRepository _productRepository;
+        private readonly UrlOptions _urlOptions;
         private readonly ILogger<HomeController> _logger;
         private bool IsProductSelected { get; set; }
 
@@ -23,12 +26,14 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
             ISessionService sessionService,
             ICookieService cookieService,
             IProductRepository productRepository,
-            ILogger<HomeController> logger)
+            ILogger<HomeController> logger,
+            IOptions<UrlOptions> urlOptions)
         {
             _sessionService = sessionService;
             _cookieService = cookieService;
             _productRepository = productRepository;
             _logger = logger;
+            _urlOptions = urlOptions.Value;
         }
 
         public async Task<IActionResult> Index(ProductSelectionViewModel model)
@@ -51,7 +56,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 
             return View(new HomeViewModel 
             { 
-                IsApplyForDiscountHidden = true                
+                IsApplyForDiscountHidden = true,
+                LearningPlatformUrl = _urlOptions.LearningPlatformUrl
             });
         }
 
@@ -85,7 +91,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 
         public IActionResult SoftwareNotChosen()
         {
-            return View(new HomeViewModel());
+            return View(new HomeViewModel { LearningPlatformUrl = _urlOptions.LearningPlatformUrl });
         }
 
         public IActionResult Cookies()

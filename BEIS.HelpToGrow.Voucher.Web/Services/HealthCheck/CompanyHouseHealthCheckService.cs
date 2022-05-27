@@ -1,7 +1,4 @@
-﻿using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database.Models;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+﻿using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -15,17 +12,16 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
     public class CompanyHouseHealthCheckService : IHealthCheck
     {
         private readonly ILogger<CompanyHouseHealthCheckService> _logger;
-        private readonly IRestClientFactory _iRestClientFactory;
-        private readonly IConfiguration _iConfiguration;
-
+        private readonly ICompanyHouseHttpConnection<CompanyHouseResponse> _companyHouseHttpConnection;
+        
         public CompanyHouseHealthCheckService(
-            IRestClientFactory iRestClientFactory, 
+            IRestClientFactory iRestClientFactory,
             ILogger<CompanyHouseHealthCheckService> logger,
-            IConfiguration iConfiguration)
+            IConfiguration iConfiguration, 
+            ICompanyHouseHttpConnection<CompanyHouseResponse> companyHouseHttpConnection)
         {
             _logger = logger;
-            _iRestClientFactory = iRestClientFactory;
-            _iConfiguration = iConfiguration;
+            _companyHouseHttpConnection = companyHouseHttpConnection;
         }
 
         public Task<HealthCheckResult> CheckHealthAsync(
@@ -40,15 +36,9 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
                 CompanyStatus = "Dissolved"
             };
 
-            var companyAPI = new CompanyHouseConnection(
-                    _iRestClientFactory,
-                    _iConfiguration["COMPANY_HOUSE_URL"],
-                    _iConfiguration["COMPANY_HOUSE_API_KEY"],
-                    _iConfiguration["VoucherSettings:connectionTimeOut"]);
-
             try
             {
-                var response = companyAPI.ProcessRequest(companyHouseDetails.CompanyNumber, new DefaultHttpContext());
+                var response = _companyHouseHttpConnection.ProcessRequest(companyHouseDetails.CompanyNumber, new DefaultHttpContext());
 
                 if (response.CompanyName == companyHouseDetails.CompanyName 
                     && response.CompanyStatus == companyHouseDetails.CompanyStatus)

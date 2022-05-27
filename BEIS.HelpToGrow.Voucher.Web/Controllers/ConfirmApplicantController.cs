@@ -1,11 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Models;
-using Microsoft.AspNetCore.Mvc;
 using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
 using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions;
 using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
@@ -14,15 +16,18 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
         private readonly ISessionService _sessionService;
         private readonly IFCASocietyService _fcaSocietyService;
         private readonly IProductPriceService _productPriceService;
+        private readonly UrlOptions _urlOptions;
 
         public ConfirmApplicantController(
             ISessionService sessionService,
             IFCASocietyService fcaSocietyService,
-            IProductPriceService productPriceService)
+            IProductPriceService productPriceService,
+            IOptions<UrlOptions> urlOptions)
         {
             _sessionService = sessionService;
             _fcaSocietyService = fcaSocietyService;
             _productPriceService = productPriceService;
+            _urlOptions = urlOptions.Value;
         }
 
         [HttpGet]
@@ -60,7 +65,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
                 HasAcceptedSubsidyControl = userVoucherDto.ApplicantDto.HasAcceptedSubsidyControl,
                 HasProvidedMarketingConsent = userVoucherDto.ApplicantDto.HasProvidedMarketingConsent,
                 ProductPrice = await _productPriceService.GetProductPrice(userVoucherDto.SelectedProduct.product_id),
-                ComparisonToolURL = Urls.ComparisonToolUrl
+                ComparisonToolURL = Urls.GetComparisonToolUrl(_urlOptions.LearningPlatformUrl)
             };
 
             return View(viewModel);

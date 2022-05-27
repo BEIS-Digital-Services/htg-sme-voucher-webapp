@@ -1,8 +1,10 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using NUnit.Framework;
+﻿using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Controllers;
 using BEIS.HelpToGrow.Voucher.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using NUnit.Framework;
+using System;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
@@ -15,9 +17,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [SetUp]
         public void Setup()
         {
-            _sut = new SessionExpiredController();
-
-            Environment.SetEnvironmentVariable("LEARNING_PLATFORM_URL", "https://fake.url.com/");
+            _sut = new SessionExpiredController(Options.Create(new UrlOptions { LearningPlatformUrl = "https://test-webapp.azurewebsites.net/" }));
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             var viewModel = viewResult.Model as SessionExpiredViewModel;
 
             Assert.NotNull(viewModel);
-            Assert.AreEqual(new Uri("https://fake.url.com/comparison-tool"), viewModel.ComparisonToolURL);
+            Assert.AreEqual(new Uri("https://test-webapp.azurewebsites.net/comparison-tool"), $"{viewModel.LearningPlatformUrl}comparison-tool");
         }
     }
 }

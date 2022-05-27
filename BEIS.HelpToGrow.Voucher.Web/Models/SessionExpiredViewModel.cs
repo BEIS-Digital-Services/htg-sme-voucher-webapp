@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Models
+﻿namespace BEIS.HelpToGrow.Voucher.Web.Models
 {
     public class SessionExpiredViewModel
     {
-        public Uri ComparisonToolURL => Urls.ComparisonToolUrl;
+        public string LearningPlatformUrl { get; set; }
     }
 }

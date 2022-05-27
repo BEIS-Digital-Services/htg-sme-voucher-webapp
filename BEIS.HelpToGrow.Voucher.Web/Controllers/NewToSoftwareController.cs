@@ -1,9 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Models.NewToSoftware;
 using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
@@ -11,10 +13,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
     {
         private readonly ILogger<NewToSoftwareController> _logger;
         private readonly ISessionService _sessionService;
-        public NewToSoftwareController(ILogger<NewToSoftwareController> logger, ISessionService sessionService)
+        private readonly UrlOptions _urlOptions;
+        public NewToSoftwareController(ILogger<NewToSoftwareController> logger, ISessionService sessionService, IOptions<UrlOptions> urlOptions)
         {
             _logger = logger;
             _sessionService = sessionService;
+            _urlOptions = urlOptions.Value;
         }
 
         public IActionResult Index()
@@ -29,7 +33,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
             var model = new NewToSoftwareViewModel
             {
                 FirstTime = userVoucherDto.FirstTime,
-                SelectedProduct = userVoucherDto.SelectedProduct
+                SelectedProduct = userVoucherDto.SelectedProduct,
+                LearningPlatformUrl = _urlOptions.LearningPlatformUrl
             };
 
             return View(model);
@@ -44,6 +49,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
                 ModelState.Clear();
                 ModelState.AddModelError("FirstTime", $"Select yes if you are buying {userVoucherDto?.SelectedProduct?.product_name} for the first time");
                 model.SelectedProduct = userVoucherDto?.SelectedProduct;
+                model.LearningPlatformUrl = _urlOptions.LearningPlatformUrl;
                 return View("Index", model);
             }
 

@@ -3,8 +3,23 @@ using Beis.HelpToGrow.Core.Repositories.Interface;
 using Beis.Htg.VendorSme.Database;
 using BEIS.HelpToGrow.Core.Repositories;
 using BEIS.HelpToGrow.Core.Repositories.Interface;
+using BEIS.HelpToGrow.Voucher.Web.Common;
+using BEIS.HelpToGrow.Voucher.Web.Config;
+using BEIS.HelpToGrow.Voucher.Web.Services;
+using BEIS.HelpToGrow.Voucher.Web.Services.Config;
+using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
+using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
+using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
+using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
+using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
+using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
+using BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck;
+using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
+using BEIS.HelpToGrow.Voucher.Web.Services.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -12,54 +27,42 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 using System;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
-using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-using BEIS.HelpToGrow.Voucher.Web.Services.Models;
-using IEncryptionService = BEIS.HelpToGrow.Voucher.Web.Services.Interfaces.IEncryptionService;
-using BEIS.HelpToGrow.Voucher.Web.Services.Config;
-using BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using System.Text.Json;
 using System.IO;
 using System.Text;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using BEIS.HelpToGrow.Voucher.Web.Constants;
+using System.Text.Json;
+using System.Threading.Tasks;
+using IEncryptionService = BEIS.HelpToGrow.Voucher.Web.Services.Interfaces.IEncryptionService;
 
 namespace BEIS.HelpToGrow.Voucher.Web
 {
     public class Startup
     {
+        private const int SessionTimeOutMinutes = 30;
+        private const int HstsMaxAgeDays = 365;
 
-        private const int SESSION_TIMEOUT_MINUTES = 30;
-        private const int HSTS_MAX_AGE_DAYS = 365;
+        private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;            
+            _configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
-            services.Configure<EligibilityRules>(Configuration.GetSection("EligibilityRules"));
-            services.Configure<CookieNamesConfiguration>(Configuration.GetSection("CookieNamesConfiguration"));
-            services.Configure<IndesserConnectionOptions>(Configuration.GetSection("IndesserConnection"));
-            services.Configure<EncryptionSettings>(options => Configuration.Bind(options));
+            services.Configure<EligibilityRules>(_configuration.GetSection("EligibilityRules"));
+            services.Configure<CookieNamesConfiguration>(_configuration.GetSection("CookieNamesConfiguration"));
+            services.Configure<IndesserConnectionOptions>(options => _configuration.Bind(options));
+            services.Configure<EncryptionSettings>(options => _configuration.Bind(options));
+            services.Configure<UrlOptions>(o =>
+            {
+                o.EmailVerificationUrl = _configuration["EmailVerificationUrl"];
+                o.LearningPlatformUrl = _configuration["LearningPlatformUrl"];
+            });
 
             services.AddMvc();
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -74,13 +77,13 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.AddHsts(options =>
             {
                 options.IncludeSubDomains = true;
-                options.MaxAge = TimeSpan.FromDays(HSTS_MAX_AGE_DAYS);
+                options.MaxAge = TimeSpan.FromDays(HstsMaxAgeDays);
             });
 
             services.Configure<CookiePolicyOptions>(options => options.Secure = CookieSecurePolicy.Always);
 
             services.AddLogging(options => { options.AddConsole(); });
-            services.AddApplicationInsightsTelemetry(Configuration["AZURE_MONITOR_INSTRUMENTATION_KEY"]);
+            services.AddApplicationInsightsTelemetry(_configuration["AzureMonitorInstrumentationKey"]);
 
             services.AddHttpContextAccessor();
             services.AddSingleton<ISessionService, SessionService>();
@@ -135,20 +138,20 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.AddSingleton<ICheckEligibilityRule, BR16>();
 
             services.AddSingleton(new DistributedCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromMinutes(SESSION_TIMEOUT_MINUTES)));
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(SessionTimeOutMinutes)));
             
             services.AddHttpClient();
 
-            services.AddStackExchangeRedisCache(options => { options.Configuration = Configuration["REDIS_PRIMARY_CONNECTION_STRING"]; });
+            services.AddStackExchangeRedisCache(options => { options.Configuration = _configuration["RedisPrimaryConnectionString"]; });
 
-            services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(Configuration["HELPTOGROW_CONNECTIONSTRING"]));
+            services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(_configuration["HelpToGrowDbConnectionString"]));
             services.AddDataProtection().PersistKeysToDbContext<HtgVendorSmeDbContext>();
 
             services.AddSession(options =>
             {
                 options.Cookie.Name = "smevoucherservice_session";
                 options.Cookie.IsEssential = true;
-                options.IdleTimeout = TimeSpan.FromMinutes(SESSION_TIMEOUT_MINUTES);                
+                options.IdleTimeout = TimeSpan.FromMinutes(SessionTimeOutMinutes);                
             });
 
             services.AddSingleton<IDistributedCacheFactory, DistributedCacheFactory>();
@@ -160,9 +163,9 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.AddSingleton <ICompanyHouseHttpConnection<CompanyHouseResponse>>(_ =>
                 new CompanyHouseConnection(
                     restClientFactory,
-                    Configuration["COMPANY_HOUSE_URL"],
-                    Configuration["COMPANY_HOUSE_API_KEY"],
-                    Configuration["VoucherSettings:connectionTimeOut"]));
+                    _configuration["CompanyHouseUrl"],
+                    _configuration["CompanyHouseApiKey"],
+                    _configuration["VoucherSettings:connectionTimeOut"]));
 
             services.AddScoped<IFCASocietyRepository, FCASocietyRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
@@ -179,6 +182,7 @@ namespace BEIS.HelpToGrow.Voucher.Web
 
             services.AddSingleton<IEncryptionService, EncryptionService>();
             services.AddHealthChecks()
+                .AddCheck<StartupHealthCheckService>("Services Health Checks")
                 .AddCheck<CompanyHouseHealthCheckService>("Company House Api")
                 .AddCheck<DatabaseHealthCheckService>("Database")
                 .AddCheck<EncryptionHealthCheckService>("Encryption", failureStatus: HealthStatus.Unhealthy,

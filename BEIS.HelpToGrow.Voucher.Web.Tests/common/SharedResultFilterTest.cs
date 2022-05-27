@@ -1,13 +1,15 @@
-﻿using System;
-using BEIS.HelpToGrow.Voucher.Web.Common;
+﻿using BEIS.HelpToGrow.Voucher.Web.Common;
+using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Controllers;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
+using System;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.Common
 {
@@ -21,7 +23,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Common
         public void Setup()
         {
             _mockSessionService = new Mock<ISessionService>();
-            _sut = new SharedResultFilter(_mockSessionService.Object);
+            _sut = new SharedResultFilter(_mockSessionService.Object, Options.Create(new UrlOptions { LearningPlatformUrl = "https://localhost" }));
         }
 
         [Test]
