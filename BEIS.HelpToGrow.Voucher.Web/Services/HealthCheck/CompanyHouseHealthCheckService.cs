@@ -1,7 +1,6 @@
 ﻿using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -17,10 +16,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
         private readonly ICompanyHouseHttpConnection<CompanyHouseResponse> _companyHouseHttpConnection;
         private readonly IOptions<CompanyHouseHealthCheckConfiguration> _companyHouseHealthCheckOptions;
 
-        public CompanyHouseHealthCheckService(
-            IRestClientFactory iRestClientFactory,
-            ILogger<CompanyHouseHealthCheckService> logger,
-            IConfiguration iConfiguration,
+        public CompanyHouseHealthCheckService(            
+            ILogger<CompanyHouseHealthCheckService> logger,            
             ICompanyHouseHttpConnection<CompanyHouseResponse> companyHouseHttpConnection, 
             IOptions<CompanyHouseHealthCheckConfiguration> companyHouseHealthCheckOptions)
         {
@@ -41,7 +38,6 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
                 if (response.CompanyName != null && response.CompanyName == _companyHouseHealthCheckOptions.Value.CompanyName 
                     && response.CompanyStatus == _companyHouseHealthCheckOptions.Value.CompanyStatus)
                 {
-                    isHealthy = true;
                     _logger.LogError("Company house API health check passed.");
                 } else
                 {

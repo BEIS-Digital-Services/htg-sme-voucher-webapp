@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System;
 using System.Collections.Generic;
@@ -14,13 +13,12 @@ using System.Threading.Tasks;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
 {
-    public class StartupHealthCheckService : IHealthCheck
+    public class DependencyInjectionHealthCheckService : IHealthCheck
     {
         private readonly IControllerActivator _controllerActivator;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public StartupHealthCheckService(IServiceScopeFactory serviceScopeFactory, IServiceProvider serviceProvider,
-            IHttpContextAccessor httpContextAccessor, IControllerActivator controllerActivator)
+        public DependencyInjectionHealthCheckService(IHttpContextAccessor httpContextAccessor, IControllerActivator controllerActivator)
         {
             _httpContextAccessor = httpContextAccessor;
             _controllerActivator = controllerActivator;
@@ -33,8 +31,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
             await Task.FromResult(0);
            
             var controllersList = GetChildTypes<ControllerBase>();
-            
-            StringBuilder listOfFailedControllers = new StringBuilder();
+
+            string failedServiceErrorDetails = string.Empty;
 
             try
             {
@@ -50,7 +48,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
                 }
             } catch (Exception ex)
             {
-                listOfFailedControllers.Append(ex.Message);
+                failedServiceErrorDetails = ex.Message;
                 isHealthy = false;
             }
 
@@ -60,7 +58,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
             }
 
             return new HealthCheckResult(
-                    context.Registration.FailureStatus, $"Help to grow web is unhealthy; its failed with the following errors {listOfFailedControllers}");
+                    context.Registration.FailureStatus, $"Help to grow web is unhealthy; its failed with the following errors {failedServiceErrorDetails}");
         }
         private static IEnumerable<Type> GetChildTypes<T>()
         {
