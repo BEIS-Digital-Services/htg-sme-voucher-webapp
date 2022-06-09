@@ -1,39 +1,33 @@
-using System.IO;
-using BEIS.HelpToGrow.Voucher.FunctionApp.Extensions;
+using Beis.HelpToGrow.Voucher.FunctionApp.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
+using System.Reflection;
 
-namespace BEIS.HelpToGrow.Voucher.FunctionApp
-{
-    public class Program
+IConfiguration configuration = null;
+var host = new HostBuilder()
+     //.ConfigureFunctionsWorkerDefaults()
+     .ConfigureFunctionsWorkerDefaults((hostBuilderContext, workerApplicationBuilder) =>
+     {
+         workerApplicationBuilder.UseFunctionExecutionMiddleware();
+     })
+    .ConfigureAppConfiguration((context, configurationBuilder) =>
     {
-        public static Task Main(string[] args)
+        //Assembly asm = Assembly.GetExecutingAssembly();
+        var connectionString = configurationBuilder.AddUserSecrets<Program>().Build().GetConnectionString("AppConfig");
+        if (connectionString != null)
         {
-            IConfiguration configuration = null;
-            return new HostBuilder()
-                .ConfigureFunctionsWorkerDefaults((hostBuilderContext, workerApplicationBuilder) =>
-                {
-                    workerApplicationBuilder.UseFunctionExecutionMiddleware();
-                })
-                .ConfigureAppConfiguration((context, configurationBuilder) =>
-                {
-                    var connectionString =  configurationBuilder.Build().GetConnectionString("AppConfig");
-                    if (connectionString != null)
-                    {
-                        configuration = configurationBuilder.AddAzureAppConfiguration(connectionString).Build();
-                    }
-                })
-                .ConfigureLogging((context, loggerBuilder) =>
-                {
-                    loggerBuilder.AddConsole();
-                })
-                .ConfigureServices(services =>
-                {
-                    services.RegisterFunctionAppServices(configuration);                    
-                })
-                .Build().RunAsync();
+            configuration = configurationBuilder.AddAzureAppConfiguration(connectionString).Build();
         }
-    }
-}
+    })
+    .ConfigureLogging((context, loggerBuilder) =>
+    {
+        loggerBuilder.AddConsole();
+    })
+    .ConfigureServices(services =>
+    {
+        services.RegisterFunctionAppServices(configuration);
+    })
+    .Build();
+
+host.Run();

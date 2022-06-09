@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Beis.HelpToGrow.Voucher.FunctionApp": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7064"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 33921,
+      "useSSL": false
+    }
+  }
+}

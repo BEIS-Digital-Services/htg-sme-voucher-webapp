@@ -1,8 +1,7 @@
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database.Models;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
+
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -10,7 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BEIS.HelpToGrow.Voucher.FunctionApp
+
+namespace Beis.HelpToGrow.Voucher.FunctionApp
 {
     public class TokenReminderFunction
     {
@@ -24,6 +24,7 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
 
         private readonly TokenReminderOptions _options;
         private readonly ILogger<TokenReminderFunction> _logger;
+        private readonly IOptions<VoucherSettings> _voucherSettings;
 
         public TokenReminderFunction(IEnterpriseRepository enterpriseRepository,
             ITokenRepository tokenRepository,
@@ -32,7 +33,8 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
             IEmailClientService emailClientService,
             IVoucherGenerationService voucherGenerationService,
             IOptions<TokenReminderOptions> options,
-            ILogger<TokenReminderFunction> logger)
+            ILogger<TokenReminderFunction> logger,
+            IOptions<VoucherSettings> voucherSettings)
         {
             _enterpriseRepository = enterpriseRepository;
             _tokenRepository = tokenRepository;
@@ -43,10 +45,11 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
             _voucherGenerationService = voucherGenerationService;
             _options = options.Value;
             _logger = logger;
+            _voucherSettings = voucherSettings;
         }
 
         [Function("TokenReminderFunction")]
-        public async Task Run([TimerTrigger("%REMINDER_SCHEDULE%",RunOnStartup = false)] TimerInfo myTimer, FunctionContext context)
+        public async Task Run([Microsoft.Azure.Functions.Worker.TimerTrigger("%REMINDER_SCHEDULE%", RunOnStartup = false)] ScheduleInfo myTimer, FunctionContext context)
         {
             _logger.LogInformation($"Scheduled reminder email started processing for invocation: {context.InvocationId}.");
 
@@ -90,7 +93,7 @@ namespace BEIS.HelpToGrow.Voucher.FunctionApp
             _logger.LogInformation($"SendEmail fetched product info for product id: {eligibleToken.product}.");
             var vendor = await _vendorCompanyRepository.GetVendorCompanySingle(eligibleProduct.vendor_id);
             _logger.LogInformation($"SendEmail fetched vendor info for vendor id: {eligibleProduct.vendor_id}.");
-            var voucherCode = await _voucherGenerationService.GenerateVoucher(vendor, eligibleEnterprise, eligibleProduct);
+            var voucherCode = await _voucherGenerationService.GenerateVoucher(vendor, eligibleEnterprise, eligibleProduct, _voucherSettings);
             _logger.LogInformation($"SendEmail voucher code generated for vendor id: {eligibleProduct.vendor_id}.");
             var param = new Dictionary<string, string> { { "grantToken", voucherCode.Trim() } };
 

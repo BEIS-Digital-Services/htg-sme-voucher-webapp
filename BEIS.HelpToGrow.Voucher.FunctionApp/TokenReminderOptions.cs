@@ -1,4 +1,4 @@
-﻿namespace BEIS.HelpToGrow.Voucher.FunctionApp
+﻿namespace Beis.HelpToGrow.Voucher.FunctionApp
 {
     public class TokenReminderOptions
     {
