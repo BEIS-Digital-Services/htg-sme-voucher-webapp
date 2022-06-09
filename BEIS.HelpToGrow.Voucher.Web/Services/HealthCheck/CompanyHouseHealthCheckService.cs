@@ -38,12 +38,16 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
             {
                 var response = _companyHouseHttpConnection.ProcessRequest(_companyHouseHealthCheckOptions.Value.CompanyNumber, new DefaultHttpContext());
 
-                if (response.CompanyName == _companyHouseHealthCheckOptions.Value.CompanyName 
+                if (response.CompanyName != null && response.CompanyName == _companyHouseHealthCheckOptions.Value.CompanyName 
                     && response.CompanyStatus == _companyHouseHealthCheckOptions.Value.CompanyStatus)
                 {
                     isHealthy = true;
                     _logger.LogError("Company house API health check passed.");
-                } 
+                } else
+                {
+                    isHealthy = false;
+                    _logger.LogError(e, "Company house API health check failed. Check company details.");
+                }
             }
             catch (Exception e)
             {
