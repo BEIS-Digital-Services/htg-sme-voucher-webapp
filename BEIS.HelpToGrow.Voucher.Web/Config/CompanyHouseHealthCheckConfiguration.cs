@@ -5,7 +5,6 @@ namespace BEIS.HelpToGrow.Voucher.Web.Config
 {
     public class CompanyHouseHealthCheckConfiguration
     {
-        [JsonPropertyName("companyNumber")]
         public string CompanyNumber { get; set; }
         public string CompanyName { get; set; }
         public string CompanyStatus { get; set; }
