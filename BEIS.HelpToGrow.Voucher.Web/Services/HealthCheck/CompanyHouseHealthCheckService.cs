@@ -1,8 +1,10 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+﻿using BEIS.HelpToGrow.Voucher.Web.Config;
+using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,15 +15,18 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
     {
         private readonly ILogger<CompanyHouseHealthCheckService> _logger;
         private readonly ICompanyHouseHttpConnection<CompanyHouseResponse> _companyHouseHttpConnection;
-        
+        private readonly IOptions<CompanyHouseHealthCheckConfiguration> _companyHouseHealthCheckOptions;
+
         public CompanyHouseHealthCheckService(
             IRestClientFactory iRestClientFactory,
             ILogger<CompanyHouseHealthCheckService> logger,
-            IConfiguration iConfiguration, 
-            ICompanyHouseHttpConnection<CompanyHouseResponse> companyHouseHttpConnection)
+            IConfiguration iConfiguration,
+            ICompanyHouseHttpConnection<CompanyHouseResponse> companyHouseHttpConnection, 
+            IOptions<CompanyHouseHealthCheckConfiguration> companyHouseHealthCheckOptions)
         {
             _logger = logger;
             _companyHouseHttpConnection = companyHouseHttpConnection;
+            _companyHouseHealthCheckOptions = companyHouseHealthCheckOptions;
         }
 
         public Task<HealthCheckResult> CheckHealthAsync(
@@ -29,19 +34,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
         {
             var isHealthy = true;
 
-            var companyHouseDetails = new CompanyHouseResponse
-            {
-                CompanyName = "GTM UK LTD",
-                CompanyNumber = "04856708",
-                CompanyStatus = "Dissolved"
-            };
-
             try
             {
-                var response = _companyHouseHttpConnection.ProcessRequest(companyHouseDetails.CompanyNumber, new DefaultHttpContext());
+                var response = _companyHouseHttpConnection.ProcessRequest(_companyHouseHealthCheckOptions.Value.CompanyNumber, new DefaultHttpContext());
 
-                if (response.CompanyName == companyHouseDetails.CompanyName 
-                    && response.CompanyStatus == companyHouseDetails.CompanyStatus)
+                if (response.CompanyName == _companyHouseHealthCheckOptions.Value.CompanyName 
+                    && response.CompanyStatus == _companyHouseHealthCheckOptions.Value.CompanyStatus)
                 {
                     isHealthy = true;
                     _logger.LogError("Company house API health check passed.");
@@ -50,7 +48,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
             catch (Exception e)
             {
                 isHealthy = false;
-                _logger.LogError(e, "Company house API health check failed.");
+                _logger.LogError(e, "Company house API health check failed. Check company details.");
             }
 
             if (isHealthy)
