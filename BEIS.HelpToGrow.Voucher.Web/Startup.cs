@@ -57,7 +57,7 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.Configure<EligibilityRules>(_configuration.GetSection("EligibilityRules"));
             services.Configure<CookieNamesConfiguration>(_configuration.GetSection("CookieNamesConfiguration"));
             services.Configure<IndesserConnectionOptions>(options => _configuration.Bind(options));
-            services.Configure<CompanyHouseHealthCheckConfiguration>(options => _configuration.GetSection("CompanyHouseHealthCheckConfiguration"));
+            services.Configure<CompanyHouseHealthCheckConfiguration>(_configuration.GetSection("CompanyHouseHealthCheckConfiguration"));
             services.Configure<EncryptionSettings>(options => _configuration.Bind(options));
             services.Configure<UrlOptions>(o =>
             {
