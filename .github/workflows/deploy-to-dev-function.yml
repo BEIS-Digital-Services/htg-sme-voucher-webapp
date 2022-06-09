@@ -5,25 +5,21 @@ on:
  
 env:
   AZURE_FUNCTIONAPP_NAME: htg-dev-voucher-function-app
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'BEIS.HelpToGrow.Voucher.FunctionApp'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'Beis.HelpToGrow.Voucher.FunctionApp'
 
 jobs:
   build-dev:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core 5.0
+    - name: Setup .NET Core 6.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
-    - name: Setup .NET Core 3.1
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.x
+        dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build "BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj" --no-restore
+      run: dotnet build "Beis.HelpToGrow.Voucher.FunctionApp/Beis.HelpToGrow.Voucher.FunctionApp.csproj" --no-restore
 
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
@@ -31,7 +27,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Publish Function App for Release
-      run: dotnet publish "BEIS.HelpToGrow.Voucher.FunctionApp/BEIS.HelpToGrow.Voucher.FunctionApp.csproj" --configuration Release --output ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
+      run: dotnet publish "Beis.HelpToGrow.Voucher.FunctionApp/Beis.HelpToGrow.Voucher.FunctionApp.csproj" --configuration Release --output ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
 
     - name: 'Deploy to Azure Function App'
       uses: azure/functions-action@v1
