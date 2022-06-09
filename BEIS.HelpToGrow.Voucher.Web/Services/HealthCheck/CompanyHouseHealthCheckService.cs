@@ -46,7 +46,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
                 } else
                 {
                     isHealthy = false;
-                    _logger.LogError(e, "Company house API health check failed. Check company details.");
+                    _logger.LogError("Company house API health check failed. Check company details.");
                 }
             }
             catch (Exception e)
