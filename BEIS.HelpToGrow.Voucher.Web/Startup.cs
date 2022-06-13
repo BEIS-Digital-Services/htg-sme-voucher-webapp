@@ -184,11 +184,12 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.AddSingleton<IEncryptionService, EncryptionService>();
             services.AddHealthChecks()
                 .AddCheck<DependencyInjectionHealthCheckService>("Dependency Injection Health Checks")
+                .AddCheck<EmailNotificationHealthCheckServicecs>("Email Notify Service Health Checks")
                 .AddCheck<IndesserHealthCheckService>("Indesser Service Health Checks")
                 .AddCheck<CompanyHouseHealthCheckService>("Company House Api")
                 .AddCheck<DatabaseHealthCheckService>("Database")
                 .AddCheck<EncryptionHealthCheckService>("Encryption", failureStatus: HealthStatus.Unhealthy,
-                    tags: new[] { "Encryption" });
+                   tags: new[] { "Encryption" });
 
             services.AddScoped<IVoucherGenerationService, VoucherGenerationService>();
         }

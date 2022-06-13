@@ -7,6 +7,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,23 +36,31 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
             var isHealthy = true;
 
             StringBuilder indesserCheckErrors = new StringBuilder();
-
-            var indesserCallResult = RunIndesserCheck(_companyHouseHealthCheckOptions.Value.CompanyNumber);
-
-            if (indesserCallResult.IsFailed)
+            try
             {
-                indesserCheckErrors.Append(indesserCallResult.Errors[0].Message);
-                isHealthy = false;
+                var indesserCallResult = RunIndesserCheck(_companyHouseHealthCheckOptions.Value.CompanyNumber);
 
-            } else { 
-
-                var eligibilityCalculation = _eligibility.Check(new Web.Models.Voucher.UserVoucherDto { }, indesserCallResult.Value);
-
-                if (eligibilityCalculation.IsFailed)
+                if (indesserCallResult.IsFailed)
                 {
-                    indesserCheckErrors.Append(eligibilityCalculation.Errors[0].Message);
+                    indesserCheckErrors.Append(indesserCallResult.Errors[0].Message);
                     isHealthy = false;
+
                 }
+                else
+                {
+
+                    var eligibilityCalculation = _eligibility.Check(new Web.Models.Voucher.UserVoucherDto { }, indesserCallResult.Value);
+
+                    if (eligibilityCalculation.IsFailed)
+                    {
+                        indesserCheckErrors.Append(eligibilityCalculation.Errors[0].Message);
+                        isHealthy = false;
+                    }
+                }
+            } catch (Exception ex)
+            {
+                isHealthy = false;                
+                _logger.LogError(ex, $"Indesser health check failed. Its failed with {ex.Message}");
             }
 
             if (isHealthy)
