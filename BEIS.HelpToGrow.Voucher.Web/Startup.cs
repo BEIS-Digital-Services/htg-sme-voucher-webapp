@@ -184,12 +184,14 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.AddSingleton<IEncryptionService, EncryptionService>();
             services.AddHealthChecks()
                 .AddCheck<DependencyInjectionHealthCheckService>("Dependency Injection Health Checks")
-                .AddCheck<EmailNotificationHealthCheckServicecs>("Email Notify Service Health Checks")
                 .AddCheck<IndesserHealthCheckService>("Indesser Service Health Checks")
                 .AddCheck<CompanyHouseHealthCheckService>("Company House Api")
                 .AddCheck<DatabaseHealthCheckService>("Database")
                 .AddCheck<EncryptionHealthCheckService>("Encryption", failureStatus: HealthStatus.Unhealthy,
                    tags: new[] { "Encryption" });
+
+            // This is add Email Notification Health Checks in the future; however, we will need to find a test email address to send varification emails. 
+            // .AddCheck<EmailNotificationHealthCheckServicecs>("Email Notify Service Health Checks"); 
 
             services.AddScoped<IVoucherGenerationService, VoucherGenerationService>();
         }

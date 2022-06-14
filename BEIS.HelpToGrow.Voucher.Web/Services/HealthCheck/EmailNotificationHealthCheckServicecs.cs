@@ -35,8 +35,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
             {
                 var userVoucherDto = new UserVoucherDto();
                 userVoucherDto.ApplicantDto ??= new ApplicantDto();
-                userVoucherDto.ApplicantDto.EmailAddress = "jawwad.baig@broadlight.io";
-                userVoucherDto.ApplicantDto.FullName = "Jawwad Baig";
+                userVoucherDto.ApplicantDto.EmailAddress = ""; // TODO: If we need to add email varification service then add a test email address here
+                userVoucherDto.ApplicantDto.FullName = ""; // TODO: add a test full name here
                 userVoucherDto.ApplicantDto.EnterpriseId = 1;
                 userVoucherDto.SelectedProduct ??= new product { product_id = 11 };                                  
 
