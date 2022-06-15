@@ -1,18 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Voucher.Web.Common;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-
-using FluentResults;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Services;
-
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]

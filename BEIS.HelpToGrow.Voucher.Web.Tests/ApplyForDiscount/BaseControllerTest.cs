@@ -1,12 +1,4 @@
 ﻿
-using HttpContextMoq;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     public class BaseControllerTest

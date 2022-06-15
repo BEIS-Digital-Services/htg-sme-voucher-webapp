@@ -1,13 +1,4 @@
-﻿using System.Collections.Generic;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     [TestFixture]

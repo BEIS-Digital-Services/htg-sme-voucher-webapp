@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Beis.HelpToGrow.Voucher.Web.Services;
-using RestSharp;
+﻿using RestSharp;
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {

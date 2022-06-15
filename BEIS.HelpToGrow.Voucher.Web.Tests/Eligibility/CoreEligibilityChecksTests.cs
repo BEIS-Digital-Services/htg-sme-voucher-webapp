@@ -1,15 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentResults;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Moq;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Config;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
+﻿
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {

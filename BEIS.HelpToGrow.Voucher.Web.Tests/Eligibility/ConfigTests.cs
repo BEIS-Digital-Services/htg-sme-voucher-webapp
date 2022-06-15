@@ -1,9 +1,4 @@
-﻿using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Testing;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Config;
+﻿using System.Text.Json;
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {

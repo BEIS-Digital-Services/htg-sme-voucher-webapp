@@ -1,10 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Controllers;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]

@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using HttpContextMoq;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Primitives;
-using Moq;
-using Notify.Exceptions;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Config;
-using Beis.HelpToGrow.Voucher.Web.Models;
-using Beis.HelpToGrow.Voucher.Web.Services;
-
+﻿
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {

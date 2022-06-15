@@ -1,23 +1,5 @@
 ﻿
-using Beis.HelpToGrow.Voucher.Web.Config;
-using Beis.HelpToGrow.Voucher.Web.Controllers;
-using Beis.HelpToGrow.Voucher.Web.Models.Applicant;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-using Beis.HelpToGrow.Voucher.Web.Services;
-using Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount;
-using FluentResults;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Applicant
 {

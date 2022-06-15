@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using Beis.HelpToGrow.Voucher.Web.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
+﻿using Newtonsoft.Json;
 using RestSharp;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors;
-using Microsoft.Extensions.Options;
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {

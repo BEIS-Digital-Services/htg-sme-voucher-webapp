@@ -1,13 +1,4 @@
-﻿using System.IO;
-using System.Text.Json;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
+﻿
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {

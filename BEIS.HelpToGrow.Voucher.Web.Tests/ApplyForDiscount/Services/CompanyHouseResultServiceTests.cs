@@ -1,11 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility;
+﻿
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {

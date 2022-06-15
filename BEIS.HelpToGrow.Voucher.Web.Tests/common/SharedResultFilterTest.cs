@@ -1,16 +1,4 @@
-﻿using Beis.HelpToGrow.Voucher.Web.Common;
-using Beis.HelpToGrow.Voucher.Web.Config;
-using Beis.HelpToGrow.Voucher.Web.Controllers;
-using Beis.HelpToGrow.Voucher.Web.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Options;
-using Moq;
-using NUnit.Framework;
-using System;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Common
 {
     [TestFixture]

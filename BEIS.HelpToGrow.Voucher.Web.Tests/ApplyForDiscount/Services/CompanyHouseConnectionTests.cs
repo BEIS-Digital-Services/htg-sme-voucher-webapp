@@ -1,12 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using Beis.HelpToGrow.Voucher.Web.Tests.Eligibility;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using NUnit.Framework;
+﻿
 using RestSharp;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services

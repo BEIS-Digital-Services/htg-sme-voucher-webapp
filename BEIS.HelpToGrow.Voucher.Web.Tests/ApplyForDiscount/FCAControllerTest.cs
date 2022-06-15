@@ -1,18 +1,4 @@
-﻿using System.Threading.Tasks;
-
-
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Controllers;
-using Beis.HelpToGrow.Voucher.Web.Models.Applicant;
-using Beis.HelpToGrow.Voucher.Web.Models.FCA;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-using Beis.HelpToGrow.Voucher.Web.Services;
-using Beis.HelpToGrow.Voucher.Web.Services.FCAServices;
-
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]

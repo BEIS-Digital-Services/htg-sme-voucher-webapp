@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.WebUtilities;
-using NUnit.Framework;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Common
 {
     [TestFixture]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Distributed;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     public class FakeRedisCache : IDistributedCache

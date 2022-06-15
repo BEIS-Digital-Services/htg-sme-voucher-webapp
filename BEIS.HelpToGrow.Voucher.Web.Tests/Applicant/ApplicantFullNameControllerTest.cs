@@ -1,17 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Moq;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Controllers;
-using Beis.HelpToGrow.Voucher.Web.Models.Applicant;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-using Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount;
-using Beis.HelpToGrow.Voucher.Web.Services;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Applicant
 {
     [TestFixture]

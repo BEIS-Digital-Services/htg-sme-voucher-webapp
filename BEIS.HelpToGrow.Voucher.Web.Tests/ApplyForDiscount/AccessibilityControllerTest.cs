@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Controllers;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]

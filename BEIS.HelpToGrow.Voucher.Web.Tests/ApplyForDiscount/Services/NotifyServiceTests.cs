@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Moq;
-using Notify.Exceptions;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Services;
-
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]

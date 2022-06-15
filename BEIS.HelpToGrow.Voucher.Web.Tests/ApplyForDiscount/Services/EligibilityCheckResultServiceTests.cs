@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility;
-
-using FluentResults;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
+﻿
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {

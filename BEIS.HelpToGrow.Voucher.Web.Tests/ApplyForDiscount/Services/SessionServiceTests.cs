@@ -1,12 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
-using HttpContextMoq;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using Newtonsoft.Json;
-using NUnit.Framework;
-using Beis.HelpToGrow.Voucher.Web.Services;
+﻿using Newtonsoft.Json;
 
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {

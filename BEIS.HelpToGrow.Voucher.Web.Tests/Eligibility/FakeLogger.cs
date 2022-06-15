@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     public class FakeLogger : ILogger<IndesserConnection>
