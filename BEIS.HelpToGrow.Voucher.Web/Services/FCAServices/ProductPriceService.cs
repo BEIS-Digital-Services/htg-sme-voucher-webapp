@@ -1,8 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using Microsoft.Extensions.Logging;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Services.FCAServices
 {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;

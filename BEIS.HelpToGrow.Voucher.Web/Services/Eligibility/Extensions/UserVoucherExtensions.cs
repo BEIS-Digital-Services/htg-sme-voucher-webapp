@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions
 {
     public static class UserVoucherExtensions

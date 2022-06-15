@@ -1,11 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using Beis.Htg.VendorSme.Database.Models;
-using FluentResults;
-using Microsoft.Extensions.Logging;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public class CompanyHouseResultService : ICompanyHouseResultService

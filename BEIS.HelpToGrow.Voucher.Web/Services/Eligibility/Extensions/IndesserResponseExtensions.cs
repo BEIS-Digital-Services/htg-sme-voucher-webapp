@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentResults;
+﻿
 using Domain = BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions

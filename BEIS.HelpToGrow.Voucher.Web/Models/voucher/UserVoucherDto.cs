@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using Beis.Htg.VendorSme.Database.Models;
+
 
 namespace BEIS.HelpToGrow.Voucher.Web.Models.Voucher
 {

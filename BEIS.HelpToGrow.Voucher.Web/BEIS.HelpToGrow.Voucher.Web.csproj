@@ -31,6 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Beis.HelpToGrow.Common" Version="2.1.8" />
         <PackageReference Include="CsvHelper" Version="27.2.1" />
         <PackageReference Include="FluentAssertions" Version="6.7.0" />
         <PackageReference Include="FluentResults" Version="3.5.0" />
@@ -39,7 +40,6 @@
         <PackageReference Include="jQuery" Version="3.6.0" />
         <PackageReference Include="jQuery.Validation" Version="1.19.4" />
         <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
-        <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="5.0.12" />
         <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="5.0.12" />
         <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
         <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="5.0.0" />
@@ -50,17 +50,6 @@
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="RestSharp" Version="106.15.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\BEIS.HelpToGrow.Core\BEIS.HelpToGrow.Core.csproj" />
-      <ProjectReference Include="..\BEIS.HelpToGrow.Voucher.Web.Services\BEIS.HelpToGrow.Voucher.Web.Services.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Beis.Htg.VendorSme.Database">
-        <HintPath>..\BEIS.HelpToGrow.Core\library\Beis.Htg.VendorSme.Database.dll</HintPath>
-      </Reference>
     </ItemGroup>
 
 </Project>

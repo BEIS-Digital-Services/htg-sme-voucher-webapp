@@ -1,5 +1,4 @@
-﻿using FluentResults;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public class MissingCharacteristicError : Error

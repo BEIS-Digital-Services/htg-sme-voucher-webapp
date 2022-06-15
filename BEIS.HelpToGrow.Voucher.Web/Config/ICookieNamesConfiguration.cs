@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Config
 {
     /// <summary>

@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BEIS.HelpToGrow.Core", "BEIS.HelpToGrow.Core\BEIS.HelpToGrow.Core.csproj", "{5617E7C4-3239-42AB-8368-5274EE1E4AF2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BEIS.HelpToGrow.Voucher.Web.Services", "BEIS.HelpToGrow.Voucher.Web.Services\BEIS.HelpToGrow.Voucher.Web.Services.csproj", "{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BEIS.HelpToGrow.Voucher.Web", "BEIS.HelpToGrow.Voucher.Web\BEIS.HelpToGrow.Voucher.Web.csproj", "{968CBE67-6E62-410F-B012-07666EB79C25}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BEIS.HelpToGrow.Voucher.Web.Tests", "BEIS.HelpToGrow.Voucher.Web.Tests\BEIS.HelpToGrow.Voucher.Web.Tests.csproj", "{B7F96BBF-4CE3-48C2-A6A3-8182058346DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beis.HelpToGrow.Voucher.FunctionApp", "Beis.HelpToGrow.Voucher.FunctionApp\Beis.HelpToGrow.Voucher.FunctionApp.csproj", "{1944201A-2A60-45A4-B55B-634D7E1B506C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beis.HelpToGrow.Voucher.FunctionApp", "Beis.HelpToGrow.Voucher.FunctionApp\Beis.HelpToGrow.Voucher.FunctionApp.csproj", "{1944201A-2A60-45A4-B55B-634D7E1B506C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,30 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Debug|x64.Build.0 = Debug|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Debug|x86.Build.0 = Debug|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Release|x64.ActiveCfg = Release|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Release|x64.Build.0 = Release|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Release|x86.ActiveCfg = Release|Any CPU
-		{5617E7C4-3239-42AB-8368-5274EE1E4AF2}.Release|x86.Build.0 = Release|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Debug|x64.Build.0 = Debug|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Debug|x86.Build.0 = Debug|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Release|x64.ActiveCfg = Release|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Release|x64.Build.0 = Release|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Release|x86.ActiveCfg = Release|Any CPU
-		{C602577F-4AFE-42DA-BF5D-13DD4F6ABF95}.Release|x86.Build.0 = Release|Any CPU
 		{968CBE67-6E62-410F-B012-07666EB79C25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{968CBE67-6E62-410F-B012-07666EB79C25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{968CBE67-6E62-410F-B012-07666EB79C25}.Debug|x64.ActiveCfg = Debug|Any CPU

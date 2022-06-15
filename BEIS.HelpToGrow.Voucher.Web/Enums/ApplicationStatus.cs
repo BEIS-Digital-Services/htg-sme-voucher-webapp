@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BEIS.HelpToGrow.Core.Enums
+namespace Beis.HelpToGrow.Voucher.Web.Enums
 {
     public enum ApplicationStatus
     {

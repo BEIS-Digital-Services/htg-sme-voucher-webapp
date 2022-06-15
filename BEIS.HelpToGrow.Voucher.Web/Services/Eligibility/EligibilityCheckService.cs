@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using FluentResults;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿
+
+
 using Newtonsoft.Json;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility

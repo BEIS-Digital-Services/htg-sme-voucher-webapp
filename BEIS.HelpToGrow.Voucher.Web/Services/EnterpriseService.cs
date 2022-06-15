@@ -1,17 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Core.Enums;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions;
-using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
-using Beis.Htg.VendorSme.Database.Models;
-using FluentResults;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+﻿
+
 
 namespace BEIS.HelpToGrow.Voucher.Web.Services
 {

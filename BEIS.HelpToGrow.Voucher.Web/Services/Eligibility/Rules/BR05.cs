@@ -1,9 +1,4 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
-using FluentResults;
-using Microsoft.Extensions.Logging;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules
 {
     public class BR05 : CheckEligibilityRule

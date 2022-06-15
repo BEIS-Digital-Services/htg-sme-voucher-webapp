@@ -1,6 +1,5 @@
 ﻿using System;
 using BEIS.HelpToGrow.Voucher.Web.Config;
-using Beis.Htg.VendorSme.Database.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

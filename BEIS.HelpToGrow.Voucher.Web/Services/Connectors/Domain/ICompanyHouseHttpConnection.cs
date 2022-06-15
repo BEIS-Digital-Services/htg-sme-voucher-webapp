@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain
 {

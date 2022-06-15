@@ -1,19 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database.Models;
-using BEIS.HelpToGrow.Core.Enums;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
+
+
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
@@ -26,14 +12,15 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
         private readonly IEnterpriseRepository _enterpriseRepository;
         private readonly INotifyService _notifyService;
         private readonly IApplicationStatusService _applicationStatusService;
+        private readonly IOptions<VoucherSettings> _voucherSettings;
 
         public TokenIssuedController(
             ILogger<TokenIssuedController> logger,
             ISessionService sessionService,
             IVoucherGenerationService voucherGenerationService,
             IVendorCompanyRepository vendorCompanyRepository,
-            IEnterpriseRepository enterpriseRepository, INotifyService notifyService, 
-            IApplicationStatusService applicationStatusService)
+            IEnterpriseRepository enterpriseRepository, INotifyService notifyService,
+            IApplicationStatusService applicationStatusService, IOptions<VoucherSettings> voucherSettings)
         {
             _logger = logger;
             _sessionService = sessionService;
@@ -42,6 +29,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
             _enterpriseRepository = enterpriseRepository;
             _notifyService = notifyService;
             _applicationStatusService = applicationStatusService;
+            _voucherSettings = voucherSettings;
         }
 
         public async Task<IActionResult> Index()
@@ -103,7 +91,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Controllers
                 throw new Exception($"The selected product redemption url does not exist for product {userVoucherDto.SelectedProduct?.product_description}");
             }
 
-            userVoucherDto.voucherCode = await _voucherGenerationService.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct);
+            userVoucherDto.voucherCode = await _voucherGenerationService.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct, _voucherSettings);
             userVoucherDto.tokenPurchaseLink = GetTokenPurchaseLink(userVoucherDto, userVoucherDto.SelectedProduct);
             _logger.LogInformation("enterprise {id} has been generated a redemption url of {url}", enterprise.enterprise_id, userVoucherDto.tokenPurchaseLink);
             var notifyResult = await _notifyService.SendVoucherToApplicant(userVoucherDto);

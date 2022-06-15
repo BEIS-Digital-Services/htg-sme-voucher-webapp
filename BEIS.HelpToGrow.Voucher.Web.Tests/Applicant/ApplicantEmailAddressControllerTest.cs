@@ -1,4 +1,4 @@
-﻿using BEIS.HelpToGrow.Core.Enums;
+﻿
 using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Controllers;
 using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;

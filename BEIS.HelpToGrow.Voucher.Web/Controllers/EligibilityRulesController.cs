@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
     [Route("api/eligibilityrules")]

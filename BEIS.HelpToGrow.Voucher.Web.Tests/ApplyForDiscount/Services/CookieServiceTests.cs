@@ -11,7 +11,7 @@ using NUnit.Framework;
 using BEIS.HelpToGrow.Voucher.Web.Config;
 using BEIS.HelpToGrow.Voucher.Web.Models;
 using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
+
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {

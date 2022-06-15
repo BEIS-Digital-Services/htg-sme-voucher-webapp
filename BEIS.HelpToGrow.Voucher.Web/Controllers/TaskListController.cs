@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {

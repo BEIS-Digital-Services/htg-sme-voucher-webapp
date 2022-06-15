@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Beis.HelpToGrow.Common" Version="2.1.8" />
         <PackageReference Include="CsvHelper" Version="27.2.1" />
         <PackageReference Include="HttpContextMoq" Version="1.2.2" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.5" />
@@ -33,12 +34,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\BEIS.HelpToGrow.Voucher.Web\BEIS.HelpToGrow.Voucher.Web.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Beis.Htg.VendorSme.Database">
-        <HintPath>..\BEIS.HelpToGrow.Core\library\Beis.Htg.VendorSme.Database.dll</HintPath>
-      </Reference>
     </ItemGroup>
 
 </Project>

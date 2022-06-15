@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {

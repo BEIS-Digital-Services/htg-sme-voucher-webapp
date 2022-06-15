@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using Microsoft.AspNetCore.Http;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services
 {
     public interface ICookieService

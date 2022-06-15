@@ -1,4 +1,4 @@
-﻿namespace BEIS.HelpToGrow.Core.Enums
+﻿namespace Beis.HelpToGrow.Voucher.Web.Enums
 {
     public enum EligibilityStatus
     {

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services.FCAServices
 {
     public interface IFCASocietyService

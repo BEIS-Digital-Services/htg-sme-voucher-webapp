@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Models
 {
     public class TermsConditionsViewModel : UsefulLinksViewModel

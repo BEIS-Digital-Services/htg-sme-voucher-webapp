@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 
 namespace BEIS.HelpToGrow.Voucher.Web.Models
 {

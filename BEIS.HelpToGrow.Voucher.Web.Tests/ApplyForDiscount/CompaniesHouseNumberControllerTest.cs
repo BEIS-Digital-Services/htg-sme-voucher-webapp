@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -12,7 +12,7 @@ using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
-using BEIS.HelpToGrow.Core.Enums;
+
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {

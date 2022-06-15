@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
     public class VerifyEmailAddressController : Controller

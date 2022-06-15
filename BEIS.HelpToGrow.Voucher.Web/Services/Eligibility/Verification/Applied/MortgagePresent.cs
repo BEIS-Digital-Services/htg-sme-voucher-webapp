@@ -1,7 +1,4 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions;
-using FluentResults;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied
 {
     public class MortgagePresent : IVerifyMortgagePresent

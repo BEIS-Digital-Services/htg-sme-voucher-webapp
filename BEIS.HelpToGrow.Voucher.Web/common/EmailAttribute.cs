@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 
 namespace BEIS.HelpToGrow.Voucher.Web.Common
 {

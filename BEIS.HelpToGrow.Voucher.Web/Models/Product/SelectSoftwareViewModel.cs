@@ -1,8 +1,4 @@
-﻿using Beis.Htg.VendorSme.Database.Models;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Models.Product
 {
     public class SelectSoftwareViewModel

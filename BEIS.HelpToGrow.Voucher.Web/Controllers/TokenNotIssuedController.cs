@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
     public class TokenNotIssuedController : Controller

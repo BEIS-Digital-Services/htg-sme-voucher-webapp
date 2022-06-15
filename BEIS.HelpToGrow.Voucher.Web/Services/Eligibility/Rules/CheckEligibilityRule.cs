@@ -1,7 +1,4 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using FluentResults;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules
 {
     public abstract class CheckEligibilityRule : ICheckEligibilityRule

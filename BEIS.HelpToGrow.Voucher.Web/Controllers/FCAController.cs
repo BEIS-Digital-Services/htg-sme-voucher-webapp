@@ -1,14 +1,4 @@
-﻿using Beis.HelpToGrow.Core.Repositories.Interface;
-using Microsoft.AspNetCore.Mvc;
-using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
-using System;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models.FCA;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
-using BEIS.HelpToGrow.Core.Enums;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
     public class FCAController : Controller

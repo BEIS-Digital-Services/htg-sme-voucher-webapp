@@ -1,6 +1,4 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using FluentResults;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied
 {
     public class TotalAgreements : AbstractVerification, IVerifyTotalAgreements

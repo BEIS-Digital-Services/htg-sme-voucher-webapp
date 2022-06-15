@@ -1,6 +1,4 @@
-﻿using Beis.Htg.VendorSme.Database.Models;
-using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Models
 {
     public class MajorUpgradeViewModel

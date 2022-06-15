@@ -1,10 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-
+﻿
 namespace BEIS.HelpToGrow.Voucher.Web.Services
 {
     public class CookieService : ICookieService
