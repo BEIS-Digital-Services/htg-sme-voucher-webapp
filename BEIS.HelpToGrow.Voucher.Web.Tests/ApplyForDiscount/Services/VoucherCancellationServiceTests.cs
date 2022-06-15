@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class VoucherCancellationServiceTests

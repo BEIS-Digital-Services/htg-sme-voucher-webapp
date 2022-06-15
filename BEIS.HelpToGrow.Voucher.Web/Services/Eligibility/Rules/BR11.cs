@@ -1,5 +1,5 @@
 ﻿
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules
 {
     public class BR11 : CheckEligibilityRule
     {

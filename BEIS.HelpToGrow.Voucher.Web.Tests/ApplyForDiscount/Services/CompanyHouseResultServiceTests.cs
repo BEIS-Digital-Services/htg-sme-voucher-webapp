@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class CompanyHouseResultServiceTests

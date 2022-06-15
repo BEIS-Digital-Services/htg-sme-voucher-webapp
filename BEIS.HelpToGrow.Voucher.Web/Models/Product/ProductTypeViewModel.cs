@@ -1,5 +1,5 @@
 ﻿
-namespace BEIS.HelpToGrow.Voucher.Web.Models.Product
+namespace Beis.HelpToGrow.Voucher.Web.Models.Product
 {
     public class ProductTypeViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     public static class MockLogger
     {

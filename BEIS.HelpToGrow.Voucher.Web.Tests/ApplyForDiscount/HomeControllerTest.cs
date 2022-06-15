@@ -1,9 +1,9 @@
 ﻿
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Config;
+using Beis.HelpToGrow.Voucher.Web.Controllers;
+using Beis.HelpToGrow.Voucher.Web.Models;
+using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
+using Beis.HelpToGrow.Voucher.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,7 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class HomeControllerTest : BaseControllerTest

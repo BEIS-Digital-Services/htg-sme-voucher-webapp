@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using BEIS.HelpToGrow.Voucher.Web.Config;
+using Beis.HelpToGrow.Voucher.Web.Config;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
-using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
+using Beis.HelpToGrow.Voucher.Web.Controllers;
+using Beis.HelpToGrow.Voucher.Web.Models.Applicant;
+using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
+using Beis.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Services.FCAServices;
 
 using Microsoft.Extensions.Options;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class ConfirmApplicantControllerTest : BaseControllerTest

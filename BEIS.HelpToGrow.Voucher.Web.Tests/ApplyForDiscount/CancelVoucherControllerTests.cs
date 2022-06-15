@@ -1,16 +1,16 @@
 ﻿
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
-using BEIS.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Controllers;
+using Beis.HelpToGrow.Voucher.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
 using System.Threading.Tasks;
- using BEIS.HelpToGrow.Voucher.Web.Config;
+ using Beis.HelpToGrow.Voucher.Web.Config;
  using Microsoft.Extensions.Options;
 
- namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class CancelVoucherControllerTests

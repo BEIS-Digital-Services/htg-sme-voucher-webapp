@@ -5,16 +5,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-buster-slim AS build
 WORKDIR /src
-COPY BEIS.HelpToGrow.Voucher.Web/BEIS.HelpToGrow.Voucher.Web.csproj .
-RUN dotnet restore "./BEIS.HelpToGrow.Voucher.Web.csproj"
+COPY Beis.HelpToGrow.Voucher.Web/Beis.HelpToGrow.Voucher.Web.csproj .
+RUN dotnet restore "./Beis.HelpToGrow.Voucher.Web.csproj"
 COPY . .
-WORKDIR "/src/BEIS.HelpToGrow.Voucher.Web"
-RUN dotnet build "BEIS.HelpToGrow.Voucher.Web.csproj" -c Release -o /app/build
+WORKDIR "/src/Beis.HelpToGrow.Voucher.Web"
+RUN dotnet build "Beis.HelpToGrow.Voucher.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "BEIS.HelpToGrow.Voucher.Web.csproj" -c Release -o /app/publish
+RUN dotnet publish "Beis.HelpToGrow.Voucher.Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BEIS.HelpToGrow.Voucher.Web.dll"]
+ENTRYPOINT ["dotnet", "Beis.HelpToGrow.Voucher.Web.dll"]

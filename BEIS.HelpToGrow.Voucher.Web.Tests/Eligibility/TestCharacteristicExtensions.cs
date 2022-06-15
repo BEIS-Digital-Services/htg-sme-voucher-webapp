@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     public static class TestCharacteristicExtensions
     {

@@ -1,6 +1,6 @@
 
 
-namespace BEIS.HelpToGrow.Voucher.Web.Models.Voucher
+namespace Beis.HelpToGrow.Voucher.Web.Models.Voucher
 {
     public class UserVoucherDto: VoucherErrorDetails
     {

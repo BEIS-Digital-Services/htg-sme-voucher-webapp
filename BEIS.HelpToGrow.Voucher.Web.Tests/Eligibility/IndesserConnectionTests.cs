@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using BEIS.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
@@ -11,10 +11,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using RestSharp;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors;
 using Microsoft.Extensions.Options;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     [TestFixture]
     public class IndesserConnectionTests

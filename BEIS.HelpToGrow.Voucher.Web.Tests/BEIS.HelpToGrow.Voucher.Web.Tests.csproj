@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <RootNamespace>BEIS.HelpToGrow.Voucher.Web.Tests</RootNamespace>
+        <RootNamespace>Beis.HelpToGrow.Voucher.Web.Tests</RootNamespace>
 
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -33,7 +33,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BEIS.HelpToGrow.Voucher.Web\BEIS.HelpToGrow.Voucher.Web.csproj" />
+      <ProjectReference Include="..\BEIS.HelpToGrow.Voucher.Web\Beis.HelpToGrow.Voucher.Web.csproj" />
     </ItemGroup>
 
 </Project>

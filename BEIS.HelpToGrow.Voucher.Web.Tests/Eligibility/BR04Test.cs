@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
+using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     [TestFixture]
     public class BR04Test

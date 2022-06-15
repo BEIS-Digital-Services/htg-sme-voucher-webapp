@@ -1,5 +1,5 @@
 ﻿
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     [Route("api/eligibilityrules")]
     [ApiController]

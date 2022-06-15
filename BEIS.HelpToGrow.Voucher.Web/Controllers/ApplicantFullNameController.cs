@@ -1,6 +1,6 @@
 ﻿
 
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     [Route("applicant")] // this has been added to match the previous page link
     public class ApplicantFullNameController : Controller

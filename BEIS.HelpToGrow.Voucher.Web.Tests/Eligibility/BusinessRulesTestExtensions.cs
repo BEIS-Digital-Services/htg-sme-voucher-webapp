@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     public static class BusinessRulesTestExtensions
     {

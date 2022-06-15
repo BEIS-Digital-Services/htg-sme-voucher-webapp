@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using BEIS.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Services;
 
 using Moq;
 using NUnit.Framework;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class VendorServiceTests

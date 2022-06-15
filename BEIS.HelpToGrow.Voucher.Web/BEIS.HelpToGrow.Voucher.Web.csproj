@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<AssemblyName>BEIS.HelpToGrow.Voucher.Web</AssemblyName>
+		<AssemblyName>Beis.HelpToGrow.Voucher.Web</AssemblyName>
 		<UserSecretsId>e6b28fe7-abd1-46bb-a8d6-22aabb1c0a6e</UserSecretsId>
 	</PropertyGroup>
 

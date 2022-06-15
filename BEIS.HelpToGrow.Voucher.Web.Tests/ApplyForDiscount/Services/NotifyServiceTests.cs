@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
+using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -9,10 +9,10 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Notify.Exceptions;
 using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Services;
 
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class NotifyServiceTests

@@ -8,12 +8,12 @@ using Microsoft.Extensions.Primitives;
 using Moq;
 using Notify.Exceptions;
 using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Config;
+using Beis.HelpToGrow.Voucher.Web.Models;
+using Beis.HelpToGrow.Voucher.Web.Services;
 
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class EmailClientServiceTests

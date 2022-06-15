@@ -13,7 +13,7 @@ using RestSharp.Authenticators;
 using RestSharp.Deserializers;
 using RestSharp.Serialization;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     public class FakeRestClient : IRestClient
     {

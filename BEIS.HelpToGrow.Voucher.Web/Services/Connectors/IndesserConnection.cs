@@ -4,7 +4,7 @@ using RestSharp;
 
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Connectors
+namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 {
 
     public class IndesserConnection : IIndesserHttpConnection<IndesserCompanyResponse>

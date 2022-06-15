@@ -1,7 +1,7 @@
 ﻿
-using Domain = BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Domain = Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions
 {
     public static class IndesserResponseExtensions
     {

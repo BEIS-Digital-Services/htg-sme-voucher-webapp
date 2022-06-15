@@ -1,7 +1,7 @@
 ﻿
 using Newtonsoft.Json;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public class EligibilityCheckResultService : IEligibilityCheckResultService
     {

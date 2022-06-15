@@ -1,5 +1,5 @@
 ﻿
-namespace BEIS.HelpToGrow.Voucher.Web.Services.FCAServices
+namespace Beis.HelpToGrow.Voucher.Web.Services.FCAServices
 {
     public interface IFCASocietyService
     {

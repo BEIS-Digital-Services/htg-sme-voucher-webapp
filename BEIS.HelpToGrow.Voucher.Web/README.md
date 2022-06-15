@@ -7,7 +7,7 @@ kubernetes for deployment.
 
 * #### Docker deployment commands ####   
     * docker build -t beis-htg-sme-voucher-webapp .
-    * docker tag BEIS.HelpToGrow.Voucher.Web {dockerhubid}/beis-htg-sme-voucher-webapp
+    * docker tag Beis.HelpToGrow.Voucher.Web {dockerhubid}/beis-htg-sme-voucher-webapp
     * docker push {dockerhubid}/beis-htg-sme-voucher-webapp
     * docker run -p 5000:5000 {dockerhubid}/beis-htg-sme-voucher-webapp
 

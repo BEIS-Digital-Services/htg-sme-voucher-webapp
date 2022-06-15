@@ -3,9 +3,9 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
+using Beis.HelpToGrow.Voucher.Web.Controllers;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class IndesserTokenResetControllerTest : BaseControllerTest

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.WebUtilities;
 using NUnit.Framework;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Common
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Common
 {
     [TestFixture]
     public class TokenIssuedUrlGenerationTest

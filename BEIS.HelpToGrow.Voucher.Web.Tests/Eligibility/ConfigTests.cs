@@ -3,9 +3,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Config;
+using Beis.HelpToGrow.Voucher.Web.Config;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     [Ignore("Not yet able to run on server")]
     [TestFixture]
