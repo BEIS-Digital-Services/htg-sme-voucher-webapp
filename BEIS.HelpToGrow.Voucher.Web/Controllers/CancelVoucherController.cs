@@ -1,5 +1,4 @@
 ﻿
-
 namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class CancelVoucherController : Controller

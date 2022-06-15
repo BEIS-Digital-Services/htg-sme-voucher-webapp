@@ -1,7 +1,4 @@
-﻿
-using System.Text.Json;
-
-
+﻿using System.Text.Json;
 
 namespace Beis.HelpToGrow.Voucher.Web.Services
 {

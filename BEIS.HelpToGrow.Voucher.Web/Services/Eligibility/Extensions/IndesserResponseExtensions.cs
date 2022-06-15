@@ -1,5 +1,4 @@
-﻿
-using Domain = Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+﻿using Domain = Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 
 namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions
 {

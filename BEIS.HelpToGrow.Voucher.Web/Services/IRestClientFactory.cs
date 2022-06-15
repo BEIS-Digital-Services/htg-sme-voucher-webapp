@@ -1,5 +1,4 @@
-﻿
-using RestSharp;
+﻿using RestSharp;
 
 namespace Beis.HelpToGrow.Voucher.Web.Services
 {

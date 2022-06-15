@@ -1,4 +1,5 @@
-﻿namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied
 {
     public class DirectorDisqualification : AbstractVerification, IVerifyDirectorNonDisqualification
     {

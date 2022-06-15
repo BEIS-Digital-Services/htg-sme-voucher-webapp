@@ -1,6 +1,4 @@
 
-
-
 namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class IndesserTokenResetController : ControllerBase

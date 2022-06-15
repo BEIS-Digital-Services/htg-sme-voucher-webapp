@@ -1,4 +1,5 @@
-﻿namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     /// <summary>
     /// These Error Codes correlate to the business rules.

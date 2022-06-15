@@ -1,7 +1,6 @@
 using FCASociety = Beis.HelpToGrow.Voucher.Web.Models.Voucher.FCASociety;
 using FCASocietyEntity = Beis.HelpToGrow.Persistence.Models.fcasociety;
 
-
 namespace Beis.HelpToGrow.Voucher.Web.Services.FCAServices
 {
     public class FCASocietyService : IFCASocietyService

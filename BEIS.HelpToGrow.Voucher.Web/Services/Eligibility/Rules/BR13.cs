@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules
 {
     public class BR13 : CheckEligibilityRule

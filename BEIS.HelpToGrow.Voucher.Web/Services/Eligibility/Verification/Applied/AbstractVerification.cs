@@ -1,5 +1,4 @@
 ﻿
-
 namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied
 {
     public abstract class AbstractVerification

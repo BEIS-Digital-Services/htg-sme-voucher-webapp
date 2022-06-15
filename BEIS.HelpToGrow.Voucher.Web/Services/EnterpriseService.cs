@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace Beis.HelpToGrow.Voucher.Web.Services
 {
     public class EnterpriseService : IEnterpriseService

@@ -1,7 +1,5 @@
-
 using Newtonsoft.Json;
 using RestSharp;
-
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors

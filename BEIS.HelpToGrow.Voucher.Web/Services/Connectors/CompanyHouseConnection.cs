@@ -1,6 +1,3 @@
-
-
-
 using RestSharp;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 

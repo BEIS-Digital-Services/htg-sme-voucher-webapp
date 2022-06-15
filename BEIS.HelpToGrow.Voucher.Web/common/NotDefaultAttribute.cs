@@ -1,5 +1,4 @@
 ﻿
-
 namespace Beis.HelpToGrow.Voucher.Web.Common
 {
     public class NotDefaultAttribute : ValidationAttribute

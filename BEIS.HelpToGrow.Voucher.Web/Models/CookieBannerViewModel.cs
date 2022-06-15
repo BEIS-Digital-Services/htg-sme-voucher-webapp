@@ -1,3 +1,4 @@
+
 namespace Beis.HelpToGrow.Voucher.Web.Models
 {
     public class CookieBannerViewModel

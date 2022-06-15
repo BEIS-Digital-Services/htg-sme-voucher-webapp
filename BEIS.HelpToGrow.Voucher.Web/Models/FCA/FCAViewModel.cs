@@ -1,5 +1,4 @@
 ﻿
-
 namespace Beis.HelpToGrow.Voucher.Web.Models.FCA
 {
     public class FCAViewModel
