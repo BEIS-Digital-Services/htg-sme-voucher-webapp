@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: htg-dev-voucher-webapp
+  AZURE_WEBAPP_NAME: htg-dev-voucher-app
   REGISTRY_LOGIN_SERVER: htgdevregistry.azurecr.io
 
 jobs:
