@@ -46,7 +46,9 @@ namespace BEIS.HelpToGrow.Voucher.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddOptions();
+
             services.Configure<EligibilityRules>(_configuration.GetSection("EligibilityRules"));
             services.Configure<CookieNamesConfiguration>(_configuration.GetSection("CookieNamesConfiguration"));
             services.Configure<IndesserConnectionOptions>(options => _configuration.Bind(options));

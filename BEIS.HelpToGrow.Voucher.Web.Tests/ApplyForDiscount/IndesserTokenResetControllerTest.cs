@@ -1,9 +1,9 @@
 ﻿using System;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using BEIS.HelpToGrow.Voucher.Web.Controllers;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
@@ -11,13 +11,13 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
     public class IndesserTokenResetControllerTest : BaseControllerTest
     {
         private IndesserTokenResetController _sut;
-        private Mock<IDistributedCache> _mockCacheService;
+        private Mock<IMemoryCache> _mockCacheService;
         private Mock<ILogger<IndesserTokenResetController>> _mockLogger;
 
         [SetUp]
         public void Setup()
         {
-            _mockCacheService = new Mock<IDistributedCache>();
+            _mockCacheService = new Mock<IMemoryCache>();
             _mockLogger = new Mock<ILogger<IndesserTokenResetController>>();
             _sut = new IndesserTokenResetController(_mockCacheService.Object, _mockLogger.Object);
         }

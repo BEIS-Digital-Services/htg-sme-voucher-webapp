@@ -1,17 +1,17 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Controllers
 {
     public class IndesserTokenResetController : ControllerBase
     {
-        private readonly IDistributedCache _cacheService;
+        private readonly IMemoryCache _cacheService;
         private readonly ILogger<IndesserTokenResetController> _logger;
 
         public IndesserTokenResetController(
-            IDistributedCache cacheService,
+            IMemoryCache cacheService,
             ILogger<IndesserTokenResetController> logger)
         {
             _cacheService = cacheService;

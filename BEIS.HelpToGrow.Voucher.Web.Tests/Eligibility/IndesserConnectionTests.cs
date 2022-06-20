@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using BEIS.HelpToGrow.Voucher.Web.Services;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Distributed;
+// using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -13,6 +13,11 @@ using NUnit.Framework;
 using RestSharp;
 using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Caching.Memory;
+using NUnit.Framework.Internal;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
+using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
@@ -26,15 +31,14 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
         private string _clientSecret;
         private string _connectionTimeOut;
         private IRestClientFactory _fakeRestClientFactory;
-        private IDistributedCacheFactory _fakeDistributedCacheFactory;
+        private static IMemoryCache _fakeIMemoryCache;
         private IOptions<IndesserConnectionOptions> _fakeOptions;
         private string _companyId;
 
         [SetUp]
         public void Setup()
         {
-            var fakeCache = new FakeRedisCache();
-            _fakeDistributedCacheFactory = new DistributedCacheFactory(fakeCache);
+            _fakeIMemoryCache = new MemoryCache(new MemoryCacheOptions());
             _fakeRestClientFactory = new FakeRestClientFactory().ResetResponses();
             _fakeLogger = new FakeLogger();
             _tokenConnectionUrl = "fakeTokenConnectionUrl";
@@ -57,12 +61,12 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
         public void ProcessRequestHandlesException()
         {
             const string errorMessage = "#Fail";
-            
             var exception = new ApplicationException(errorMessage);
-            var fakeCache = new FakeRedisCache().Throwing(exception);
-            
-            _fakeDistributedCacheFactory = new DistributedCacheFactory(fakeCache);
-            
+
+            var mockRestClientFactory = new Mock<IRestClientFactory>();
+            mockRestClientFactory.Setup(x => x.Create(It.IsAny<string>(), It.IsAny<int>()))
+                .Throws(exception);
+
             var logger = MockLogger
                             .Factory(_fakeLogger)
                             .Object
@@ -70,14 +74,13 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
 
             var connection = new IndesserConnection(
                 _fakeOptions,
-                _fakeDistributedCacheFactory,
-                _fakeRestClientFactory,
-                logger);
+                mockRestClientFactory.Object,
+                logger, _fakeIMemoryCache);
 
             var result = connection.ProcessRequest(_companyId, new DefaultHttpContext());
 
             Assert.That(result.IsFailed);
-            Assert.AreEqual(errorMessage, result.Errors.Single().Message);
+            Assert.AreEqual(errorMessage, result.Errors.Single().Message);            
             Assert.That(FakeLogger.LogErrorCalled);
         }
 
@@ -87,16 +90,16 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
             var tokenBytes = GetInvalidTokenBytes();
             var responses = GetOnlyBadResponses();
 
-            _fakeDistributedCacheFactory = GetCacheFactory(tokenBytes);
+            _fakeIMemoryCache.Set("connectionToken", tokenBytes);
+
             _fakeRestClientFactory = new FakeRestClientFactory(responses).ResetResponses();
 
             var logger = MockLogger.Factory(_fakeLogger).Object.CreateLogger<IndesserConnection>();
 
             var connection = new IndesserConnection(
                 _fakeOptions,
-                _fakeDistributedCacheFactory,
                 _fakeRestClientFactory,
-                logger);
+                logger, _fakeIMemoryCache);
 
             var result = connection.ProcessRequest(_companyId, new DefaultHttpContext());
 
@@ -109,18 +112,16 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
         {
             var invalidCachedToken = GetInvalidTokenBytes();
             var responses = GetMultipleFailuresAttemptingToReadCompanyDataWithSuccess();
-
-            _fakeDistributedCacheFactory = GetCacheFactory(invalidCachedToken);
             
+            _fakeIMemoryCache.Set("connectionToken", invalidCachedToken);
             _fakeRestClientFactory = new FakeRestClientFactory(responses).ResetResponses();
 
             var logger = MockLogger.Factory(_fakeLogger).Object.CreateLogger<IndesserConnection>();
 
             var connection = new IndesserConnection(
                 _fakeOptions,
-                _fakeDistributedCacheFactory,
                 _fakeRestClientFactory,
-                logger);
+                logger, _fakeIMemoryCache);
 
             var result = connection.ProcessRequest(_companyId, new DefaultHttpContext());
 
@@ -133,16 +134,15 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
             var tokenBytes = GetValidTokenBytes();
             var responses = GetMultipleFailuresAttemptingToReadCompanyDataWithFailure();
 
-            _fakeDistributedCacheFactory = GetCacheFactory(tokenBytes);
+            _fakeIMemoryCache.Set("connectionToken", tokenBytes);
             _fakeRestClientFactory = new FakeRestClientFactory(responses).ResetResponses();
 
             var logger = MockLogger.Factory(_fakeLogger).Object.CreateLogger<IndesserConnection>();
 
             var connection = new IndesserConnection(
                 _fakeOptions,
-                _fakeDistributedCacheFactory,
                 _fakeRestClientFactory,
-                logger);
+                logger, _fakeIMemoryCache);
 
             var result = connection.ProcessRequest(_companyId, new DefaultHttpContext());
 
@@ -165,16 +165,14 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
                 new() { StatusCode = HttpStatusCode.OK, Content = GetValidCompanyResponse() }
             };
 
-            _fakeDistributedCacheFactory = GetCacheFactory(null);
             _fakeRestClientFactory = new FakeRestClientFactory(responses).ResetResponses();
 
             var logger = MockLogger.Factory(_fakeLogger).Object.CreateLogger<IndesserConnection>();
 
             var connection = new IndesserConnection(
                 _fakeOptions,
-                _fakeDistributedCacheFactory,
                 _fakeRestClientFactory,
-                logger);
+                logger, _fakeIMemoryCache);
 
             var result = connection.ProcessRequest(_companyId, new DefaultHttpContext());
 
@@ -193,16 +191,15 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
                 Content = expectedResponse
             };
 
-            _fakeDistributedCacheFactory = GetCacheFactory(tokenBytes);
+            _fakeIMemoryCache.Set("connectionToken", tokenBytes);
             _fakeRestClientFactory = new FakeRestClientFactory(response).ResetResponses();
 
             var logger = MockLogger.Factory(_fakeLogger).Object.CreateLogger<IndesserConnection>();
 
             var connection = new IndesserConnection(
                 _fakeOptions,
-                _fakeDistributedCacheFactory,
                 _fakeRestClientFactory,
-                logger);
+                logger, _fakeIMemoryCache);
 
             var result = connection.ProcessRequest(_companyId, new DefaultHttpContext());
 
@@ -357,8 +354,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
               }
             }
           ]
-        }"
-            ;
+        }";
 
         private static byte[] GetValidTokenBytes()
         {
@@ -382,14 +378,6 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
             obj.timeAcquired = DateTime.Now;
 
             return JsonConvert.SerializeObject(obj);
-        }
-
-        private static IDistributedCacheFactory GetCacheFactory(byte[] tokenBytes)
-        {
-            var fakeCache = new FakeRedisCache();
-            fakeCache.Set("connectionToken", tokenBytes, new DistributedCacheEntryOptions());
-
-            return new DistributedCacheFactory(fakeCache);
         }
     }
 }
