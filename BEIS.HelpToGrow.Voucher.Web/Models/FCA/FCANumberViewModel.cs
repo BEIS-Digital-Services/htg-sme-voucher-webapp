@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Models.FCA
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Models.FCA
 {
     public class FCANumberViewModel
     {

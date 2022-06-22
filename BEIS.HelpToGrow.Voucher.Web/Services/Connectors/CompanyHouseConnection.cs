@@ -1,12 +1,7 @@
-using System;
-using System.Net;
-using System.Text;
-using Microsoft.AspNetCore.Http;
 using RestSharp;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Connectors
+namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 {
     public class CompanyHouseConnection: ICompanyHouseHttpConnection<CompanyHouseResponse>
     {

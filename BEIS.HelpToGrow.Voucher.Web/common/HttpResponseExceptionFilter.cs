@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿
 
-namespace BEIS.HelpToGrow.Voucher.Web.Common
+namespace Beis.HelpToGrow.Voucher.Web.Common
 {
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
     {

@@ -1,17 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using CsvHelper;
-using CsvHelper.Configuration;
-using FCASociety = BEIS.HelpToGrow.Voucher.Web.Models.Voucher.FCASociety;
-using FCASocietyEntity = Beis.Htg.VendorSme.Database.Models.fcasociety;
+using FCASociety = Beis.HelpToGrow.Voucher.Web.Models.Voucher.FCASociety;
+using FCASocietyEntity = Beis.HelpToGrow.Persistence.Models.fcasociety;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.FCAServices
+namespace Beis.HelpToGrow.Voucher.Web.Services.FCAServices
 {
     public class FCASocietyService : IFCASocietyService
     {

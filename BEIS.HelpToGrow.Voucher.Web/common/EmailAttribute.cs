@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Common
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Common
 {
     /// <summary>
     /// Requires the format [first level domain]@p[second level domain].[third level domain (length 2 to 20)]

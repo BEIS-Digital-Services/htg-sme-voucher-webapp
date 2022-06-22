@@ -1,6 +1,5 @@
-﻿using FluentResults;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public class DuplicateCharacteristicError : Error
     {

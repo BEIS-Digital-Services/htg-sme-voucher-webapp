@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class AccessibilityControllerTest : BaseControllerTest

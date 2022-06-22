@@ -4,7 +4,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.ApplicationInsights;
 
-namespace BEIS.HelpToGrow.Voucher.Web
+
+namespace Beis.HelpToGrow.Voucher.Web
 {
     public class Program
     {

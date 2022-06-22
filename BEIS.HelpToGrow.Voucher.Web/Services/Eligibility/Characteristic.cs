@@ -1,4 +1,5 @@
-﻿namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public readonly struct Characteristic
     {

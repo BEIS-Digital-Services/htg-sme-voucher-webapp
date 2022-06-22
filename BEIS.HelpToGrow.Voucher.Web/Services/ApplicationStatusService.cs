@@ -1,14 +1,5 @@
-﻿using Beis.Htg.VendorSme.Database;
-using Beis.Htg.VendorSme.Database.Models;
-using BEIS.HelpToGrow.Core.Enums;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Services
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services
 {
     public class ApplicationStatusService : IApplicationStatusService
     {

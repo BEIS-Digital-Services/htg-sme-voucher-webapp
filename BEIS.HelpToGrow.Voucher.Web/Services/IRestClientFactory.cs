@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services
+namespace Beis.HelpToGrow.Voucher.Web.Services
 {
     public interface IRestClientFactory
     {

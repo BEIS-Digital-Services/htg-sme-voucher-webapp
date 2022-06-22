@@ -1,6 +1,5 @@
-﻿using System;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Common
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Common
 {
     public class HttpResponseException : Exception
     {

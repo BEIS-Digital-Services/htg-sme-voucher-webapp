@@ -1,4 +1,5 @@
-﻿namespace BEIS.HelpToGrow.Voucher.Web.Config
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Config
 {
     public class UrlOptions
     {

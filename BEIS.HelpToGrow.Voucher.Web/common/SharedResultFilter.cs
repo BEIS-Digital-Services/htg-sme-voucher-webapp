@@ -1,12 +1,5 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Options;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Common
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Common
 {
     public class SharedResultFilter : IResultFilter
     {

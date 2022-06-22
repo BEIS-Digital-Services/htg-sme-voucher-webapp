@@ -1,4 +1,5 @@
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Connectors
+
+namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 {
     public class IndesserConnectionOptions
     {

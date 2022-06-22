@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Common
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Common
 {
     public class NotDefaultAttribute : ValidationAttribute
     {

@@ -1,19 +1,8 @@
-using System;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using FluentResults;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 using JsonSerializer = System.Text.Json.JsonSerializer;
-using Microsoft.Extensions.Options;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Connectors
+namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 {
 
     public class IndesserConnection : IIndesserHttpConnection<IndesserCompanyResponse>

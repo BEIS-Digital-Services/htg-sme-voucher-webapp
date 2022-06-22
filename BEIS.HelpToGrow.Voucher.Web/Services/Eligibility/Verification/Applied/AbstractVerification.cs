@@ -1,9 +1,5 @@
-﻿using System.Linq;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Extensions;
-using FluentResults;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied
 {
     public abstract class AbstractVerification
     {

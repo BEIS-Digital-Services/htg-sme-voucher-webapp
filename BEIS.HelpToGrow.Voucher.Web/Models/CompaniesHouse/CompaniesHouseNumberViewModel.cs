@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Models.CompaniesHouse
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Models.CompaniesHouse
 {
     public class CompaniesHouseNumberViewModel
     {

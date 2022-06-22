@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Models.Applicant
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Models.Applicant
 {
     public class EmailAddressViewModel
     {
