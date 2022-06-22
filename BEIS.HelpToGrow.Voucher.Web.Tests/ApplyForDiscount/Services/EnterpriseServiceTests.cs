@@ -1,19 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Core.Enums;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using Beis.Htg.VendorSme.Database.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class EnterpriseServiceTests

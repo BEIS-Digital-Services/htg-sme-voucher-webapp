@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Config
+namespace Beis.HelpToGrow.Voucher.Web.Config
 {
     public class EligibilityRulesSection
     {

@@ -1,19 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using Beis.Htg.VendorSme.Database.Models;
-using FluentResults;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class EmailVerificationServiceTests

@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
-using Beis.Htg.VendorSme.Database.Models;
-using FluentResults;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
+﻿
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class EligibilityCheckResultServiceTests

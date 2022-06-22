@@ -1,13 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using Beis.Htg.VendorSme.Database.Models;
-using FluentResults;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public class IndesserResponseService : IIndesserResponseService
     {

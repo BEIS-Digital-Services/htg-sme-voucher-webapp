@@ -1,12 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class InEligibleControllerTest : BaseControllerTest

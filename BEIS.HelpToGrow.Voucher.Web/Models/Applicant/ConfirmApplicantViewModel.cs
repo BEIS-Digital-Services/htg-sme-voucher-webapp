@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Models.Applicant
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Models.Applicant
 {
     public class ConfirmApplicantViewModel
     {

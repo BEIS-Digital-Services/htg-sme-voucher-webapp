@@ -1,21 +1,14 @@
-using Beis.HelpToGrow.Core.Repositories;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database;
-using BEIS.HelpToGrow.Core.Repositories;
-using BEIS.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Config;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
-using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-using BEIS.HelpToGrow.Voucher.Web.Services.Models;
+
+using Beis.HelpToGrow.Voucher.Web.Common;
+using Beis.HelpToGrow.Voucher.Web.Config;
+using Beis.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
+using Beis.HelpToGrow.Voucher.Web.Services.FCAServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -27,9 +20,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using IEncryptionService = BEIS.HelpToGrow.Voucher.Web.Services.Interfaces.IEncryptionService;
 
-namespace BEIS.HelpToGrow.Voucher.Web
+
+namespace Beis.HelpToGrow.Voucher.Web
 {
     public class Startup
     {
@@ -57,6 +50,7 @@ namespace BEIS.HelpToGrow.Voucher.Web
                 o.EmailVerificationUrl = _configuration["EmailVerificationUrl"];
                 o.LearningPlatformUrl = _configuration["LearningPlatformUrl"];
             });
+            services.Configure<VoucherSettings>(_configuration.GetSection("VoucherSettings"));
 
             services.AddMvc();
             services.AddRouting(options => options.LowercaseUrls = true);

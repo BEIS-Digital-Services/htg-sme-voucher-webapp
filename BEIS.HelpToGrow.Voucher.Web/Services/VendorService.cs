@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Services
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services
 {
     public class VendorService : IVendorService
     {

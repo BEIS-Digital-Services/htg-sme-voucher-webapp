@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using RestSharp;
+﻿using RestSharp;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     public class FakeRestClientFactory : IRestClientFactory
     {

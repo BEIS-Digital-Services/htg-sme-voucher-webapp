@@ -1,16 +1,5 @@
-﻿using BEIS.HelpToGrow.Core.Enums;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class ApplicantEmailAddressController : Controller
     {

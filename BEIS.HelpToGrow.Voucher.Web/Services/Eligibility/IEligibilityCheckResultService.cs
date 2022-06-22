@@ -1,7 +1,5 @@
-﻿using System.Threading.Tasks;
-using FluentResults;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public interface IEligibilityCheckResultService
     {

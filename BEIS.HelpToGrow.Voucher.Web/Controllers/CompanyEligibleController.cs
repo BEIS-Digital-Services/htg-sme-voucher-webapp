@@ -1,10 +1,5 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class CompanyEligibleController: Controller
     {

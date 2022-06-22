@@ -1,13 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database.Models;
-using FluentResults;
-using Microsoft.Extensions.Logging;
+﻿
 using Newtonsoft.Json;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public class EligibilityCheckResultService : IEligibilityCheckResultService
     {

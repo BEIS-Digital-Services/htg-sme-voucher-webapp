@@ -1,16 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using System.Net;
-using BEIS.HelpToGrow.Voucher.Web.Models.CompaniesHouse;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
-using BEIS.HelpToGrow.Core.Enums;
-using System.Linq;
-using System.Collections.Generic;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class CompaniesHouseNumberController : Controller
     {

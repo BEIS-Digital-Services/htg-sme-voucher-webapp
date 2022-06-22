@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Config
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Config
 {
     /// <summary>
     /// An interface that defines the behaviour of a configuration for cookie names.

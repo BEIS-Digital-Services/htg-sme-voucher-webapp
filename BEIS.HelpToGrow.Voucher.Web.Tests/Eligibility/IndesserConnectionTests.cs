@@ -1,22 +1,7 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Moq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
+﻿using Newtonsoft.Json;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     [TestFixture]
     public class IndesserConnectionTests

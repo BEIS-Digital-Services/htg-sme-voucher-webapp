@@ -1,25 +1,7 @@
-﻿using BEIS.HelpToGrow.Core.Enums;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
-using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount;
-using FluentResults;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Applicant
+
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Applicant
 {
     [TestFixture]
     public class ApplicantEmailAddressControllerTest : BaseControllerTest
