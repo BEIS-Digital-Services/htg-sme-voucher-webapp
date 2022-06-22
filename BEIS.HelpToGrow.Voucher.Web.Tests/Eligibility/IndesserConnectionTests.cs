@@ -1,23 +1,20 @@
-﻿using System;
+﻿using BEIS.HelpToGrow.Voucher.Web.Services;
+using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Moq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using Microsoft.AspNetCore.Http;
-// using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
-using RestSharp;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Caching.Memory;
-using NUnit.Framework.Internal;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 
 namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
