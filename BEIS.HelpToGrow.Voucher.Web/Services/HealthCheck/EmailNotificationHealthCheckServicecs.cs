@@ -3,11 +3,12 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
 {
     public class EmailNotificationHealthCheckServicecs : IHealthCheck
     {
-        private readonly ILogger<CompanyHouseHealthCheckService> _logger;
+        private readonly ILogger<EmailNotificationHealthCheckServicecs> _logger;
         private readonly IEmailVerificationService _emailVerificationService;        
         private readonly IOptions<UrlOptions> _options;
 
-        public EmailNotificationHealthCheckServicecs(ILogger<CompanyHouseHealthCheckService> logger, IEmailVerificationService emailVerificationService, IOptions<UrlOptions> options)
+        public EmailNotificationHealthCheckServicecs(ILogger<EmailNotificationHealthCheckServicecs> logger, 
+            IEmailVerificationService emailVerificationService, IOptions<UrlOptions> options)
         {
             _logger = logger;
             _emailVerificationService = emailVerificationService;        

@@ -4,12 +4,12 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
 {
     public class IndesserHealthCheckService : IHealthCheck
     {
-        private readonly ILogger<CompanyHouseHealthCheckService> _logger;
+        private readonly ILogger<IndesserHealthCheckService> _logger;
         private readonly IIndesserHttpConnection<IndesserCompanyResponse> _indesserHttpConnection;
         private readonly IOptions<CompanyHouseHealthCheckConfiguration> _companyHouseHealthCheckOptions;
         private readonly ICheckEligibility _eligibility;
 
-        public IndesserHealthCheckService(ILogger<CompanyHouseHealthCheckService> logger,
+        public IndesserHealthCheckService(ILogger<IndesserHealthCheckService> logger,
             IIndesserHttpConnection<IndesserCompanyResponse> indesserHttpConnection,
             IOptions<CompanyHouseHealthCheckConfiguration> companyHouseHealthCheckOptions, ICheckEligibility eligibility)
         {
@@ -37,7 +37,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
                 else
                 {
 
-                    var eligibilityCalculation = _eligibility.Check(new Web.Models.Voucher.UserVoucherDto { }, indesserCallResult.Value);
+                    var eligibilityCalculation = _eligibility.Check(new UserVoucherDto { }, indesserCallResult.Value);
 
                     if (eligibilityCalculation.IsFailed)
                     {
