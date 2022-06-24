@@ -1,10 +1,5 @@
-﻿using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using BEIS.HelpToGrow.Voucher.Web.Models.CompaniesHouse;
-using Microsoft.AspNetCore.Mvc;
-using NUnit.Framework;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Common
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Common
 {
     internal class NoOpResult : IActionResult
     {

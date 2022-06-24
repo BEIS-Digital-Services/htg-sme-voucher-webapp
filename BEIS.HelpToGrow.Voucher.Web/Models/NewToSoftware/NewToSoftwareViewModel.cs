@@ -1,7 +1,5 @@
-﻿using Beis.Htg.VendorSme.Database.Models;
-using System.ComponentModel.DataAnnotations;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Models.NewToSoftware
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Models.NewToSoftware
 {
     public class NewToSoftwareViewModel
     {

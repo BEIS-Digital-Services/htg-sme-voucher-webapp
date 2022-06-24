@@ -1,7 +1,5 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Common;
-using System.ComponentModel.DataAnnotations;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Models.CompaniesHouse
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Models.CompaniesHouse
 {
     public class CompanySizeViewModel
     {

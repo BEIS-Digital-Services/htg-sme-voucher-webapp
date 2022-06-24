@@ -1,15 +1,15 @@
-﻿using System.Linq;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+﻿
+using Domain = Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     public static class BusinessRulesTestExtensions
     {
-        public static Characteristic AddCharacteristic(this IndesserCompanyResponse indesserCompanyResponse, string name)
+        public static Domain.Characteristic AddCharacteristic(this IndesserCompanyResponse indesserCompanyResponse, string name)
         {
             if (!indesserCompanyResponse.Characteristics.Any(_ => _.Name.Equals(name)))
             {
-                indesserCompanyResponse.Characteristics.Add(new Characteristic { Name = name });
+                indesserCompanyResponse.Characteristics.Add(new Domain.Characteristic { Name = name });
             }
             
             return indesserCompanyResponse.Characteristic(name);

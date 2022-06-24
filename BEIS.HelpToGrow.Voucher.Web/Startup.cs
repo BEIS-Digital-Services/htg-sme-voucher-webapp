@@ -1,22 +1,15 @@
-using Beis.HelpToGrow.Core.Repositories;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database;
-using BEIS.HelpToGrow.Core.Repositories;
-using BEIS.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Config;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
-using BEIS.HelpToGrow.Voucher.Web.Services.FCAServices;
-using BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-using BEIS.HelpToGrow.Voucher.Web.Services.Models;
+
+using Beis.HelpToGrow.Voucher.Web.Common;
+using Beis.HelpToGrow.Voucher.Web.Config;
+using Beis.HelpToGrow.Voucher.Web.Services;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors;
+using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
+using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
+using Beis.HelpToGrow.Voucher.Web.Services.FCAServices;
+using Beis.HelpToGrow.Voucher.Web.Services.HealthCheck;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -24,20 +17,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.IO;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using IEncryptionService = BEIS.HelpToGrow.Voucher.Web.Services.Interfaces.IEncryptionService;
 
-namespace BEIS.HelpToGrow.Voucher.Web
+namespace Beis.HelpToGrow.Voucher.Web
 {
     public class Startup
     {
@@ -53,7 +41,9 @@ namespace BEIS.HelpToGrow.Voucher.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddOptions();
+
             services.Configure<EligibilityRules>(_configuration.GetSection("EligibilityRules"));
             services.Configure<CookieNamesConfiguration>(_configuration.GetSection("CookieNamesConfiguration"));
             services.Configure<IndesserConnectionOptions>(options => _configuration.Bind(options));
@@ -64,6 +54,7 @@ namespace BEIS.HelpToGrow.Voucher.Web
                 o.EmailVerificationUrl = _configuration["EmailVerificationUrl"];
                 o.LearningPlatformUrl = _configuration["LearningPlatformUrl"];
             });
+            services.Configure<VoucherSettings>(_configuration.GetSection("VoucherSettings"));
 
             services.AddMvc();
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -138,12 +129,7 @@ namespace BEIS.HelpToGrow.Voucher.Web
             services.AddSingleton<ICheckEligibilityRule, BR15>();
             services.AddSingleton<ICheckEligibilityRule, BR16>();
 
-            services.AddSingleton(new DistributedCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromMinutes(SessionTimeOutMinutes)));
-            
             services.AddHttpClient();
-
-            services.AddStackExchangeRedisCache(options => { options.Configuration = _configuration["RedisPrimaryConnectionString"]; });
 
             services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(_configuration["HelpToGrowDbConnectionString"]));
             services.AddDataProtection().PersistKeysToDbContext<HtgVendorSmeDbContext>();
@@ -154,8 +140,7 @@ namespace BEIS.HelpToGrow.Voucher.Web
                 options.Cookie.IsEssential = true;
                 options.IdleTimeout = TimeSpan.FromMinutes(SessionTimeOutMinutes);                
             });
-
-            services.AddSingleton<IDistributedCacheFactory, DistributedCacheFactory>();
+            
             services.AddSingleton<IRestClientFactory, RestClientFactory>();
             var restClientFactory = new RestClientFactory();
 
@@ -189,9 +174,6 @@ namespace BEIS.HelpToGrow.Voucher.Web
                 .AddCheck<DatabaseHealthCheckService>("Database")
                 .AddCheck<EncryptionHealthCheckService>("Encryption", failureStatus: HealthStatus.Unhealthy,
                    tags: new[] { "Encryption" });
-
-            // This is add Email Notification Health Checks in the future; however, we will need to find a test email address to send varification emails. 
-            // .AddCheck<EmailNotificationHealthCheckServicecs>("Email Notify Service Health Checks"); 
 
             services.AddScoped<IVoucherGenerationService, VoucherGenerationService>();
         }

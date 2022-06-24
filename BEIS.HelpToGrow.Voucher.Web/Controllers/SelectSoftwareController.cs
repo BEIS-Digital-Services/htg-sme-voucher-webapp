@@ -1,12 +1,5 @@
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using Microsoft.AspNetCore.Mvc;
-using BEIS.HelpToGrow.Voucher.Web.Models.Product;
-using System.Linq;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class SelectSoftwareController : Controller
     {

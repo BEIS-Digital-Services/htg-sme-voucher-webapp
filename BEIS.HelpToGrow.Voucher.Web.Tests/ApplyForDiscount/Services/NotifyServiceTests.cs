@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using Beis.Htg.VendorSme.Database.Models;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Moq;
-using Notify.Exceptions;
-using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class NotifyServiceTests

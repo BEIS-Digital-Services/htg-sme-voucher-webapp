@@ -1,16 +1,6 @@
-using System.Threading.Tasks;
-using FluentResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using System;
 using Newtonsoft.Json;
-using BEIS.HelpToGrow.Core.Enums;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class CheckEligibilityController : Controller
     {

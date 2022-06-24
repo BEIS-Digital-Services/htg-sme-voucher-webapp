@@ -1,17 +1,5 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Common;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Options;
-using Moq;
-using NUnit.Framework;
-using System;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Common
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Common
 {
     [TestFixture]
     public class SharedResultFilterTest

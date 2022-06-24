@@ -1,12 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using System;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using System.Threading.Tasks;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class ExistingCustomerController : Controller
     {

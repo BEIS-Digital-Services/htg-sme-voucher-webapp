@@ -1,11 +1,4 @@
-﻿using Beis.Htg.VendorSme.Database;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
+﻿namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
 {
     public class DatabaseHealthCheckService : IHealthCheck
     {

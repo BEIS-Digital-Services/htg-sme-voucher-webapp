@@ -1,9 +1,6 @@
-using System.Linq;
-using System.Text;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services
+namespace Beis.HelpToGrow.Voucher.Web.Services
 {
     public class SessionService : ISessionService
     {

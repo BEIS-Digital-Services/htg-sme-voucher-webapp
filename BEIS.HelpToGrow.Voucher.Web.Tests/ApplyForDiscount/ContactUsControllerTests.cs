@@ -1,8 +1,5 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using NUnit.Framework;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class ContactUsControllerTests : BaseControllerTest

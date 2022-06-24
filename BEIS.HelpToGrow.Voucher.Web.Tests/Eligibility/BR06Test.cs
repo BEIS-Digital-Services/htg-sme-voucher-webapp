@@ -1,15 +1,5 @@
-﻿using System.IO;
-using System.Text.Json;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
 {
     [TestFixture]
     public class BR06Test

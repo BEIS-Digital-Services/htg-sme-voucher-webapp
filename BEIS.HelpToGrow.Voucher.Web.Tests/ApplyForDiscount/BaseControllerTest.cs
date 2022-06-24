@@ -1,14 +1,5 @@
-﻿using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database.Models;
-using HttpContextMoq;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     public class BaseControllerTest
     {

@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BEIS.HelpToGrow.Core.Enums;
-using FluentResults;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Eligibility
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
 {
     public class Check
     {

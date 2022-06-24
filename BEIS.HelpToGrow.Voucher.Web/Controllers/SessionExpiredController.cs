@@ -1,9 +1,5 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Controllers
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class SessionExpiredController : Controller
     {

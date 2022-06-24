@@ -1,18 +1,6 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using BEIS.HelpToGrow.Voucher.Web.Services.Eligibility;
-using FluentResults;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
+namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
 {
     public class IndesserHealthCheckService : IHealthCheck
     {
@@ -35,7 +23,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
         {
             var isHealthy = true;
 
-            StringBuilder indesserCheckErrors = new StringBuilder();
+            var indesserCheckErrors = new StringBuilder();
             try
             {
                 var indesserCallResult = RunIndesserCheck(_companyHouseHealthCheckOptions.Value.CompanyNumber);

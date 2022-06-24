@@ -1,22 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using BEIS.HelpToGrow.Core.Enums;
-using Beis.HelpToGrow.Core.Repositories.Interface;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using Beis.Htg.VendorSme.Database.Models;
-using FluentResults;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using BEIS.HelpToGrow.Voucher.Web.Controllers;
-using BEIS.HelpToGrow.Voucher.Web.Models;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
     public class TokenIssuedControllerTests : BaseControllerTest
@@ -30,7 +13,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         private Mock<INotifyService> _mockNotifyService;
         private Mock<IApplicationStatusService> _mockApplicationStatusService;
         private ApplicationStatus _applicationStatus = ApplicationStatus.EmailVerified;
-
+        private IOptions<VoucherSettings> _voucherSettings;
         [SetUp]
         public void Setup()
         {
@@ -40,6 +23,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             _mockVendorCompanyRepository = new Mock<IVendorCompanyRepository>();
             _mockEnterpriseRepository = new Mock<IEnterpriseRepository>();
             _mockNotifyService = new Mock<INotifyService>();
+            _voucherSettings = Options.Create<VoucherSettings>(new VoucherSettings{ VoucherCodeLength = 9 });
 
             _mockApplicationStatusService = new Mock<IApplicationStatusService>();
             _mockApplicationStatusService.Setup(x => x.GetApplicationStatus(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((string s1, string s2) => _applicationStatus);
@@ -50,7 +34,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 _mockVendorCompanyRepository.Object,
                 _mockEnterpriseRepository.Object,
                 _mockNotifyService.Object,
-                _mockApplicationStatusService.Object);
+                _mockApplicationStatusService.Object,
+                _voucherSettings);
         }
 
         [Test]
@@ -127,7 +112,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 .Returns(Task.FromResult(enterprise));
 
             _mockVoucherGeneratorService
-                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct))
+                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct, _voucherSettings, true))
                 .Returns(Task.FromResult("fake voucher code"));
 
             var notificationResult = Result.Ok();
@@ -174,7 +159,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 .Returns(Task.FromResult(enterprise));
 
             _mockVoucherGeneratorService
-                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct))
+                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct, _voucherSettings, true))
                 .Returns(Task.FromResult("fake voucher code"));
 
             var notificationResult = Result.Ok();
@@ -230,7 +215,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 .Returns(Task.FromResult(enterprise));
 
             _mockVoucherGeneratorService
-                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct))
+                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct, _voucherSettings, true))
                 .Returns(Task.FromResult("fake voucher code"));
 
             var notificationResult = Result.Ok();
@@ -285,7 +270,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 .Returns(Task.FromResult(enterprise));
 
             _mockVoucherGeneratorService
-                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct))
+                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct, _voucherSettings, true))
                 .Returns(Task.FromResult("fake voucher code"));
 
             var notificationResult = Result.Ok();
@@ -344,7 +329,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 .Returns(Task.FromResult(enterprise));
 
             _mockVoucherGeneratorService
-                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct))
+                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct, _voucherSettings, true))
                 .Returns(Task.FromResult("fake voucher code"));
 
             var notificationResult = Result.Ok();
@@ -378,7 +363,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 .Returns(Task.FromResult(enterprise));
 
             _mockVoucherGeneratorService
-                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct))
+                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct, _voucherSettings, true))
                 .Returns(Task.FromResult("fake voucher code"));
 
             var notificationResult = Result.Fail("fake error message");

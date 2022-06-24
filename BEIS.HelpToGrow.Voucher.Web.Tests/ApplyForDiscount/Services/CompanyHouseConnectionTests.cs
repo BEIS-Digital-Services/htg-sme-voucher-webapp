@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using BEIS.HelpToGrow.Voucher.Web.Tests.Eligibility;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using NUnit.Framework;
+﻿
 using RestSharp;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
+using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class CompanyHouseConnectionTests

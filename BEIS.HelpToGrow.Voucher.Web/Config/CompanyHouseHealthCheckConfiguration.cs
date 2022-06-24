@@ -1,7 +1,4 @@
-﻿using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using System.Text.Json.Serialization;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Config
+﻿namespace Beis.HelpToGrow.Voucher.Web.Config
 {
     public class CompanyHouseHealthCheckConfiguration
     {

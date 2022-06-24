@@ -1,16 +1,6 @@
-﻿using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Web;
-using BEIS.HelpToGrow.Voucher.Web.Common;
-using BEIS.HelpToGrow.Voucher.Web.Models.Applicant;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using BEIS.HelpToGrow.Voucher.Web.Services.Interfaces;
-using FluentResults;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using System.Text.Json;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services
+namespace Beis.HelpToGrow.Voucher.Web.Services
 {
     public class EmailVerificationService : IEmailVerificationService
     {
@@ -42,7 +32,7 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services
                 EmailAddress = userVoucher.ApplicantDto.EmailAddress,
                 ProductId = userVoucher.SelectedProduct.product_id
             };
-            var jsonString = JsonSerializer.Serialize(verificationDetails);
+            var jsonString = System.Text.Json.JsonSerializer.Serialize(verificationDetails);
             return HttpUtility.HtmlEncode(_encryptionService.Encrypt(jsonString, _salt));
         }
 

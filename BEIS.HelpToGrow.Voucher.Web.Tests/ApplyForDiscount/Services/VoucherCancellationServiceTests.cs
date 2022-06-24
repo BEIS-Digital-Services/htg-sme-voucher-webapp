@@ -1,17 +1,5 @@
-﻿using Beis.HelpToGrow.Core.Repositories.Interface;
-using Beis.Htg.VendorSme.Database.Models;
-using BEIS.HelpToGrow.Core.Enums;
-using BEIS.HelpToGrow.Voucher.Web.Services;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 {
     [TestFixture]
     public class VoucherCancellationServiceTests
@@ -21,7 +9,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
         private Mock<IEnterpriseRepository> _mockEnterpriseRepo;
         private Mock<ITokenRepository> _mockTokenRepo;
         private Mock<IProductPriceRepository> _mockProductPriceRepo;
-
+        private Mock<IVendorCompanyRepository> _mockVendorCompanyRepo;
+        private Mock<IEncryptionService> _mockEncryptionService;
         private enterprise enterprise;
         private token token;
         private product_price productPrice;
@@ -34,12 +23,14 @@ namespace BEIS.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
             _mockEnterpriseRepo.Setup(x => x.GetEnterprise(It.IsAny<long>()))
                 .ReturnsAsync((long id) => enterprise);
             _mockTokenRepo = new Mock<ITokenRepository>();
-            _mockTokenRepo.Setup(x => x.GetToken(It.IsAny<long>()))
-                .ReturnsAsync((long id) => token);
+            _mockTokenRepo.Setup(x => x.GetTokenByEnterpriseId(It.IsAny<long>()))
+                .ReturnsAsync((long id) => token);            
             _mockProductPriceRepo = new Mock<IProductPriceRepository>();
             _mockProductPriceRepo.Setup(x => x.GetByProductId(It.IsAny<long>()))
                 .ReturnsAsync((long id) => productPrice);
-            _sut = new VoucherCancellationService(_mockLogger.Object, _mockEnterpriseRepo.Object, _mockTokenRepo.Object, _mockProductPriceRepo.Object);
+            _mockEncryptionService = new Mock<IEncryptionService>();
+            _mockVendorCompanyRepo = new Mock<IVendorCompanyRepository>();
+            _sut = new VoucherCancellationService(_mockLogger.Object, _mockEnterpriseRepo.Object, _mockTokenRepo.Object, _mockProductPriceRepo.Object, _mockEncryptionService.Object,  _mockVendorCompanyRepo.Object);
         }
 
         [Test]

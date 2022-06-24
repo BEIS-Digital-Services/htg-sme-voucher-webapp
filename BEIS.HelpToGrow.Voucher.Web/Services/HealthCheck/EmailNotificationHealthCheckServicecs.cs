@@ -1,29 +1,16 @@
-﻿using Beis.Htg.VendorSme.Database.Models;
-using BEIS.HelpToGrow.Voucher.Web.Config;
-using BEIS.HelpToGrow.Voucher.Web.Models.Voucher;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
+﻿
+namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
 {
     public class EmailNotificationHealthCheckServicecs : IHealthCheck
     {
         private readonly ILogger<CompanyHouseHealthCheckService> _logger;
-        private readonly IEmailVerificationService _emailVerificationService;
-        private readonly IOptions<CompanyHouseHealthCheckConfiguration> _companyHouseHealthCheckOptions;
+        private readonly IEmailVerificationService _emailVerificationService;        
         private readonly IOptions<UrlOptions> _options;
 
-        public EmailNotificationHealthCheckServicecs(ILogger<CompanyHouseHealthCheckService> logger, IEmailVerificationService emailVerificationService, IOptions<CompanyHouseHealthCheckConfiguration> companyHouseHealthCheckOptions, IOptions<UrlOptions> options)
+        public EmailNotificationHealthCheckServicecs(ILogger<CompanyHouseHealthCheckService> logger, IEmailVerificationService emailVerificationService, IOptions<UrlOptions> options)
         {
             _logger = logger;
-            _emailVerificationService = emailVerificationService;
-            _companyHouseHealthCheckOptions = companyHouseHealthCheckOptions;
+            _emailVerificationService = emailVerificationService;        
             _options = options;
         }
 
@@ -55,7 +42,8 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.HealthCheck
             } catch (Exception ex)
             {
                 isHealthy = false;
-                _logger.LogError(ex, $"Notify health check failed. Its faild with {ex.Message}");
+                string message = $"Notify health check failed. Its faild with {ex.Message}";
+                _logger.LogError(ex, message);
             }
 
             if (isHealthy)

@@ -1,48 +1,34 @@
-using System;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using FluentResults;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
-using BEIS.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
 using JsonSerializer = System.Text.Json.JsonSerializer;
-using Microsoft.Extensions.Options;
 
-namespace BEIS.HelpToGrow.Voucher.Web.Services.Connectors
+namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 {
-
     public class IndesserConnection : IIndesserHttpConnection<IndesserCompanyResponse>
     {
         private const string Accept = "application/json";
         private readonly string _tokenConnectionUrl;
         private readonly string _companyCheckUrl;
-        private readonly IDistributedCacheFactory _cacheServiceFactory;
         private readonly IRestClientFactory _restClientFactory;
         private readonly ILogger<IndesserConnection> _logger;
         private readonly string _clientKey;
         private readonly string _clientSecret;
         private readonly int _connectionTimeOut;
-        private IDistributedCache _cacheService;
+        private readonly IMemoryCache _cacheService;
 
         public IndesserConnection(IOptions<IndesserConnectionOptions> options,
-            IDistributedCacheFactory cacheServiceFactory,
             IRestClientFactory restClientFactory,
-            ILogger<IndesserConnection> logger)
+            ILogger<IndesserConnection> logger, 
+            IMemoryCache memoryCache)
         {
             _tokenConnectionUrl = options.Value.TokenConnectionUrl;
             _clientKey = options.Value.ClientKey;
             _clientSecret = options.Value.ClientSecret;
             _companyCheckUrl = options.Value.CompanyCheckUrl;
             _connectionTimeOut = int.Parse(options.Value.ConnectionTimeOut);
-
-            _cacheServiceFactory = cacheServiceFactory;
             _restClientFactory = restClientFactory;
             _logger = logger;
+            _cacheService = memoryCache;
         }
 
         public Result<IndesserCompanyResponse> ProcessRequest(string companyId, HttpContext httpContext)
@@ -97,8 +83,6 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.Connectors
 
         private ConnectionToken GetConnectionToken()
         {
-            _cacheService = _cacheServiceFactory.Create();
-
             var initialAttempt = GetConnectionToken(true);
 
             return !IsValidToken(initialAttempt)
@@ -111,10 +95,11 @@ namespace BEIS.HelpToGrow.Voucher.Web.Services.Connectors
             const int maxAttempts = 5;
 
             var attempts = 0;
+            byte[] connectionTokenBytes;
 
             while (attempts <= maxAttempts)
             {
-                var connectionTokenBytes = _cacheService.Get("connectionToken");
+                _cacheService.TryGetValue("connectionToken", out connectionTokenBytes);
 
                 var connectionToken = useCachedToken
                     ? GetConnectionToken(connectionTokenBytes)
