@@ -34,7 +34,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 return View(model);
             }
 
-            if (model.EmployeeNumbers is < 5 or > 249)
+            if (model.EmployeeNumbers is < 1 or > 249)
             {
                 return RedirectToAction("CompanySize", "InEligible");
             }
