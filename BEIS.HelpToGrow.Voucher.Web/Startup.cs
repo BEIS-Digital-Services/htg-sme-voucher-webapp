@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,7 +38,9 @@ namespace Beis.HelpToGrow.Voucher.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddOptions();
+
             services.Configure<EligibilityRules>(_configuration.GetSection("EligibilityRules"));
             services.Configure<CookieNamesConfiguration>(_configuration.GetSection("CookieNamesConfiguration"));
             services.Configure<IndesserConnectionOptions>(options => _configuration.Bind(options));
@@ -124,12 +125,7 @@ namespace Beis.HelpToGrow.Voucher.Web
             services.AddSingleton<ICheckEligibilityRule, BR15>();
             services.AddSingleton<ICheckEligibilityRule, BR16>();
 
-            services.AddSingleton(new DistributedCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromMinutes(SessionTimeOutMinutes)));
-            
             services.AddHttpClient();
-
-            services.AddStackExchangeRedisCache(options => { options.Configuration = _configuration["RedisPrimaryConnectionString"]; });
 
             services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(_configuration["HelpToGrowDbConnectionString"]));
             services.AddDataProtection().PersistKeysToDbContext<HtgVendorSmeDbContext>();
@@ -140,8 +136,7 @@ namespace Beis.HelpToGrow.Voucher.Web
                 options.Cookie.IsEssential = true;
                 options.IdleTimeout = TimeSpan.FromMinutes(SessionTimeOutMinutes);                
             });
-
-            services.AddSingleton<IDistributedCacheFactory, DistributedCacheFactory>();
+            
             services.AddSingleton<IRestClientFactory, RestClientFactory>();
             var restClientFactory = new RestClientFactory();
 
@@ -168,8 +163,6 @@ namespace Beis.HelpToGrow.Voucher.Web
             services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
 
             services.AddSingleton<IEncryptionService, EncryptionService>();
-
-            
 
             services.AddScoped<IVoucherGenerationService, VoucherGenerationService>();
         }

@@ -26,6 +26,7 @@ global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.WebUtilities;
 global using Microsoft.Extensions.Caching.Distributed;
+global using Microsoft.Extensions.Caching.Memory;
 
 global using CsvHelper;
 global using CsvHelper.Configuration;

@@ -3,11 +3,11 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
 {
     public class IndesserTokenResetController : ControllerBase
     {
-        private readonly IDistributedCache _cacheService;
+        private readonly IMemoryCache _cacheService;
         private readonly ILogger<IndesserTokenResetController> _logger;
 
         public IndesserTokenResetController(
-            IDistributedCache cacheService,
+            IMemoryCache cacheService,
             ILogger<IndesserTokenResetController> logger)
         {
             _cacheService = cacheService;
