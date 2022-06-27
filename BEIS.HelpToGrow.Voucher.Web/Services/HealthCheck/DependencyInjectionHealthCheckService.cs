@@ -14,11 +14,10 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
             _controllerActivator = controllerActivator;
         }
 
-        public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
+        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
         CancellationToken cancellationToken = default)
         {
-            var isHealthy = true;
-            await Task.FromResult(0);
+            var isHealthy = true;            
            
             var controllersList = GetChildTypes<ControllerBase>();
 
@@ -44,11 +43,11 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
 
             if (isHealthy)
             {
-                return HealthCheckResult.Healthy("Help to grow web app is healthy");
+                return Task.FromResult(HealthCheckResult.Healthy("Help to grow web app is healthy"));
             }
 
-            return new HealthCheckResult(
-                    context.Registration.FailureStatus, $"Help to grow web is unhealthy; its failed with the following errors {failedServiceErrorDetails}");
+            return Task.FromResult(new HealthCheckResult(
+                    context.Registration.FailureStatus, $"Help to grow web is unhealthy; its failed with the following errors {failedServiceErrorDetails}"));
         }
         private static IEnumerable<Type> GetChildTypes<T>()
         {
