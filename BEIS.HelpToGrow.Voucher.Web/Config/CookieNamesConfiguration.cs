@@ -1,7 +1,4 @@
-﻿
-using System.Text.Json.Serialization;
-
-namespace Beis.HelpToGrow.Voucher.Web.Config
+﻿namespace Beis.HelpToGrow.Voucher.Web.Config
 {
     /// <summary>
     /// A class that implements a configuration for cookie names.

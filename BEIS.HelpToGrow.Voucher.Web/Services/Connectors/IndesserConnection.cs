@@ -4,7 +4,6 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 {
-
     public class IndesserConnection : IIndesserHttpConnection<IndesserCompanyResponse>
     {
         private const string Accept = "application/json";
