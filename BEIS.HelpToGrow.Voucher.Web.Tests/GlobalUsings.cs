@@ -39,9 +39,13 @@ global using FluentResults;
 global using Beis.HelpToGrow.Persistence.Models;
 global using Beis.HelpToGrow.Repositories.Interfaces;
 global using Beis.HelpToGrow.Common.Config;
-global using Beis.HelpToGrow.Common.Enums;
 global using Beis.HelpToGrow.Common.Interfaces;
 global using Beis.HelpToGrow.Common.Services;
+
+global using Beis.HelpToGrow.Common.Voucher.Enums;
+global using Beis.HelpToGrow.Common.Voucher.Interfaces;
+global using Beis.HelpToGrow.Common.Voucher.Services;
+global using Beis.HelpToGrow.Common.Voucher.Config;
 
 global using Beis.HelpToGrow.Voucher.Web.Tests.Eligibility;
 global using Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount;

@@ -1,8 +1,5 @@
-using Beis.HelpToGrow.Voucher.FunctionApp.Extensions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.Reflection;
+
+
 
 IConfiguration configuration = null;
 var host = new HostBuilder()

@@ -1,5 +1,5 @@
 ﻿
-namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
+namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
 {
     public class CompanyHouseHealthCheckService : IHealthCheck
     {
