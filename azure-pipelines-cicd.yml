@@ -17,7 +17,7 @@ variables:
 extends:
   template: dotnet6/build-and-deploy.yml@template
   parameters:
-    solutionToBuild: 'Beis.HelpToGrow.Voucher.Web.sln'
+    solutionToBuild: 'BEIS.HelpToGrow.Voucher.Web.sln'
     projectToPublish: 'Beis.HelpToGrow.Voucher.Web.csproj'
     webApplicationNameSuffix: 'voucher-app'
     webApplicationResourceGroupFormat: 'voucher'
