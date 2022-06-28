@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Beis.HelpToGrow.Voucher.Web.Services.HealthCheck
+namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
 {
     public class IndesserHealthCheckService : IHealthCheck
     {

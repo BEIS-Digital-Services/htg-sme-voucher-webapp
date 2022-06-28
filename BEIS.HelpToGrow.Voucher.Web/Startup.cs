@@ -1,28 +1,11 @@
-
-using Beis.HelpToGrow.Voucher.Web.Common;
-using Beis.HelpToGrow.Voucher.Web.Config;
-using Beis.HelpToGrow.Voucher.Web.Services;
 using Beis.HelpToGrow.Voucher.Web.Services.Connectors;
-using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification;
 using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
-using Beis.HelpToGrow.Voucher.Web.Services.FCAServices;
-using Beis.HelpToGrow.Voucher.Web.Services.HealthCheck;
+using Beis.HelpToGrow.Voucher.Web.Services.HealthChecks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Text.Json;
 
 namespace Beis.HelpToGrow.Voucher.Web
@@ -55,6 +38,7 @@ namespace Beis.HelpToGrow.Voucher.Web
                 o.LearningPlatformUrl = _configuration["LearningPlatformUrl"];
             });
             services.Configure<VoucherSettings>(_configuration.GetSection("VoucherSettings"));
+            services.Configure<NotifyServiceSettings>(options => _configuration.Bind(options));
 
             services.AddMvc();
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -92,8 +76,7 @@ namespace Beis.HelpToGrow.Voucher.Web
             services.AddScoped<IProductPriceService, ProductPriceService>();
             services.AddScoped<IApplicationStatusService, ApplicationStatusService>();
             services.AddScoped<IVoucherCancellationService, VoucherCancellationService>();
-
-            services.AddSingleton<INotifyServiceSettings, NotifyServiceSettings>();
+            
             services.AddSingleton<ICheckEligibility, EligibilityCheckService>();
             services.AddSingleton<IVerifyPostcodePattern, PostcodePattern>();
             services.AddSingleton<IVerifyMinTradingDuration, MinTradingDuration>();
@@ -203,7 +186,7 @@ namespace Beis.HelpToGrow.Voucher.Web
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                endpoints.MapHealthChecks("/healthz", new HealthCheckOptions()
                 {
                     ResponseWriter = WriteHealthResponse
                 });
