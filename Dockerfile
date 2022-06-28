@@ -5,5 +5,5 @@ EXPOSE 443
 
 FROM base AS final
 WORKDIR /app
-COPY ./Beis.HelpToGrow.Api.Voucher .
+COPY ./BEIS.HelpToGrow.Voucher.Web .
 ENTRYPOINT ["dotnet", "Beis.HelpToGrow.Voucher.Web.dll"]
