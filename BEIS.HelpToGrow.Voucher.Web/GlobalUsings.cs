@@ -46,6 +46,7 @@ global using Beis.HelpToGrow.Voucher.Web.Models.NewToSoftware;
 global using Beis.HelpToGrow.Voucher.Web.Models.Product;
 global using Beis.HelpToGrow.Voucher.Web.Models.Voucher;
 global using Beis.HelpToGrow.Voucher.Web.Services;
+
 global using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Rules;
 global using Beis.HelpToGrow.Voucher.Web.Services.FCAServices;
 global using Beis.HelpToGrow.Voucher.Web.Services.Connectors.Domain;
@@ -60,12 +61,15 @@ global using Beis.HelpToGrow.Repositories;
 global using Beis.HelpToGrow.Repositories.Enums;
 global using Beis.HelpToGrow.Repositories.Interfaces;
 
-global using Beis.HelpToGrow.Common.Enums;
+global using Beis.HelpToGrow.Common.Voucher.Enums;
+global using Beis.HelpToGrow.Common.Voucher.Interfaces;
+global using Beis.HelpToGrow.Common.Voucher.Services;
+global using Beis.HelpToGrow.Common.Voucher.Config;
+
 global using Beis.HelpToGrow.Common.Config;
 global using Beis.HelpToGrow.Common.Interfaces;
-global using Beis.HelpToGrow.Common.Models;
 global using Beis.HelpToGrow.Common.Services;
-
+global using Beis.HelpToGrow.Common.Services.HealthChecks;
 
 
 

@@ -1,7 +1,4 @@
 ﻿
-
-
-
 namespace Beis.HelpToGrow.Voucher.FunctionApp.Extensions
 {
     public static class RegisterFunctionAppServicesExtension
@@ -23,8 +20,7 @@ namespace Beis.HelpToGrow.Voucher.FunctionApp.Extensions
             services.AddTransient<IEmailClientService, EmailClientService>();
             services.AddTransient<IVoucherGenerationService, VoucherGenerationService>();
             services.AddTransient<IEncryptionService, EncryptionService>();
-            services.AddScoped<INotifyServiceSettings, NotifyServiceSettings>();
-
+ 
             return services;
         }
     }
