@@ -1,12 +1,4 @@
-﻿using Beis.HelpToGrow.Voucher.Web.Services.Connectors;
-using Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied;
-using Beis.HelpToGrow.Voucher.Web.Services.HealthChecks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.DependencyInjection;
-using System.Text.Json;
-
+﻿
 namespace Beis.HelpToGrow.Voucher.Web.Extensions
 {
     internal static class ServiceCollectionExtensions
@@ -52,12 +44,14 @@ namespace Beis.HelpToGrow.Voucher.Web.Extensions
 
             services.AddSingleton<IIndesserHttpConnection<IndesserCompanyResponse>, IndesserConnection>();
 
-            services.AddSingleton<ICompanyHouseHttpConnection<CompanyHouseResponse>>(_ =>
-               new CompanyHouseConnection(
-                   restClientFactory,
-                   configuration["CompanyHouseUrl"],
-                   configuration["CompanyHouseApiKey"],
-                   configuration["VoucherSettings:connectionTimeOut"]));
+            services.AddSingleton<ICompanyHouseHttpConnection<CompanyHouseResponse>, CompanyHouseConnection>();
+
+            //services.AddSingleton<ICompanyHouseHttpConnection<CompanyHouseResponse>>(_ =>
+            //   new CompanyHouseConnection(
+            //       restClientFactory,
+            //       configuration["CompanyHouseUrl"],
+            //       configuration["CompanyHouseApiKey"],
+            //       configuration["VoucherSettings:connectionTimeOut"]));
 
             services.RegisterRepositories();
 
@@ -140,6 +134,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Extensions
             services.Configure<CookieNamesConfiguration>(configuration.GetSection("CookieNamesConfiguration"));
             services.Configure<IndesserConnectionOptions>(options => configuration.Bind(options));
             services.Configure<CompanyHouseHealthCheckConfiguration>(configuration.GetSection("CompanyHouseHealthCheckConfiguration"));
+            
+            services.Configure<CompanyHouseSettings>(options => configuration.Bind(options));
+
             services.Configure<EncryptionSettings>(options => configuration.Bind(options));
             services.Configure<UrlOptions>(o =>
             {

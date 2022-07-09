@@ -1,11 +1,3 @@
-using Beis.HelpToGrow.Common.Helpers;
-using Beis.HelpToGrow.Voucher.Web.Extensions;
-using Beis.HelpToGrow.Voucher.Web.Services.HealthChecks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging.ApplicationInsights;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureAppConfiguration(configBuilder =>
 {

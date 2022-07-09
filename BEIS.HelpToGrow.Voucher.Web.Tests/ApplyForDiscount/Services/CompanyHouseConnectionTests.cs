@@ -8,6 +8,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
     [TestFixture]
     public class CompanyHouseConnectionTests
     {
+        private IOptions<CompanyHouseSettings> _fakeOptions;
+
         [SetUp]
         public void Setup()
         {
@@ -23,8 +25,14 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
             var fakeApiKey = "fake api key";
             var connectionTimeOut = "1000";
 
-            var sut = new CompanyHouseConnection(fakeRestClientFactory, companyHouseApiUrl, fakeApiKey,
-                connectionTimeOut);
+            _fakeOptions = Options.Create(new CompanyHouseSettings
+            {
+                 CompanyHouseApiKey = fakeApiKey,
+                 CompanyHouseUrl = companyHouseApiUrl,
+                 ConnectionTimeOut = int.Parse(connectionTimeOut)
+            });
+
+            var sut = new CompanyHouseConnection(fakeRestClientFactory, _fakeOptions);
 
             var response = sut.ProcessRequest("fake company id", new DefaultHttpContext());
 
@@ -47,8 +55,14 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
             var fakeApiKey = "fake api key";
             var connectionTimeOut = "1000";
 
-            var sut = new CompanyHouseConnection(fakeRestClientFactory, companyHouseApiUrl, fakeApiKey,
-                connectionTimeOut);
+            _fakeOptions = Options.Create(new CompanyHouseSettings
+            {
+                CompanyHouseApiKey = fakeApiKey,
+                CompanyHouseUrl = companyHouseApiUrl,
+                ConnectionTimeOut = int.Parse(connectionTimeOut)
+            });
+
+            var sut = new CompanyHouseConnection(fakeRestClientFactory, _fakeOptions);
 
             var response = sut.ProcessRequest("fake company id", new DefaultHttpContext());
 
