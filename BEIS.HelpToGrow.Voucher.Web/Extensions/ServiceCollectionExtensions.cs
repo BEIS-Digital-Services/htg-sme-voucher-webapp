@@ -40,18 +40,10 @@ namespace Beis.HelpToGrow.Voucher.Web.Extensions
             services.RegisterOptions(configuration);
 
             services.AddSingleton<IRestClientFactory, RestClientFactory>();
-            var restClientFactory = new RestClientFactory();
-
+            
             services.AddSingleton<IIndesserHttpConnection<IndesserCompanyResponse>, IndesserConnection>();
 
             services.AddSingleton<ICompanyHouseHttpConnection<CompanyHouseResponse>, CompanyHouseConnection>();
-
-            //services.AddSingleton<ICompanyHouseHttpConnection<CompanyHouseResponse>>(_ =>
-            //   new CompanyHouseConnection(
-            //       restClientFactory,
-            //       configuration["CompanyHouseUrl"],
-            //       configuration["CompanyHouseApiKey"],
-            //       configuration["VoucherSettings:connectionTimeOut"]));
 
             services.RegisterRepositories();
 
