@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Beis.HelpToGrow.Voucher.Web
 {
@@ -114,6 +115,8 @@ namespace Beis.HelpToGrow.Voucher.Web
 
             services.AddHttpClient();
 
+            services.AddStackExchangeRedisCache(options => { options.Configuration = _configuration["RedisPrimaryConnectionString"]; });
+            
             services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(_configuration["HelpToGrowDbConnectionString"]));
             services.AddDataProtection().PersistKeysToDbContext<HtgVendorSmeDbContext>();
 
