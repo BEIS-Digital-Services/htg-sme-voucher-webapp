@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Beis.HelpToGrow.Voucher.Web
 {
@@ -57,6 +58,9 @@ namespace Beis.HelpToGrow.Voucher.Web
             });
 
             services.Configure<CookiePolicyOptions>(options => options.Secure = CookieSecurePolicy.Always);
+
+            services.AddSingleton(new DistributedCacheEntryOptions()
+                  .SetSlidingExpiration(TimeSpan.FromMinutes(SessionTimeOutMinutes)));
 
             services.AddLogging(options => { options.AddConsole(); });
             services.AddApplicationInsightsTelemetry(_configuration["AzureMonitorInstrumentationKey"]);
@@ -114,6 +118,8 @@ namespace Beis.HelpToGrow.Voucher.Web
 
             services.AddHttpClient();
 
+            services.AddStackExchangeRedisCache(options => { options.Configuration = _configuration["RedisPrimaryConnectionString"]; });
+            
             services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(_configuration["HelpToGrowDbConnectionString"]));
             services.AddDataProtection().PersistKeysToDbContext<HtgVendorSmeDbContext>();
 
