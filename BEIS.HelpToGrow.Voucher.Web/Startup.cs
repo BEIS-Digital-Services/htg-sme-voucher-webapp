@@ -59,6 +59,9 @@ namespace Beis.HelpToGrow.Voucher.Web
 
             services.Configure<CookiePolicyOptions>(options => options.Secure = CookieSecurePolicy.Always);
 
+            services.AddSingleton(new DistributedCacheEntryOptions()
+                  .SetSlidingExpiration(TimeSpan.FromMinutes(SessionTimeOutMinutes)));
+
             services.AddLogging(options => { options.AddConsole(); });
             services.AddApplicationInsightsTelemetry(_configuration["AzureMonitorInstrumentationKey"]);
 
