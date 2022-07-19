@@ -23,13 +23,13 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
         [Test]
         public void ValidEmployeeCount()
         {
-            _userVoucherDto.EmployeeNumbers = 5;
+            _userVoucherDto.EmployeeNumbers = 1;
 
             _indesserCompanyResponse.Financials = new List<Financial> { new()
                 {
                     FinancialData = new FinancialData
                     {
-                        NumberofEmployees = 5.0
+                        NumberofEmployees = 1.0
                     }
                 }
             };
@@ -66,7 +66,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
         [Test]
         public void InvalidEmployeeCountPerUserResponse()
         {
-            _userVoucherDto.EmployeeNumbers = 4;
+            _userVoucherDto.EmployeeNumbers = 250;
 
             var result = _sut.Check(_indesserCompanyResponse, _userVoucherDto);
 
@@ -76,13 +76,13 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
         [Test]
         public void InvalidEmployeeCountTooSmallPerIndesserResponse()
         {
-            _userVoucherDto.EmployeeNumbers = 5;
+            _userVoucherDto.EmployeeNumbers = 0;
 
             _indesserCompanyResponse.Financials = new List<Financial> { new()
                 {
                     FinancialData = new FinancialData
                     {
-                        NumberofEmployees = 4.0
+                        NumberofEmployees = 0.0
                     }
                 }
             };

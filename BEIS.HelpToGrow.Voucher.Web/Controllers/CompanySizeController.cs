@@ -30,11 +30,11 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             if (!ModelState.IsValid || model.EmployeeNumbers == default)
             {
                 ModelState.Clear();
-                ModelState.AddModelError("EmployeeNumbers", "Enter the number of employees");
+                ModelState.AddModelError("EmployeeNumbers", "Enter the number of employees between 1-249");
                 return View(model);
             }
 
-            if (model.EmployeeNumbers is < 5 or > 249)
+            if (model.EmployeeNumbers is < 1 or > 249)
             {
                 return RedirectToAction("CompanySize", "InEligible");
             }
