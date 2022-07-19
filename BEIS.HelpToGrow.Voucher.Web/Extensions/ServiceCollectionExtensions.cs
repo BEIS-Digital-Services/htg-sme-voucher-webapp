@@ -36,6 +36,11 @@ namespace Beis.HelpToGrow.Voucher.Web.Extensions
             services.AddOptions();
             services.AddHttpClient();
 
+            services.AddSingleton(new DistributedCacheEntryOptions()
+                  .SetSlidingExpiration(TimeSpan.FromMinutes(SessionTimeOutMinutes)));
+            services.AddStackExchangeRedisCache(options => { options.Configuration = configuration["RedisPrimaryConnectionString"]; });
+
+
             services.RegisterServices();
             services.RegisterOptions(configuration);
 
