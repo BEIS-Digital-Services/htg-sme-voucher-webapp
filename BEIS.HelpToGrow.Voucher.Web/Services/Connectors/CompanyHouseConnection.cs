@@ -9,17 +9,14 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
         private readonly string _companyHouseApiUrl;
         private readonly string _apiToken;
         private readonly int _connectionTimeOut;
-        
         public CompanyHouseConnection(
             IRestClientFactory clientFactory,
-            string companyHouseApiUrl,
-            string apiKey,
-            string connectionTimeOut)
+            IOptions<CompanyHouseSettings> companyHouseSettings)
         {
             _clientFactory = clientFactory;
-            _companyHouseApiUrl = companyHouseApiUrl;
-            _apiToken = apiKey;
-            _connectionTimeOut = int.Parse(connectionTimeOut);
+            _companyHouseApiUrl = companyHouseSettings.Value.CompanyHouseUrl;
+            _apiToken = companyHouseSettings.Value.CompanyHouseApiKey;
+            _connectionTimeOut = companyHouseSettings.Value.ConnectionTimeOut;
         }
 
         public CompanyHouseResponse ProcessRequest(string companyId, HttpContext httpContext)
