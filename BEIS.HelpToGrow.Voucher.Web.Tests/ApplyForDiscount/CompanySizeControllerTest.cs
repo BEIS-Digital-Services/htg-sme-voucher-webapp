@@ -158,23 +158,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             Assert.That(controllerResult.ControllerName == "ExistingCustomer");
             Assert.That(controllerResult.ActionName == "Index");
-        }
-
-        [Test]
-        public async Task PostFormWithIncorrectLowerEmployeeNumbersRedirectToInEligibleCompanySize()
-        {
-            var expectedModel = await SetupSelection(_productRepository, 1, 1);
-
-            _mockSessionService.Setup(x => x.Get<UserVoucherDto>(It.IsAny<string>(), _controllerContext.HttpContext)).Returns(expectedModel);
-
-            _sut = new CompanySizeController(_mockSessionService.Object);
-            _sut.ControllerContext = _controllerContext;
-
-            var controllerResult = (RedirectToActionResult)_sut.Index(new CompanySizeViewModel {EmployeeNumbers =  4});
-
-            Assert.That(controllerResult.ControllerName == "InEligible");
-            Assert.That(controllerResult.ActionName == "CompanySize");
-        }
+        }        
 
         [Test]
         public async Task PostFormWithIncorrectHigherEmployeeNumbersRedirectToInEligibleCompanySize()
@@ -202,7 +186,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             _sut = new CompanySizeController(_mockSessionService.Object);
             _sut.ControllerContext = _controllerContext;
 
-            var controllerResult = (RedirectToActionResult)_sut.Index(new CompanySizeViewModel { EmployeeNumbers = 5 });
+            var controllerResult = (RedirectToActionResult)_sut.Index(new CompanySizeViewModel { EmployeeNumbers = 4 });
 
             Assert.That(controllerResult.ControllerName == "CompaniesHouse");
             Assert.That(controllerResult.ActionName == "Index");
