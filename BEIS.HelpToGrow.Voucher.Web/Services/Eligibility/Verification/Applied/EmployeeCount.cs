@@ -3,7 +3,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility.Verification.Applied
 {
     public class EmployeeCount : IVerifyEmployeeCount
     {
-        public int EmployeeCountMin => 5;
+        public int EmployeeCountMin => 1;
         public int EmployeeCountMax => 249;
 
         public Result Verify(IndesserCompanyResponse indesserCompanyResponse, UserVoucherDto userVoucherDto)

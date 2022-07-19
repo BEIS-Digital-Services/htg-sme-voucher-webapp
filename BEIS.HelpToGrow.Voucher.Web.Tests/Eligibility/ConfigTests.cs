@@ -6,12 +6,12 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
     [TestFixture]
     public class ConfigTests
     {
-        private WebApplicationFactory<Startup> _factory;
+        private WebApplicationFactory<Program> _factory;
 
         [SetUp]
         public void Setup()
         {
-            _factory = new WebApplicationFactory<Startup>();
+            _factory = new WebApplicationFactory<Program>();
         }
 
         [TearDown]

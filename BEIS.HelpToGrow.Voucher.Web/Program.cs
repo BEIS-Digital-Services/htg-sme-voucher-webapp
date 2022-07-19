@@ -1,35 +1,60 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.ApplicationInsights;
-
-
-namespace Beis.HelpToGrow.Voucher.Web
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.ConfigureAppConfiguration(configBuilder =>
 {
-    public class Program
+    var connectionString = configBuilder.Build().GetConnectionString("AppConfig");
+    if (connectionString != null)
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        private static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
-                .ConfigureAppConfiguration(configuration =>
-                {
-                    var connectionString = configuration.Build().GetConnectionString("AppConfig");
-                    if (connectionString != null)
-                    {
-                        configuration.AddAzureAppConfiguration(connectionString);
-                    }
-                }).ConfigureLogging(_ =>
-                {
-                    _.AddFilter<ApplicationInsightsLoggerProvider>(string.Empty, LogLevel.Debug);
-                    _.AddFilter<ApplicationInsightsLoggerProvider>("Microsoft", LogLevel.Warning);
-                });
-        }
+        configBuilder.AddAzureAppConfiguration(connectionString);
     }
+});
+
+builder.Logging.AddFilter<ApplicationInsightsLoggerProvider>(string.Empty, LogLevel.Debug);
+builder.Logging.AddFilter<ApplicationInsightsLoggerProvider>("Microsoft", LogLevel.Warning);
+
+// Add services to the container.
+builder.Services.RegisterAllServices(builder.Configuration);
+
+builder.Services.AddHealthChecks()
+              .AddCheck<DependencyInjectionHealthCheckService>("Dependency Injection Health Checks")
+              .AddCheck<IndesserHealthCheckService>("Indesser Service Health Checks")
+              .AddCheck<CompanyHouseHealthCheckService>("Company House Api")
+              .AddCheck<DatabaseHealthCheckService>("Database")
+              .AddCheck<EncryptionHealthCheckService>("Encryption", failureStatus: HealthStatus.Unhealthy,
+                 tags: new[] { "Encryption" });
+
+var app = builder.Build();
+app.UseForwardedHeaders();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseForwardedHeaders();
 }
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseForwardedHeaders();
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseCookiePolicy();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthorization();
+app.UseSession();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/healthz", new HealthCheckOptions()
+    {
+        ResponseWriter = HealthCheckJsonResponseWriter.Write
+    });
+    endpoints.MapControllers();
+    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+});
+
+app.Run();
+
