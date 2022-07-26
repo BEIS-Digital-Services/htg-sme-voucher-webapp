@@ -23,7 +23,7 @@
           {
             <span class="govuk-error-message">Enter an email address in the correct format, like name@example.com</span>
           }
-          <input id="email" asp-for="@Model.EmailAddress" class="govuk-input govuk-!-width-three-quarters" type="text" spellcheck="false" aria-describedby="email-hint" autocomplete="email">
+          <input id="email" asp-for="@Model.EmailAddress" class="govuk-input govuk-!-width-three-quarters" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="on" autocompletetype="email">
         </div>
         <button class="govuk-button work-email" data-module="govuk-button">Continue</button>
       </form>
