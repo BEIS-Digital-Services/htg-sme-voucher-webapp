@@ -10,7 +10,7 @@
     <UserSecretsId>9efaa12d-8e31-46d7-a641-063bcb6d0c0f</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Beis.HelpToGrow.Common.Voucher" Version="6.1.14" />
+    <PackageReference Include="Beis.HelpToGrow.Common.Voucher" Version="6.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.1.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.3.0" />
