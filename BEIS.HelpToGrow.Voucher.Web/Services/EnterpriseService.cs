@@ -50,6 +50,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
                 _sessionService.Set("userVoucherDto", userVoucher, _httpContextAccessor.HttpContext);
             }
             enterprise.applicant_email_address = userVoucher.ApplicantDto.EmailAddress;
+            enterprise.applicant_phone_number = userVoucher.ApplicantDto.PhoneNumber;
             enterprise.applicant_name = userVoucher.ApplicantDto.FullName;
             enterprise.applicant_role = userVoucher.ApplicantDto.Role;
         }
@@ -73,7 +74,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
                     eligibility_status_id = (long) EligibilityStatus.Unknown,
                     applicant_email_verified = false,
                     agreed_tandc = true,
-                    marketing_consent = userVoucher.ApplicantDto.HasProvidedMarketingConsent 
+                    marketing_consent = userVoucher.ApplicantDto.HasProvidedMarketingConsent,
+                    marketing_consent_by_phone = userVoucher.ApplicantDto.HasProvidedMarketingConsentByPhone
                 };
 
                 await MapVoucherToEnterprise(userVoucher, enterprise);
@@ -217,7 +219,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
                 var enterprise = await _repository.GetEnterprise(enterpriseId);
 
                 enterprise.eligibility_status_id = (long) eligibility;
-
+              
                 await _repository.UpdateEnterprise(enterprise);
 
                 return Result.Ok();
@@ -257,10 +259,13 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
                 ? userVoucher.EmployeeNumbers
                 : companySize;
             userVoucher.ApplicantDto.EmailAddress = enterprise.applicant_email_address;
+            userVoucher.ApplicantDto.PhoneNumber = enterprise.applicant_phone_number;
             userVoucher.ApplicantDto.FullName = enterprise.applicant_name;
             userVoucher.ApplicantDto.Role = enterprise.applicant_role;
             userVoucher.ApplicantDto.IsVerified = enterprise.applicant_email_verified;
-           
+            userVoucher.ApplicantDto.HasProvidedMarketingConsent = enterprise.marketing_consent.GetValueOrDefault();
+            userVoucher.ApplicantDto.HasProvidedMarketingConsentByPhone = enterprise.marketing_consent_by_phone.GetValueOrDefault();
+
             _sessionService.Set("userVoucherDto", userVoucher, _httpContextAccessor.HttpContext);
 
             return userVoucher;
