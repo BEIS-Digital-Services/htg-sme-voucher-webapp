@@ -2,7 +2,7 @@
     var viewModel = (CookieBannerViewModel)ViewData["CookieBannerViewModel"];
 
     var satisfactionSurveyUrl = ViewData["SatisfactionSurveyUrl"];
-    var helpToGrowDigital = ViewData["HelpToGrowDigitalUrl"];
+    var comparisonToolUrl = ViewData["ComparisonToolUrl"];
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,10 @@
             </div>
 
             <div class="govuk-header__content">
-                <a href="@helpToGrowDigital" class="govuk-header__link govuk-header__link--service-name">
+                <a href="@comparisonToolUrl" class="govuk-header__link govuk-header__link--service-name jsLink">
+                    Help to Grow: Digital
+                </a>
+                 <a href="@comparisonToolUrl" class="govuk-header__link govuk-header__link--service-name noJsLink">
                     Help to Grow: Digital
                 </a>
             </div>

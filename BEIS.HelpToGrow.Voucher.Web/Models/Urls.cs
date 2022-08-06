@@ -12,7 +12,5 @@ namespace Beis.HelpToGrow.Voucher.Web.Models
         public static Uri GetBusinessEligibilityUrl(string learningPlatformUrl) => new(new Uri(learningPlatformUrl), "eligibility");
 
         public static Uri GetBusinessAdviceAndLearningUrl(string learningPlatformUrl) => new(new Uri(learningPlatformUrl), "business-advice-and-learning");
-
-        public static Uri GetHelpToGrowDigitalUrl(string learningPlatformUrl) => new(new Uri(learningPlatformUrl), "comparison-tool");
     }
 }

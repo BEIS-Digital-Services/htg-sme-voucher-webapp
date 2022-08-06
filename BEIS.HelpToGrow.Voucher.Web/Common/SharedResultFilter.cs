@@ -29,7 +29,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Common
         }
         private void SetupHelpToGrowDigitalUrl(Controller controller)
         {
-            controller.ViewData["HelpToGrowDigitalUrl"] = Urls.GetHelpToGrowDigitalUrl(_options.LearningPlatformUrl);
+            controller.ViewData["ComparisonToolUrl"] = Urls.GetComparisonToolUrl(_options.LearningPlatformUrl);
         }
 
         public void OnResultExecuted(ResultExecutedContext context)
