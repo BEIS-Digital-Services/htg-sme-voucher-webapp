@@ -14,8 +14,8 @@
 
             <p class="govuk-body">After you have completed the online application and passed all fraud and eligibility checks, you will receive a unique discount link to purchase the software directly from your chosen supplier’s website. These fraud and eligibility checks will not affect your business&#700; credit score.</p>
 
-            <p class="govuk-body">For full terms and conditions, please visit: <a target="_blank" asp-controller="TermsAndConditions" asp-action="Terms" class="govuk-link">terms and conditions (opens in new tab)</a>.</p>
-
+            <p class="govuk-body">For full terms and conditions, please visit: <a target="_blank" href="@Url.Action("Terms", "TermsAndConditions", new { isBlank = true })"  class="govuk-link">terms and conditions (opens in new tab)</a>.</p>
+            
             <form class="form">
                 <a asp-controller="newtosoftware" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
                     Apply now

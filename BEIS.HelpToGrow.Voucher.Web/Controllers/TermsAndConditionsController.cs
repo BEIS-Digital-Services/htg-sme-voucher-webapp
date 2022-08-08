@@ -42,12 +42,13 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Terms()
+        public IActionResult Terms(bool isBlank)
         {
             var viewModel = new TermsConditionsViewModel 
             {
                 IsTermsConditionsHidden = true,
-                LearningPlatformUrl = _urlOptions.LearningPlatformUrl
+                LearningPlatformUrl = _urlOptions.LearningPlatformUrl,
+                IsBlankPage = isBlank
             };
 
             return View(viewModel);

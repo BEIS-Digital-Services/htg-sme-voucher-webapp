@@ -10,5 +10,6 @@ namespace Beis.HelpToGrow.Voucher.Web.Models
         public bool IsApplyForDiscountHidden { get; set; }
         public bool IsGeneralGuidanceHidden { get; set; }
         public bool IsGetInTouchHidden { get; set; }
+        public bool IsBlankPage { get; set; }
     }
 }
