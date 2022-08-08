@@ -20,11 +20,17 @@ namespace Beis.HelpToGrow.Voucher.Web.Common
             }
             SetupCookieSelection(controller);
             SetupSatisfactionSurveyUrl(controller);
+            SetupHelpToGrowDigitalUrl(controller);
         }
 
         private void SetupSatisfactionSurveyUrl(Controller controller)
         {
             controller.ViewData["SatisfactionSurveyUrl"] = Urls.GetSatisfactionSurveyUrl(_options.LearningPlatformUrl);
+        }
+        private void SetupHelpToGrowDigitalUrl(Controller controller)
+        {
+            controller.ViewData["ComparisonToolUrl"] = Urls.GetComparisonToolUrl(_options.LearningPlatformUrl);
+            controller.ViewData["ComparisonToolNoJsUrl"] = Urls.GetComparisonToolNoJsUrl(_options.LearningPlatformUrl);
         }
 
         public void OnResultExecuted(ResultExecutedContext context)
