@@ -7,7 +7,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
         public void Set(string key, object value, HttpContext currentContext)
         {
             var serialized = JsonConvert.SerializeObject(value);
-            var bytes = Encoding.ASCII.GetBytes(serialized);
+            var bytes = Encoding.UTF8.GetBytes(serialized);
             currentContext.Session.Set(key, bytes);
         }
 
@@ -18,7 +18,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
                 return default;
             }
 
-            var value = Encoding.ASCII.GetString(bytes);
+            var value = Encoding.UTF8.GetString(bytes);
 
             return !string.IsNullOrWhiteSpace(value)
                 ? JsonConvert.DeserializeObject<T>(value)
