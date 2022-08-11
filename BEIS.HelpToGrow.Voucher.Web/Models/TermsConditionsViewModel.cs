@@ -5,16 +5,18 @@ namespace Beis.HelpToGrow.Voucher.Web.Models
     {
         public string SelectedProduct { get; set; }
 
+   
         [Required]
-        public string TermsConditions { get; set; }
-  
+        public bool TermsAndConditionsAccepted { get; set; }
         [Required]
-        public string PrivacyPolicy { get; set; }
+        public bool PrivacyPolicyAccepted { get; set; }
         [Required]
-        public string SubsidyControl { get; set; }
-        public bool IsIncomplete =>
-            string.IsNullOrWhiteSpace(TermsConditions) ||
-            string.IsNullOrWhiteSpace(PrivacyPolicy) ||
-            string.IsNullOrWhiteSpace(SubsidyControl);
+        public bool SubsidyControlAccepted { get; set; }
+
+        public bool IsIncomplete => !(TermsAndConditionsAccepted && PrivacyPolicyAccepted && SubsidyControlAccepted);
+
+
+
     }
+
 }

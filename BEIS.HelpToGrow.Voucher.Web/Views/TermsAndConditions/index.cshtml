@@ -2,10 +2,6 @@
 @{
     ViewData["Title"] = "Terms and conditions, privacy policy and subsidy control";
     var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
-    var termsConditionsSelection = Model.TermsConditions == "on" ? "checked" : "";
-    var privacyPolicySelection = Model.PrivacyPolicy == "on" ? "checked" : "";
-    var subsidyControlSelection = Model.SubsidyControl == "on" ? "checked" : "";
-
 }
 <div class="govuk-width-container">
   <nav class="govuk-!-margin-bottom-9">
@@ -26,24 +22,24 @@
             <p>
               Before you apply for a software discount for <strong>@Model.SelectedProduct</strong>, you will need to read and accept the <a href="/termsandconditions/terms" class="govuk-link">terms and conditions</a>, <a href="/termsandconditions/privacy" class="govuk-link">privacy policy</a> and <a href="/termsandconditions/subsidy">subsidy control</a>.
             </p>
-            <span asp-validation-for="TermsConditions" class="govuk-error-message"></span>
+            <span asp-validation-for="TermsAndConditionsAccepted" class="govuk-error-message"></span>
 
             <div class="govuk-checkboxes" data-module="govuk-checkboxes">
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="TermsConditions" name="TermsConditions" type="checkbox" @termsConditionsSelection>
+                <input class="govuk-checkboxes__input" asp-for="TermsAndConditionsAccepted" />
 
                 <label class="govuk-label govuk-checkboxes__label" for="TermsConditions">
                   I have read and accept the terms and conditions
                 </label>
               </div>
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="PrivacyPolicy" name="PrivacyPolicy" type="checkbox" @privacyPolicySelection>
+                <input class="govuk-checkboxes__input" asp-for="PrivacyPolicyAccepted" />
                 <label class="govuk-label govuk-checkboxes__label" for="PrivacyPolicy">
                   I have read and accept the privacy policy
                 </label>
               </div>
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="SubsidyControl" name="SubsidyControl" type="checkbox" @subsidyControlSelection>
+                <input class="govuk-checkboxes__input" asp-for="SubsidyControlAccepted">
                 <label class="govuk-label govuk-checkboxes__label" for="SubsidyControl">
                   I have read and accept the subsidy control
                 </label>
