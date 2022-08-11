@@ -5,7 +5,7 @@
     var termsConditionsSelection = Model.TermsConditions == "on" ? "checked" : "";
     var privacyPolicySelection = Model.PrivacyPolicy == "on" ? "checked" : "";
     var subsidyControlSelection = Model.SubsidyControl == "on" ? "checked" : "";
-    var marketingConsentSelection = Model.MarketingConsent == "on" ? "checked" : "";
+
 }
 <div class="govuk-width-container">
   <nav class="govuk-!-margin-bottom-9">
@@ -31,6 +31,7 @@
             <div class="govuk-checkboxes" data-module="govuk-checkboxes">
               <div class="govuk-checkboxes__item">
                 <input class="govuk-checkboxes__input" id="TermsConditions" name="TermsConditions" type="checkbox" @termsConditionsSelection>
+
                 <label class="govuk-label govuk-checkboxes__label" for="TermsConditions">
                   I have read and accept the terms and conditions
                 </label>
@@ -47,16 +48,7 @@
                   I have read and accept the subsidy control
                 </label>
               </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="MarketingConsent" name="MarketingConsent" type="checkbox" @marketingConsentSelection>
-                <label class="govuk-label govuk-checkboxes__label" for="SubsidyControl">
-                  <p> I consent to the Department for Business, Energy & Industrial Strategy (BEIS) contacting me (including through one or more of the third party recipients identified in the privacy policy) by email to keep me informed about news, updates and events relating to Help to Grow: Digital, and communicate with me about past and current applications for discounts (grant tokens), including offering support in the event of their expiry, and for support with my discount (grant token) applications and redemptions and software purchases.</p>                  
-                  <p> I am freely consenting to BEIS (and/or the third party recipients identified in the privacy policy) holding and processing my personal data for these purposes.</p>
-                </label>
-              </div>
-              <div>
 
-              </div>
             </div>
           </fieldset>
         </div>

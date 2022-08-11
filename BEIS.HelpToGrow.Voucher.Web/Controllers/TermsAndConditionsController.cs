@@ -33,10 +33,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             viewModel.TermsConditions = "on";
             viewModel.PrivacyPolicy = "on";
             viewModel.SubsidyControl = "on";
-            viewModel.MarketingConsent =
-                userVoucherDto.ApplicantDto.HasProvidedMarketingConsent
-                    ? "on"
-                    : null;
+           
 
             return View(viewModel);
         }
@@ -79,13 +76,12 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 return View(viewModel);
             }
 
-            var hasProvidedMarketingConsent = viewModel.MarketingConsent == "on";
             var userVoucherDto = _sessionService.Get<UserVoucherDto>("userVoucherDto", HttpContext);
             userVoucherDto.ConsentTermsConditions = "Yes";
             userVoucherDto.ApplicantDto.HasAcceptedTermsAndConditions = true;
             userVoucherDto.ApplicantDto.HasAcceptedPrivacyPolicy = true;
             userVoucherDto.ApplicantDto.HasAcceptedSubsidyControl = true;
-            userVoucherDto.ApplicantDto.HasProvidedMarketingConsent = hasProvidedMarketingConsent;
+       
             _sessionService.Set("userVoucherDto", userVoucherDto, ControllerContext.HttpContext);
 
             return RedirectToAction("Index", "ConfirmApplicant");
