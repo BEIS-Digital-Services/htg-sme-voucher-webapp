@@ -5,7 +5,7 @@
 }
 <div class="govuk-width-container">
   <nav class="govuk-!-margin-bottom-9">
-    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="/applicantemailaddress">Back</a>
+    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-controller="ApplicantEmailAddress" asp-action="Index">Back</a>
   </nav>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -20,11 +20,8 @@
           </h1>
           <p class="govuk-body">Enter your phone number so that we can provide support for using your discount.</p>
           <div id="phone-number-hint" class="govuk-hint">Phone number</div>
-          @if (!ViewData.ModelState.IsValid)
-          {
-            <span class="govuk-error-message">Enter your phone number so that we can provide support for using your discount.</span>
-          }
-          <input id="phone" asp-for="@Model.PhoneNumber" class="govuk-input govuk-!-width-three-quarters" type="number" spellcheck="false" aria-describedby="phone-number-hint" autocomplete="phone">
+          <span asp-validation-for="PhoneNumber" class="govuk-error-message"></span>
+          <input id="phone" asp-for="@Model.PhoneNumber" class="govuk-input govuk-!-width-three-quarters" spellcheck="false" aria-describedby="phone-number-hint" autocomplete="phone">
         </div>
         <button class="govuk-button phone-number" data-module="govuk-button">Continue</button>
       </form>

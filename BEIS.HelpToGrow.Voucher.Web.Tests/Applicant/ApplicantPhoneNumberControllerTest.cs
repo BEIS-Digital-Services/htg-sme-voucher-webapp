@@ -79,7 +79,7 @@
         }
 
         [Test]
-        [TestCase("07525252525")]
+        [TestCase("07525252525")]       
         public void GetIndexSetsUserSessionDtoForAValidModel(string number)
         {
             _sut.Index(new PhoneNumberViewModel { PhoneNumber = number });
@@ -88,6 +88,28 @@
             Assert.IsNotNull(dtoResult);
             Assert.IsNotNull(dtoResult.ApplicantDto);
             Assert.IsNotNull(dtoResult.ApplicantDto.PhoneNumber);
+        }
+
+        [TestCase("07525252525")]
+        [TestCase("+447525252525")]
+        [TestCase("00447525252525")]
+        [TestCase("01173027736")]
+        [TestCase("00441173027736")]
+        [TestCase("+441173027736")]        
+        public void ValidationPasses(string number)
+        {
+            // Arrange
+            var sut = new PhoneNumberViewModel { PhoneNumber = number };
+
+            // Set some properties here
+            var context = new ValidationContext(sut, null, null);
+            var results = new List<ValidationResult>();
+
+            // Act
+            var modelIsValid = Validator.TryValidateObject(sut, context, results, true);
+
+            // Assert 
+            Assert.IsTrue(modelIsValid);
         }
 
         [TestCase(null, Description = "Null value")]
