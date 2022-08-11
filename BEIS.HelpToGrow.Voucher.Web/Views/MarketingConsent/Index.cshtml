@@ -1,0 +1,97 @@
+﻿@model MarketingConsentViewModel
+<div class="govuk-width-container">
+    <nav class="govuk-!-margin-bottom-9">
+        <a class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0">Back</a>
+    </nav>
+    <partial name="_ValidationSummary" model="ViewData.ModelState" />
+
+
+
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+            <!--      <form class="terms-policy-update" action="applicant/check-your-answers" method="get">-->
+            <form asp-action="Index" method="post">
+
+                <div class="govuk-form-group">
+
+                    <div class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            <span class="govuk-caption-l">Section 3 of 4</span>
+                            <h1 class="govuk-fieldset__heading">
+                                Would you like to receive marketing information?
+                            </h1>
+                        </legend>
+                        <span style="display:none" id="terms-policy" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>Select if you have read and accepted the terms and conditions, privacy policy and subsidy control
+                        </span>
+
+                        <p>
+                            From time to time the Department for Business, Energy &amp; Industrial Strategy (BEIS) may contact you to:<br>
+                        </p>
+
+                        <ul class="govuk-list govuk-list--bullet">
+                            <li>keep you informed about news,updates and events relating to Help to Grow: Digital</li>
+                            <li>communicate with you about past and current applications for discounts, including the offer of support once a discount expires</li>
+                            <li>offer you support with your discount applications &amp; redemptions, and software purchases</li>
+                        </ul>
+
+
+                        <p>Choose how you would like to receive this information.</p>
+
+                        <p>
+                            By selecting 'phone number' or 'email' you are consenting to the Department of Business, Energy and Industrial Strategy (BEIS) holding,
+                            processing and using your personal data to contact you (including through one or more of the third parties identified in the privacy policy).
+                        </p>
+
+                    </div>
+
+
+
+
+                    <fieldset class="govuk-fieldset">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" asp-for="AcceptMarketingByPhone" />
+                            <label class="govuk-label govuk-checkboxes__label" for="optional-phone">
+                                Phone number (optional)
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" asp-for="AcceptMarketingByEmail" />
+                            <label class="govuk-label govuk-checkboxes__label" for="optional-email">
+                                Email (optional)
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <div>
+                        <br>
+                        <p>If you do not want to receive updates, select 'Continue'</p>
+                    </div>
+
+                </div>
+
+                <button class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+
+
+            </form>
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+</div>

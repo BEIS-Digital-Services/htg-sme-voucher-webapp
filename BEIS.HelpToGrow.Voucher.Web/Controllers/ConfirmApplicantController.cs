@@ -21,6 +21,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
         }
 
         [HttpGet]
+
         public async Task<IActionResult> Index()
         {
             var userVoucherDto = _sessionService.Get<UserVoucherDto>("userVoucherDto", ControllerContext.HttpContext);
