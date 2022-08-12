@@ -47,9 +47,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             Assert.That(viewResult.Model is TermsConditionsViewModel);
             Assert.AreEqual("fake product name", ((TermsConditionsViewModel) viewResult.Model).SelectedProduct);
-            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).TermsAndConditionsAccepted);
-            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).PrivacyPolicyAccepted);
-            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).SubsidyControlAccepted);
+            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).TermsAndConditions);
+            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).PrivacyPolicy);
+            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).SubsidyControl);
         }
 
         [Test]
@@ -72,9 +72,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             Assert.That(viewResult.Model is TermsConditionsViewModel);
             Assert.AreEqual("fake product name", ((TermsConditionsViewModel) viewResult.Model).SelectedProduct);
-            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).TermsAndConditionsAccepted);
-            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).PrivacyPolicyAccepted);
-            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).SubsidyControlAccepted);
+            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).TermsAndConditions);
+            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).PrivacyPolicy);
+            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).SubsidyControl);
         }
 
         [Test]
@@ -101,9 +101,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var viewModel = new TermsConditionsViewModel
             {
-                PrivacyPolicyAccepted = true,
-                SubsidyControlAccepted = true,
-                TermsAndConditionsAccepted = true,
+                PrivacyPolicy = true,
+                SubsidyControl = true,
+                TermsAndConditions = true,
             };
 
             var actionResult = (RedirectToActionResult)_sut.Index(viewModel);

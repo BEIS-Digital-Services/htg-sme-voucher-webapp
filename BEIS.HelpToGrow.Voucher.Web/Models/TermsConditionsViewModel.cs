@@ -7,13 +7,13 @@ namespace Beis.HelpToGrow.Voucher.Web.Models
 
    
         [Required]
-        public bool TermsAndConditionsAccepted { get; set; }
+        public bool TermsAndConditions { get; set; }
         [Required]
-        public bool PrivacyPolicyAccepted { get; set; }
+        public bool PrivacyPolicy { get; set; }
         [Required]
-        public bool SubsidyControlAccepted { get; set; }
+        public bool SubsidyControl { get; set; }
 
-        public bool IsIncomplete => !(TermsAndConditionsAccepted && PrivacyPolicyAccepted && SubsidyControlAccepted);
+        public bool IsIncomplete => !(TermsAndConditions && PrivacyPolicy && SubsidyControl);
 
 
 

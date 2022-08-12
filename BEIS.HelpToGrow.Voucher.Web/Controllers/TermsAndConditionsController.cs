@@ -30,9 +30,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 return View(viewModel);
             }
 
-            viewModel.TermsAndConditionsAccepted = true;
-            viewModel.PrivacyPolicyAccepted = true;
-            viewModel.SubsidyControlAccepted = true;
+            viewModel.TermsAndConditions = true;
+            viewModel.PrivacyPolicy = true;
+            viewModel.SubsidyControl = true;
 
 
             return View(viewModel);
@@ -72,7 +72,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             if (!ModelState.IsValid || viewModel.IsIncomplete)
             {
                 ModelState.Clear();
-                ModelState.AddModelError("TermsAndConditionsAccepted", "Select if you have read and accepted the terms and conditions, privacy policy and subsidy control");
+                ModelState.AddModelError("TermsAndConditions", "Select if you have read and accepted the terms and conditions, privacy policy and subsidy control");
                 return View(viewModel);
             }
 
