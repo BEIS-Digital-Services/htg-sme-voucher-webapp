@@ -121,7 +121,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             userVoucherDto.ApplicantDto.EmailAddress = model.EmailAddress.Trim();
             _sessionService.Set("userVoucherDto", userVoucherDto, HttpContext);
 
-            return RedirectToAction("Index", "TermsAndConditions");
+            return RedirectToAction("Index", "ApplicantPhoneNumber");
         }
 
         private static string GetVerificationLink(string verificationCode, string path)

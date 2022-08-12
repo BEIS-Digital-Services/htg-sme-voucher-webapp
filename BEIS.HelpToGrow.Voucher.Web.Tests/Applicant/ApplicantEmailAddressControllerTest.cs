@@ -53,8 +53,6 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Applicant
         public void IndexMissingEmailAddress()
         {
             _sut = new ApplicantEmailAddressController(_mockSessionService.Object, _mockEmailVerificationService.Object, _mockApplicationStatusService.Object, _options);
-                                                                                                                                                             
-            _sut = new ApplicantEmailAddressController(_mockSessionService.Object, _mockEmailVerificationService.Object, _mockApplicationStatusService.Object, _options);
 
             var viewResult = (ViewResult)_sut.Index();
 
