@@ -84,7 +84,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
        
             _sessionService.Set("userVoucherDto", userVoucherDto, ControllerContext.HttpContext);
 
-            return RedirectToAction("Index", "ConfirmApplicant");
+            return RedirectToAction(String.Empty, "MarketingConsent");
         }
     }
 }
