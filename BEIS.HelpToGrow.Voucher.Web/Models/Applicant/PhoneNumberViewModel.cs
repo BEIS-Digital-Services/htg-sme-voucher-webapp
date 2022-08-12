@@ -4,8 +4,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Models.Applicant
 {
     public class PhoneNumberViewModel
     {
-        [Required(ErrorMessage = "Enter your phone number so that we can provide support for using your discount")]
-        [PhoneNumber(ErrorMessage = "Enter your phone number so that we can provide support for using your discount")]
+        [Required(ErrorMessage = "Enter your business telephone number. This could be a landline or mobile")]
+        [PhoneNumber(ErrorMessage = "Enter your business telephone number. This could be a landline or mobile")]
         public string PhoneNumber { get; set; }
     }
 }
