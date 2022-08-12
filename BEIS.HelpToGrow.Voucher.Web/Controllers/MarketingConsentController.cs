@@ -20,7 +20,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
 
             if (userVoucherDto?.ApplicantDto == null )
             {
-                return RedirectToAction("", "SessionExpired");
+                return RedirectToAction(String.Empty, "SessionExpired");
             }
             viewModel.AcceptMarketingByEmail = userVoucherDto.ApplicantDto.HasProvidedMarketingConsent;
             viewModel.AcceptMarketingByPhone = userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone;
@@ -34,7 +34,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             if (userVoucherDto?.ApplicantDto == null)
             {
                 _logger.LogError("Marketing consent was posted with no valid userVoucherDto in the session.");
-                return RedirectToAction("", "SessionExpired");
+                return RedirectToAction(String.Empty, "SessionExpired");
             }
             userVoucherDto.ApplicantDto.HasProvidedMarketingConsent = model.AcceptMarketingByEmail;
             userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone = model.AcceptMarketingByPhone;
