@@ -108,8 +108,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var actionResult = (RedirectToActionResult)_sut.Index(viewModel);
 
-            Assert.AreEqual("ConfirmApplicant", actionResult.ControllerName);
-            Assert.AreEqual("Index", actionResult.ActionName);
+            Assert.AreEqual("MarketingConsent", actionResult.ControllerName);
+            Assert.AreEqual("", actionResult.ActionName);
         }
 
         [Test]
