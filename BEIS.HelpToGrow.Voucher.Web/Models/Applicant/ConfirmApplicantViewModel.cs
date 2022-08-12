@@ -10,6 +10,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Models.Applicant
         [Required]
         public string EmailAddress { get; set; }
         [Required]
+        public string PhoneNumber { get; set; }
+        [Required]
         public string SoftwareProduct { get; set; }
         [Required]
         public string CompanyName { get; set; }

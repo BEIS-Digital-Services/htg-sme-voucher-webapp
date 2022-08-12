@@ -94,6 +94,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 expectedModel.ApplicantDto.FullName = applicantDto.FullName;
                 expectedModel.ApplicantDto.Role = applicantDto.Role;
                 expectedModel.ApplicantDto.EmailAddress = applicantDto.EmailAddress;
+                expectedModel.ApplicantDto.PhoneNumber = applicantDto.PhoneNumber;
                 expectedModel.ApplicantDto.HasAcceptedTermsAndConditions = applicantDto.HasAcceptedTermsAndConditions;
                 expectedModel.ApplicantDto.HasAcceptedPrivacyPolicy = applicantDto.HasAcceptedPrivacyPolicy;
                 expectedModel.ApplicantDto.HasAcceptedSubsidyControl = applicantDto.HasAcceptedSubsidyControl;

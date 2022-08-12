@@ -160,6 +160,33 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         }
 
         [Test]
+        public async Task GetIndexReturnsConfirmApplicantViewModelWithPhoneNumber()
+        {
+            var expectedModel =
+                await SetupSelection(_productRepository, 1, 1, "", "", "", "", "", "", "", "",
+                    new ApplicantDto
+                    {
+                        PhoneNumber = "07525252528",
+                        HasAcceptedPrivacyPolicy = true,
+                        HasAcceptedSubsidyControl = true,
+                        HasAcceptedTermsAndConditions = true
+                    });
+
+            _mockSessionService
+                .Setup(x => x.Get<UserVoucherDto>(It.IsAny<string>(), _controllerContext.HttpContext))
+                .Returns(expectedModel);
+
+            _mockProductPriceService
+                .Setup(_ => _.GetProductPrice(It.IsAny<long>()))
+                .Returns(Task.FromResult("fake price description"));
+
+            var index = await _sut.Index();
+            var controllerResult = (ViewResult)index;
+
+            Assert.That(((ConfirmApplicantViewModel)controllerResult.Model).PhoneNumber == "07525252528");
+        }
+
+        [Test]
         public async Task GetIndexReturnsConfirmApplicantViewModelWithHasTermsAndConditionsAsFalse()
         {
             var expectedModel =

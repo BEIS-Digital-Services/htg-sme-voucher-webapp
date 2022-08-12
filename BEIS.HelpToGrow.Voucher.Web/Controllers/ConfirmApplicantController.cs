@@ -47,6 +47,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 FullName = userVoucherDto.ApplicantDto.FullName,
                 Role = userVoucherDto.ApplicantDto.Role,
                 EmailAddress = userVoucherDto.ApplicantDto.EmailAddress,
+                PhoneNumber = userVoucherDto.ApplicantDto.PhoneNumber,
                 SoftwareProduct = userVoucherDto.SelectedProduct?.product_name,
                 CompanyName =  userVoucherDto.HasCompanyHouseNumber.ToBoolean() ? userVoucherDto.CompanyHouseResponse.CompanyName : society?.SocietyName,
                 CompanyNumber = userVoucherDto.HasCompanyHouseNumber.ToBoolean() ? userVoucherDto.CompanyHouseResponse.CompanyNumber : society?.FullRegistrationNumber,
