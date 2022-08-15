@@ -44,7 +44,11 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
          
             var concentByPhoneAndEmail = string.Empty;
 
-            if (userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone && userVoucherDto.ApplicantDto.HasProvidedMarketingConsent)
+            if (!userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone && !userVoucherDto.ApplicantDto.HasProvidedMarketingConsent)
+            {
+                concentByPhoneAndEmail = "None";
+            }
+            else if (userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone && userVoucherDto.ApplicantDto.HasProvidedMarketingConsent)
             {
                 concentByPhoneAndEmail = "Phone, Email";
 

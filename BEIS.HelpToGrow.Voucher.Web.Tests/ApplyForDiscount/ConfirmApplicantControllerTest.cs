@@ -80,7 +80,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             Assert.Fail($"View model is not {nameof(ConfirmApplicantViewModel)}");
         }
 
-        [TestCase(false,false, "")]
+        [TestCase(false,false, "None")]
         [TestCase(true, false, "Phone")]
         [TestCase(false, true, "Email")]
         [TestCase(true, true, "Phone, Email")]
