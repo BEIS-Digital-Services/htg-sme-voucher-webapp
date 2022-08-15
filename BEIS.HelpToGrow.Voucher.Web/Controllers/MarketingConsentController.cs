@@ -38,6 +38,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             }
             userVoucherDto.ApplicantDto.HasProvidedMarketingConsent = model.AcceptMarketingByEmail;
             userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone = model.AcceptMarketingByPhone;
+
+            _sessionService.Set("userVoucherDto", userVoucherDto, ControllerContext.HttpContext);
+
             return RedirectToAction("Index", "ConfirmApplicant");
         }
 

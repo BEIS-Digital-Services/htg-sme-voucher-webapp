@@ -98,6 +98,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 expectedModel.ApplicantDto.HasAcceptedTermsAndConditions = applicantDto.HasAcceptedTermsAndConditions;
                 expectedModel.ApplicantDto.HasAcceptedPrivacyPolicy = applicantDto.HasAcceptedPrivacyPolicy;
                 expectedModel.ApplicantDto.HasAcceptedSubsidyControl = applicantDto.HasAcceptedSubsidyControl;
+                expectedModel.ApplicantDto.HasProvidedMarketingConsent = applicantDto.HasProvidedMarketingConsent;
+                expectedModel.ApplicantDto.HasProvidedMarketingConsentByPhone = applicantDto.HasProvidedMarketingConsentByPhone;
             }
             
             return expectedModel;

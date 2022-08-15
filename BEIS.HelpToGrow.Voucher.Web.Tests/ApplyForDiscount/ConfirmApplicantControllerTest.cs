@@ -43,7 +43,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                 {
                     HasAcceptedTermsAndConditions = true,
                     HasAcceptedPrivacyPolicy = true,
-                    HasAcceptedSubsidyControl = true
+                    HasAcceptedSubsidyControl = true,
+                    HasProvidedMarketingConsent = true,
+                    HasProvidedMarketingConsentByPhone = true,
                 }
             };
             
@@ -76,6 +78,38 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             }
 
             Assert.Fail($"View model is not {nameof(ConfirmApplicantViewModel)}");
+        }
+
+        [TestCase(false,false, "")]
+        [TestCase(true, false, "Phone")]
+        [TestCase(false, true, "Email")]
+        [TestCase(true, true, "Phone, Email")]
+        public async Task GetIndexReturnsConfirmApplicantViewModelWithMarketingConsentResponse(bool byPhone, bool byEmail, string expected)
+        {
+            var expectedModel =
+                await SetupSelection(_productRepository, 1, 1, "", "", "", "", "", "", "", "",
+                    new ApplicantDto
+                    {
+                        FullName = "Full Name",
+                        HasAcceptedPrivacyPolicy = true,
+                        HasAcceptedSubsidyControl = true,
+                        HasAcceptedTermsAndConditions = true,
+                        HasProvidedMarketingConsent = byEmail,
+                        HasProvidedMarketingConsentByPhone = byPhone,
+                    });
+
+            _mockSessionService
+                .Setup(x => x.Get<UserVoucherDto>(It.IsAny<string>(), _controllerContext.HttpContext))
+                .Returns(expectedModel);
+
+            _mockProductPriceService
+                .Setup(_ => _.GetProductPrice(It.IsAny<long>()))
+                .Returns(Task.FromResult("fake product price"));
+
+            var index = await _sut.Index();
+            var controllerResult = (ViewResult)index;
+
+            Assert.That(((ConfirmApplicantViewModel)controllerResult.Model).MarketingConsentResponse == expected);
         }
 
         [Test]

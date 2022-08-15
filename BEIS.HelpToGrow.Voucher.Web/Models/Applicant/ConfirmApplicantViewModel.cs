@@ -22,7 +22,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Models.Applicant
         public bool HasAcceptedPrivacyPolicy { get; set; }
         public bool HasAcceptedSubsidyControl { get; set; }
         public bool HasProvidedMarketingConsent { get; set; }
-        public string MarketingConsentResponse => HasProvidedMarketingConsent ? "Yes" : "No";
+        public string MarketingConsentResponse { get; set; }
         public Uri ComparisonToolURL { get; set; }
         public string ProductPrice { get; set; }
     }
