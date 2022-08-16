@@ -115,6 +115,20 @@
                     </a>
                   </dd>
                 </dl>
+                <dl class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Applicant phone number
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    @Model.PhoneNumber
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    <a asp-action="" asp-controller="applicantPhoneNumber">
+                      Change
+                      <span class="govuk-visually-hidden"> phone number</span>
+                    </a>
+                  </dd>
+                </dl>
               </div>
               <div class="govuk-summary-list govuk-!-margin-bottom-9">
                   <h2 class="govuk-heading-m">Consent</h2>
@@ -142,7 +156,7 @@
 
                   <dl class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                      Subsidy Control
+                      Subsidy control
                     </dt>
                     <dd class="govuk-summary-list__value">
                       Accepted
@@ -153,13 +167,13 @@
 
                 <dl class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Marketing Consent
+                    Marketing consent
                   </dt>
                   <dd class="govuk-summary-list__value">
                     @Model.MarketingConsentResponse
                   </dd>
                   <dd class="govuk-summary-list__actions">
-                    <a asp-action="" asp-controller="TermsAndConditions">
+                    <a asp-action="Index" asp-controller="MarketingConsent">
                       Change
                       <span class="govuk-visually-hidden"> marketing consent</span>
                     </a>
