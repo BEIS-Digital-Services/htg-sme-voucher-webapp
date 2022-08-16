@@ -18,7 +18,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
 
             if (string.IsNullOrWhiteSpace(userVoucherDto?.ApplicantDto.PhoneNumber))
             {
-                return View();
+                return View(new PhoneNumberViewModel());
             }
 
             var model = new PhoneNumberViewModel

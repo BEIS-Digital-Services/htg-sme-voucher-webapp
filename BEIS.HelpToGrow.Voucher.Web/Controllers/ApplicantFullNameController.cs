@@ -19,7 +19,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
 
             if (string.IsNullOrWhiteSpace(userVoucherDto?.ApplicantDto.FullName))
             {
-                return View();
+                return View(new FullNameViewModel());
             }
 
             var model = new FullNameViewModel

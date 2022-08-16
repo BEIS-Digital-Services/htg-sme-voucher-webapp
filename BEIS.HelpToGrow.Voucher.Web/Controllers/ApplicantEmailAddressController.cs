@@ -27,7 +27,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
 
             if (string.IsNullOrWhiteSpace(userVoucherDto?.ApplicantDto.EmailAddress))
             {
-                return View();
+                return View(new EmailAddressViewModel());
             }
 
             var model = new EmailAddressViewModel
