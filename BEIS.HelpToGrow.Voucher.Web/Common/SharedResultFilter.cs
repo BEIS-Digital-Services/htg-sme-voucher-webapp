@@ -21,6 +21,17 @@ namespace Beis.HelpToGrow.Voucher.Web.Common
             SetupCookieSelection(controller);
             SetupSatisfactionSurveyUrl(controller);
             SetupHelpToGrowDigitalUrl(controller);
+            SetupGoogleAnalyticsKey(controller, context.Result as ViewResult);
+        }
+
+        private void SetupGoogleAnalyticsKey(Controller controller, ViewResult view)
+        {
+            var contentKey = controller.RouteData.Values["Controller"] + "-" + controller.RouteData.Values["Action"];
+            if (!string.IsNullOrEmpty(view?.ViewName))
+            {
+                contentKey = contentKey + "-" + view.ViewName;
+            }
+            controller.ViewData["contentKey"] = contentKey.ToLower();
         }
 
         private void SetupSatisfactionSurveyUrl(Controller controller)
@@ -34,7 +45,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Common
         }
 
         public void OnResultExecuted(ResultExecutedContext context)
-        {            
+        {
         }
 
         private void SetupCookieSelection(Controller controller)
