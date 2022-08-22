@@ -14,13 +14,7 @@ builder.Logging.AddFilter<ApplicationInsightsLoggerProvider>("Microsoft", LogLev
 // Add services to the container.
 builder.Services.RegisterAllServices(builder.Configuration);
 
-builder.Services.AddHealthChecks()
-              .AddCheck<DependencyInjectionHealthCheckService>("Dependency Injection Health Checks")
-              .AddCheck<IndesserHealthCheckService>("Indesser Service Health Checks")
-              .AddCheck<CompanyHouseHealthCheckService>("Company House Api")
-              .AddCheck<DatabaseHealthCheckService>("Database")
-              .AddCheck<EncryptionHealthCheckService>("Encryption", failureStatus: HealthStatus.Unhealthy,
-                 tags: new[] { "Encryption" });
+builder.Services.RegisterHealthcheckServices();
 
 var app = builder.Build();
 app.UseForwardedHeaders();
@@ -48,10 +42,7 @@ app.UseSession();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapHealthChecks("/healthz", new HealthCheckOptions()
-    {
-        ResponseWriter = HealthCheckJsonResponseWriter.Write
-    });
+    endpoints.MapSMEHealthChecks();
     endpoints.MapControllers();
     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 });
