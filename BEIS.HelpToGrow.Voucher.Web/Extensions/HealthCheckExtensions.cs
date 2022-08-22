@@ -10,43 +10,43 @@
                 HealthStatus.Unhealthy,
                 tags: new[] 
                 { 
-                    "LowFrequency", 
-                    "IO", 
-                    "DI" 
+                    HealthCheckType.LowFrequency.ToString(),                  
+                    HealthCheckType.DI.ToString()            
                 })
               .AddCheck<IndesserHealthCheckService>(
                 "Indesser Service Health Checks",
                 HealthStatus.Unhealthy,
                 tags: new[] 
-                { 
-                    "LowFrequency", 
-                    "IO", 
-                    "Indesser" 
+                {
+                    HealthCheckType.LowFrequency.ToString(),
+                    HealthCheckType.IO.ToString(),
+                    HealthCheckType.Indesser.ToString()
                 })
               .AddCheck<CompanyHouseHealthCheckService>(
                 "Company House Api",
                 HealthStatus.Unhealthy,
                 tags: new[] 
-                { 
-                    "LowFrequency", 
-                    "CompaniesHouse" 
+                {
+                    HealthCheckType.LowFrequency.ToString(),
+                    HealthCheckType.IO.ToString(),
+                    HealthCheckType.CompaniesHouse.ToString()
                 })
               .AddCheck<DatabaseHealthCheckService>(
                 "Database",
                 HealthStatus.Unhealthy,
                 tags: new[] 
-                { 
-                    "HighFrequency", 
-                    "IO", 
-                    "Database" 
+                {
+                    HealthCheckType.HighFrequency.ToString(),
+                    HealthCheckType.IO.ToString(),
+                    HealthCheckType.Database.ToString()
                 })
               .AddCheck<EncryptionHealthCheckService>(
                 "Encryption",
                 failureStatus: HealthStatus.Unhealthy,
                 tags: new[] 
-                { 
-                    "HighFrequency", 
-                    "Encryption" 
+                {
+                    HealthCheckType.HighFrequency.ToString(),
+                    HealthCheckType.Encryption.ToString()
                 });
 
         }
@@ -61,47 +61,47 @@
 
             endpoints.MapHealthChecks("/healthz/low-frequency", new HealthCheckOptions()
             {
-                Predicate = (check) => check.Tags.Contains("LowFrequency"),
+                Predicate = (check) => check.Tags.Contains(HealthCheckType.LowFrequency.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
 
             endpoints.MapHealthChecks("/healthz/high-frequency", new HealthCheckOptions()
             {
-                Predicate = (check) => check.Tags.Contains("HighFrequency"),
+                Predicate = (check) => check.Tags.Contains(HealthCheckType.HighFrequency.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
 
             endpoints.MapHealthChecks("/healthz/io", new HealthCheckOptions()
             {
-                Predicate = (check) => check.Tags.Contains("IO"),
+                Predicate = (check) => check.Tags.Contains(HealthCheckType.IO.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
 
             endpoints.MapHealthChecks("/healthz/encryption", new HealthCheckOptions()
             {
-                Predicate = (check) => check.Tags.Contains("Encyrption"),
+                Predicate = (check) => check.Tags.Contains(HealthCheckType.Encryption.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
 
             endpoints.MapHealthChecks("/healthz/database", new HealthCheckOptions()
             {
-                Predicate = (check) => check.Tags.Contains("Database"),
+                Predicate = (check) => check.Tags.Contains(HealthCheckType.Database.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
 
             endpoints.MapHealthChecks("/healthz/di", new HealthCheckOptions()
             {
-                Predicate = (check) => check.Tags.Contains("DI"),
+                Predicate = (check) => check.Tags.Contains(HealthCheckType.DI.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
             endpoints.MapHealthChecks("/healthz/companies-house", new HealthCheckOptions()
             {
-                Predicate = (check) => check.Tags.Contains("CompaniesHouse"),
+                Predicate = (check) => check.Tags.Contains(HealthCheckType.CompaniesHouse.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
             endpoints.MapHealthChecks("/healthz/indesser", new HealthCheckOptions()
             {
-                Predicate = (check) => check.Tags.Contains("Indesser"),
+                Predicate = (check) => check.Tags.Contains(HealthCheckType.Indesser.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
 
