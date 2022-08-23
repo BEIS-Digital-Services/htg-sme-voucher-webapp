@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Beis.HelpToGrow.Common.Voucher" Version="6.1.15" />
+        <PackageReference Include="Beis.HelpToGrow.Common.Voucher" Version="6.1.25" />
         <PackageReference Include="CsvHelper" Version="27.2.1" />
         <PackageReference Include="HttpContextMoq" Version="1.2.2" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.5" />

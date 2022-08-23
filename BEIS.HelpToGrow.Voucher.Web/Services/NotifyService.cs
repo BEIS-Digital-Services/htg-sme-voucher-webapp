@@ -6,13 +6,13 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
         // notify dashboard - https://www.notifications.service.gov.uk/
 
         private readonly ILogger<NotifyService> _logger;
-        private readonly NotifyServiceSettings _settings;
+        private readonly VoucherWebAppNotifySettings _settings;
         private readonly IEmailClientService _client;
         private readonly IWebHostEnvironment _environment;
 
         public NotifyService(
             ILogger<NotifyService> logger,
-            IOptions<NotifyServiceSettings> settings,
+            IOptions<VoucherWebAppNotifySettings> settings,
             IEmailClientService client,
             IWebHostEnvironment environment)
         {

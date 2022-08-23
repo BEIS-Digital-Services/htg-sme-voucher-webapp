@@ -22,6 +22,11 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
             _enterpriseService = enterpriseService;
             _encryptionService = encryptionService;
             _salt = configuration["EmailVerificationSalt"];
+
+            if (string.IsNullOrEmpty(_salt))
+            {
+                throw new ArgumentNullException();
+            }
         }
 
         public string GetVerificationCode(UserVoucherDto userVoucher)
