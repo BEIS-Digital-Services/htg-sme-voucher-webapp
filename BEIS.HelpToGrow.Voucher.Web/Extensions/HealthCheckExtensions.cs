@@ -104,6 +104,10 @@
                 Predicate = (check) => check.Tags.Contains(HealthCheckType.Indesser.ToString()),
                 ResponseWriter = HealthCheckJsonResponseWriter.Write
             });
+            endpoints.MapHealthChecks("/healthz/all", new HealthCheckOptions()
+            {
+                ResponseWriter = HealthCheckJsonResponseWriter.Write
+            });
 
         }
     }
