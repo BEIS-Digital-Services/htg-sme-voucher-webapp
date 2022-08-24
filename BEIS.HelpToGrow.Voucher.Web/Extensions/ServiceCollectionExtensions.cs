@@ -19,7 +19,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Extensions
                 options.IncludeSubDomains = true;
                 options.MaxAge = TimeSpan.FromDays(HstsMaxAgeDays);
             });
-            services.AddLogging(options => { options.AddConsole(); });
+            services.AddLogging(options => { options.AddConsole(); });            
             services.AddApplicationInsightsTelemetry(configuration["AzureMonitorInstrumentationKey"]);
 
             services.AddControllersWithViews(config =>
@@ -127,23 +127,26 @@ namespace Beis.HelpToGrow.Voucher.Web.Extensions
 
         private static void RegisterOptions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<EligibilityRules>(configuration.GetSection("EligibilityRules"));
-            services.Configure<CookieNamesConfiguration>(configuration.GetSection("CookieNamesConfiguration"));
-            services.Configure<IndesserConnectionOptions>(options => configuration.Bind(options));
-            services.Configure<CompanyHouseHealthCheckConfiguration>(configuration.GetSection("CompanyHouseHealthCheckConfiguration"));
-            
-            services.Configure<CompanyHouseSettings>(options => configuration.Bind(options));
+            services.AddOptions<EligibilityRules>().Bind(configuration.GetSection("EligibilityRules")).ValidateDataAnnotations(); 
 
-            services.Configure<EncryptionSettings>(options => configuration.Bind(options));
-            services.Configure<UrlOptions>(o =>
-            {
-                o.EmailVerificationUrl = configuration["EmailVerificationUrl"];
-                o.LearningPlatformUrl = configuration["LearningPlatformUrl"];
-            });
-            services.Configure<VoucherSettings>(configuration.GetSection("VoucherSettings"));
-            services.Configure<NotifyServiceSettings>(options => configuration.Bind(options));
+            services.Configure<CookieNamesConfiguration>(configuration.GetSection("CookieNamesConfiguration"));
+            services.AddOptions<IndesserConnectionOptions>().Bind(configuration.GetSection("CookieNamesConfiguration")).ValidateDataAnnotations(); 
+
+            services.AddOptions<IndesserConnectionOptions>().Bind(configuration).ValidateDataAnnotations(); 
+            services.AddOptions<CompanyHouseHealthCheckConfiguration>().Bind(configuration.GetSection("CompanyHouseHealthCheckConfiguration")).ValidateDataAnnotations(); 
+            
+            services.AddOptions<CompanyHouseSettings>().Bind(configuration).ValidateDataAnnotations(); 
+            
+            services.AddOptions<EncryptionSettings>().Bind(configuration).ValidateDataAnnotations();
+                        
+            services.AddOptions<UrlOptions>().Bind(configuration).ValidateDataAnnotations(); 
+
+            services.AddOptions<VoucherSettings>().Bind(configuration.GetSection("VoucherSettings")).ValidateDataAnnotations(); 
+            services.AddOptions<VoucherWebAppNotifySettings>().Bind(configuration).ValidateDataAnnotations();
+
             services.Configure<ForwardedHeadersOptions>(options => options.ForwardedHeaders = ForwardedHeaders.All);
-            services.Configure<CookiePolicyOptions>(options => options.Secure = CookieSecurePolicy.Always);
+            services.Configure<CookiePolicyOptions>(options => options.Secure = CookieSecurePolicy.Always);            
+
         }
 
     }
