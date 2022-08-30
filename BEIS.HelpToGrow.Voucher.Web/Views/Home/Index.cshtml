@@ -3,6 +3,10 @@
     ViewData["Title"] = "Apply for discount on business software";
 }
 <div class="govuk-width-container">
+    <nav class="govuk-!-margin-bottom-9">
+      <a href="@Urls.GetComparisonToolUrl(Model.LearningPlatformUrl)" class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0 jsLink">Back</a>
+      <a href="@Urls.GetComparisonToolNoJsUrl(Model.LearningPlatformUrl)" class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0 noJsLink">Back</a>
+    </nav>
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <h1 class="govuk-heading-l">Apply for your Help to Grow: Digital discount on approved software</h1>
@@ -14,7 +18,7 @@
 
             <p class="govuk-body">After you have completed the online application and passed all fraud and eligibility checks, you will receive a unique discount link to purchase the software directly from your chosen supplier’s website. These fraud and eligibility checks will not affect your business&#700; credit score.</p>
 
-            <p class="govuk-body">For full terms and conditions, please visit: <a target="_blank" asp-controller="TermsAndConditions" asp-action="Terms" class="govuk-link">terms and conditions (opens in new tab)</a>.</p>
+            <p class="govuk-body">For full terms and conditions, please visit: <a asp-controller="TermsAndConditions" asp-action="Terms" class="govuk-link">terms and conditions</a>.</p>
 
             <form class="form">
                 <a asp-controller="newtosoftware" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
@@ -30,7 +34,7 @@
             <ul class="govuk-list govuk-list--number">
                 <li>Your business must have a registered office in the UK and be registered at the relevant Companies House or be a registered society listed on the Financial Conduct Authority’s Mutuals Register.</li>
                 <li>Your business must have been actively trading for over 12 months prior to the date of application and have an incorporation date of, at minimum, 365 days prior to the date of application.</li>
-                <li>Your business must have a total of between 5 and 249 employees.</li>
+                <li>Your business must have a total of between 1 and 249 employees. <a href="/guidance" class="govuk-link"> Read our General Guidance for more information about employee criteria</a></li>
                 <li>Your business must be purchasing the approved software for the first time.</li>
             </ul>
 

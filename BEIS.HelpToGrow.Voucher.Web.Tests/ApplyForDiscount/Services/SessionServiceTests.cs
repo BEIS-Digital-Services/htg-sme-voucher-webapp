@@ -37,7 +37,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
                 ApplicantDto = new ApplicantDto {FullName = "fake full name"}
             };
             var fakeJson = JsonConvert.SerializeObject(fakeDto);
-            var value = Encoding.ASCII.GetBytes(fakeJson);
+            var value = Encoding.UTF8.GetBytes(fakeJson);
             var mockHttpContext = new Mock<HttpContext>();
             var mockSession = new Mock<ISession>();
 
@@ -62,7 +62,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
                 ApplicantDto = new ApplicantDto {FullName = "fake full name"}
             };
             var fakeJson = JsonConvert.SerializeObject(fakeDto);
-            var value = Encoding.ASCII.GetBytes(fakeJson);
+            var value = Encoding.UTF8.GetBytes(fakeJson);
             var mockHttpContext = new Mock<HttpContext>();
             var mockSession = new Mock<ISession>();
 

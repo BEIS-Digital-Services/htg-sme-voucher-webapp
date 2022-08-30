@@ -32,7 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Beis.HelpToGrow.Common" Version="2.1.9" />
+        <PackageReference Include="Beis.HelpToGrow.Common.Voucher" Version="6.1.25" />
         <PackageReference Include="CsvHelper" Version="27.2.1" />
         <PackageReference Include="FluentAssertions" Version="6.7.0" />
         <PackageReference Include="FluentResults" Version="3.5.0" />
@@ -46,11 +46,15 @@
         <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="5.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.12" />
         <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
-        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.5" />
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.7" />
+        
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.5" />
         <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.12" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="RestSharp" Version="106.15.0" />
     </ItemGroup>
-
+	<ItemGroup>
+		<InternalsVisibleTo Include="Beis.HelpToGrow.Voucher.Web.Tests" />
+	</ItemGroup>
 </Project>

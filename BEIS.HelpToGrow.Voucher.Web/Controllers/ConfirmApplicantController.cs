@@ -41,12 +41,32 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             {
                 return RedirectToAction("Index", "SelectSoftware");
             }
+         
+            var concentByPhoneAndEmail = string.Empty;
+
+            if (!userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone && !userVoucherDto.ApplicantDto.HasProvidedMarketingConsent)
+            {
+                concentByPhoneAndEmail = "None";
+            }
+            else if (userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone && userVoucherDto.ApplicantDto.HasProvidedMarketingConsent)
+            {
+                concentByPhoneAndEmail = "Phone, Email";
+
+            } else if (userVoucherDto.ApplicantDto.HasProvidedMarketingConsentByPhone)
+            {
+                concentByPhoneAndEmail = "Phone";
+
+            } else if (userVoucherDto.ApplicantDto.HasProvidedMarketingConsent)
+            {
+                concentByPhoneAndEmail = "Email";
+            }
 
             var viewModel = new ConfirmApplicantViewModel
             {
                 FullName = userVoucherDto.ApplicantDto.FullName,
                 Role = userVoucherDto.ApplicantDto.Role,
                 EmailAddress = userVoucherDto.ApplicantDto.EmailAddress,
+                PhoneNumber = userVoucherDto.ApplicantDto.PhoneNumber,
                 SoftwareProduct = userVoucherDto.SelectedProduct?.product_name,
                 CompanyName =  userVoucherDto.HasCompanyHouseNumber.ToBoolean() ? userVoucherDto.CompanyHouseResponse.CompanyName : society?.SocietyName,
                 CompanyNumber = userVoucherDto.HasCompanyHouseNumber.ToBoolean() ? userVoucherDto.CompanyHouseResponse.CompanyNumber : society?.FullRegistrationNumber,
@@ -55,7 +75,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 HasAcceptedSubsidyControl = userVoucherDto.ApplicantDto.HasAcceptedSubsidyControl,
                 HasProvidedMarketingConsent = userVoucherDto.ApplicantDto.HasProvidedMarketingConsent,
                 ProductPrice = await _productPriceService.GetProductPrice(userVoucherDto.SelectedProduct.product_id),
-                ComparisonToolURL = Urls.GetComparisonToolUrl(_urlOptions.LearningPlatformUrl)
+                ComparisonToolURL = Urls.GetComparisonToolUrl(_urlOptions.LearningPlatformUrl),
+                MarketingConsentResponse = concentByPhoneAndEmail
             };
 
             return View(viewModel);

@@ -6,27 +6,21 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
     {
         private NotifyService _sut;
         private Mock<ILogger<NotifyService>> _mockLogger;
-        private Mock<INotifyServiceSettings> _mockOptions;
+        private IOptions<VoucherWebAppNotifySettings> _mockOptions;
         private Mock<IWebHostEnvironment> _mockHostEnvironment;
         private Mock<IEmailClientService> _mockEmailClient;
 
         [SetUp]
         public void Setup()
         {
-            _mockOptions = new Mock<INotifyServiceSettings>();
-            _mockOptions
-                .Setup(_ => _.IssueTokenTemplateId)
-                .Returns(() => "fake template id");
-            _mockOptions
-                .Setup(_ => _.EmailVerificationUrl)
-                .Returns(() => "https://localhost:44326/VerifyEmailAddress");
+            _mockOptions = Options.Create<VoucherWebAppNotifySettings>(new VoucherWebAppNotifySettings { IssueTokenTemplateId  = "fake template id" , EmailVerificationUrl = "https://localhost:44326/VerifyEmailAddress" });
 
             _mockLogger = new Mock<ILogger<NotifyService>>();
             _mockHostEnvironment = new Mock<IWebHostEnvironment>();
             _mockEmailClient = new Mock<IEmailClientService>();
             _sut = new NotifyService(
                 _mockLogger.Object,
-                _mockOptions.Object,
+                _mockOptions,
                 _mockEmailClient.Object,
                 _mockHostEnvironment.Object);
         }

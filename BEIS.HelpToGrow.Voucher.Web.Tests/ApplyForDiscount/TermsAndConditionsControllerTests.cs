@@ -47,9 +47,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             Assert.That(viewResult.Model is TermsConditionsViewModel);
             Assert.AreEqual("fake product name", ((TermsConditionsViewModel) viewResult.Model).SelectedProduct);
-            Assert.Null(((TermsConditionsViewModel) viewResult.Model).TermsConditions);
-            Assert.Null(((TermsConditionsViewModel) viewResult.Model).PrivacyPolicy);
-            Assert.Null(((TermsConditionsViewModel) viewResult.Model).SubsidyControl);
+            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).TermsAndConditions);
+            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).PrivacyPolicy);
+            Assert.IsFalse(((TermsConditionsViewModel) viewResult.Model).SubsidyControl);
         }
 
         [Test]
@@ -72,9 +72,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             Assert.That(viewResult.Model is TermsConditionsViewModel);
             Assert.AreEqual("fake product name", ((TermsConditionsViewModel) viewResult.Model).SelectedProduct);
-            Assert.AreEqual("on", ((TermsConditionsViewModel) viewResult.Model).TermsConditions);
-            Assert.AreEqual("on", ((TermsConditionsViewModel) viewResult.Model).PrivacyPolicy);
-            Assert.AreEqual("on", ((TermsConditionsViewModel) viewResult.Model).SubsidyControl);
+            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).TermsAndConditions);
+            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).PrivacyPolicy);
+            Assert.IsTrue(((TermsConditionsViewModel) viewResult.Model).SubsidyControl);
         }
 
         [Test]
@@ -101,15 +101,15 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var viewModel = new TermsConditionsViewModel
             {
-                PrivacyPolicy = "fake answer #1",
-                SubsidyControl = "fake answer #2",
-                TermsConditions = "fake answer #3",
+                PrivacyPolicy = true,
+                SubsidyControl = true,
+                TermsAndConditions = true,
             };
 
             var actionResult = (RedirectToActionResult)_sut.Index(viewModel);
 
-            Assert.AreEqual("ConfirmApplicant", actionResult.ControllerName);
-            Assert.AreEqual("Index", actionResult.ActionName);
+            Assert.AreEqual("MarketingConsent", actionResult.ControllerName);
+            Assert.AreEqual("", actionResult.ActionName);
         }
 
         [Test]

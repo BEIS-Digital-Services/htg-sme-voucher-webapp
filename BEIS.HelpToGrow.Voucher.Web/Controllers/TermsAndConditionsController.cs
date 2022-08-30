@@ -30,13 +30,10 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 return View(viewModel);
             }
 
-            viewModel.TermsConditions = "on";
-            viewModel.PrivacyPolicy = "on";
-            viewModel.SubsidyControl = "on";
-            viewModel.MarketingConsent =
-                userVoucherDto.ApplicantDto.HasProvidedMarketingConsent
-                    ? "on"
-                    : null;
+            viewModel.TermsAndConditions = true;
+            viewModel.PrivacyPolicy = true;
+            viewModel.SubsidyControl = true;
+
 
             return View(viewModel);
         }
@@ -75,20 +72,19 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             if (!ModelState.IsValid || viewModel.IsIncomplete)
             {
                 ModelState.Clear();
-                ModelState.AddModelError("TermsConditions", "Select if you have read and accepted the terms and conditions, privacy policy and subsidy control");
+                ModelState.AddModelError("TermsAndConditions", "Select if you have read and accepted the terms and conditions, privacy policy and subsidy control");
                 return View(viewModel);
             }
 
-            var hasProvidedMarketingConsent = viewModel.MarketingConsent == "on";
             var userVoucherDto = _sessionService.Get<UserVoucherDto>("userVoucherDto", HttpContext);
             userVoucherDto.ConsentTermsConditions = "Yes";
             userVoucherDto.ApplicantDto.HasAcceptedTermsAndConditions = true;
             userVoucherDto.ApplicantDto.HasAcceptedPrivacyPolicy = true;
             userVoucherDto.ApplicantDto.HasAcceptedSubsidyControl = true;
-            userVoucherDto.ApplicantDto.HasProvidedMarketingConsent = hasProvidedMarketingConsent;
+       
             _sessionService.Set("userVoucherDto", userVoucherDto, ControllerContext.HttpContext);
 
-            return RedirectToAction("Index", "ConfirmApplicant");
+            return RedirectToAction(String.Empty, "MarketingConsent");
         }
     }
 }

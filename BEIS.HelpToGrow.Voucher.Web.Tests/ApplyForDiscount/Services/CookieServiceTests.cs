@@ -6,22 +6,11 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
     public class EmailClientServiceTests
     {
         [Test]
-        public void CtorMissingValue()
-        {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                var emailClientService = new EmailClientService(null);
-
-                Assert.Null(emailClientService);
-            });
-        }
-
-        [Test]
         public void SendEmailAsyncMissingApiKey()
         {
-            var mockOptions = new Mock<INotifyServiceSettings>();
+            var mockOptions = Options.Create<NotifyServiceSettings>( new NotifyServiceSettings { });
 
-            var sut = new EmailClientService(mockOptions.Object);
+            var sut = new EmailClientService(mockOptions);
 
             Assert.ThrowsAsync<NullReferenceException>(() => sut.SendEmailAsync("fake@domain.org", string.Empty, new Dictionary<string, object>()));
         }
@@ -29,12 +18,10 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
         [Test]
         public void SendEmailAsyncBadApiKey()
         {
-            var mockOptions = new Mock<INotifyServiceSettings>();
-            mockOptions
-                .Setup(_ => _.NotifyApiKey)
-                .Returns("fake key");
+            var mockOptions = Options.Create<NotifyServiceSettings>(new NotifyServiceSettings { NotifyApiKey = "fake key" });
 
-            var sut = new EmailClientService(mockOptions.Object);
+
+            var sut = new EmailClientService(mockOptions);
 
             Assert.ThrowsAsync<NotifyAuthException>(() => sut.SendEmailAsync("fake@domain.org", string.Empty, new Dictionary<string, object>()));
         }

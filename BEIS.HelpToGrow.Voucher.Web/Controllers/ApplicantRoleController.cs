@@ -22,7 +22,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
 
                 if (string.IsNullOrWhiteSpace(userVoucherDto?.ApplicantDto.Role))
                 {
-                    return View();
+                    return View(new TitleOrRoleViewModel());
                 }
 
                 var model = new TitleOrRoleViewModel

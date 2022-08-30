@@ -52,7 +52,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Applicant
 
             var viewResult = (ViewResult)_sut.Index();
 
-            Assert.Null(viewResult.Model);
+            Assert.Null((viewResult.Model as TitleOrRoleViewModel).BusinessRole);
             Assert.Null(viewResult.ViewName);
         }
 

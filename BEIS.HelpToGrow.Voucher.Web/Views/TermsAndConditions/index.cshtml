@@ -2,14 +2,10 @@
 @{
     ViewData["Title"] = "Terms and conditions, privacy policy and subsidy control";
     var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
-    var termsConditionsSelection = Model.TermsConditions == "on" ? "checked" : "";
-    var privacyPolicySelection = Model.PrivacyPolicy == "on" ? "checked" : "";
-    var subsidyControlSelection = Model.SubsidyControl == "on" ? "checked" : "";
-    var marketingConsentSelection = Model.MarketingConsent == "on" ? "checked" : "";
 }
 <div class="govuk-width-container">
   <nav class="govuk-!-margin-bottom-9">
-    <a class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0">Back</a>
+    <a class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0" >Back</a>
   </nav>
   <partial name="_ValidationSummary" model="ViewData.ModelState" />
   <div class="govuk-grid-row">
@@ -26,37 +22,29 @@
             <p>
               Before you apply for a software discount for <strong>@Model.SelectedProduct</strong>, you will need to read and accept the <a href="/termsandconditions/terms" class="govuk-link">terms and conditions</a>, <a href="/termsandconditions/privacy" class="govuk-link">privacy policy</a> and <a href="/termsandconditions/subsidy">subsidy control</a>.
             </p>
-            <span asp-validation-for="TermsConditions" class="govuk-error-message"></span>
+            <span asp-validation-for="TermsAndConditions" class="govuk-error-message"></span>
 
             <div class="govuk-checkboxes" data-module="govuk-checkboxes">
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="TermsConditions" name="TermsConditions" type="checkbox" @termsConditionsSelection>
+                <input class="govuk-checkboxes__input" asp-for="TermsAndConditions" />
+
                 <label class="govuk-label govuk-checkboxes__label" for="TermsConditions">
                   I have read and accept the terms and conditions
                 </label>
               </div>
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="PrivacyPolicy" name="PrivacyPolicy" type="checkbox" @privacyPolicySelection>
+                <input class="govuk-checkboxes__input" asp-for="PrivacyPolicy" />
                 <label class="govuk-label govuk-checkboxes__label" for="PrivacyPolicy">
                   I have read and accept the privacy policy
                 </label>
               </div>
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="SubsidyControl" name="SubsidyControl" type="checkbox" @subsidyControlSelection>
+                <input class="govuk-checkboxes__input" asp-for="SubsidyControl">
                 <label class="govuk-label govuk-checkboxes__label" for="SubsidyControl">
                   I have read and accept the subsidy control
                 </label>
               </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="MarketingConsent" name="MarketingConsent" type="checkbox" @marketingConsentSelection>
-                <label class="govuk-label govuk-checkboxes__label" for="SubsidyControl">
-                  I consent to the Department for Business, Energy & Industrial Strategy (BEIS) contacting me by email to keep me informed about news and events relating to Help to Grow: Digital.<br/>
-                  I am freely consenting to BEIS holding and processing my personal data for marketing communication purposes.
-                </label>
-              </div>
-              <div>
 
-              </div>
             </div>
           </fieldset>
         </div>
@@ -66,4 +54,7 @@
       </form>
     </div>
   </div>
-</div><script src="~/js/voucher/navigation.js"></script>
+</div>
+@section Scripts {
+<script src="~/js/voucher/navigation.js"></script>
+}
