@@ -4,6 +4,8 @@
     var satisfactionSurveyUrl = ViewData["SatisfactionSurveyUrl"];
     var comparisonToolUrl = ViewData["ComparisonToolUrl"];
     var comparisonToolNoJsUrl = ViewData["ComparisonToolNoJsUrl"];
+    var contentKey = ViewData["contentKey"];
+    var pageTitle = @ViewData["Title"];
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -11,11 +13,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="facebook-domain-verification" content="was3azi1fm9oj72wrp0ip97a1e65iu" />
-    <title>@ViewData["Title"]</title>
+    <title>@pageTitle</title>
     <!-- Google Tag Manager -->
     <script src="~/js/googleTagManager.js" asp-append-version="true"></script>
     <!-- End Google Tag Manager -->
-
+    <script>window.dataLayer = window.dataLayer || []; window.dataLayer.push({ 'event': 'virtualPageview', 'content-key': '@(contentKey)', 'pageTitle': '@(pageTitle)'});</script>
     <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="~/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/css/main.css">
     <link rel="stylesheet" href="~/css/application.css">
