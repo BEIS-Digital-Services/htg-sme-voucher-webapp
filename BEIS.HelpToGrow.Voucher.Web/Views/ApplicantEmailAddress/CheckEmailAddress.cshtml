@@ -4,7 +4,7 @@
 }
 <div class="govuk-width-container">
   <nav class="govuk-!-margin-bottom-9">
-    <a asp-controller="ConfirmApplicant" asp-action="" class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0">Back</a>
+    <a ga-data-action-id="link-sme-applicant-email-nav-back" asp-controller="ConfirmApplicant" asp-action="" class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0">Back</a>
   </nav>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -15,8 +15,8 @@
       <h2 class="govuk-heading-m">I didn't get the email</h2>
       <p class="govuk-body">Check your junk email folder. If the email is not there:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>you can <a asp-action="" class="govuk-link">enter your work email address again</a></li>
-        <li>we can <a asp-action="CheckEmailAddress" asp-route-resend="true" class="govuk-link">resend the email</a></li>
+        <li>you can <a ga-data-action-id="link-sme-enter-work-email" asp-action="" class="govuk-link">enter your work email address again</a></li>
+        <li>we can <a ga-data-action-id="link-sme-resend-the-email" asp-action="CheckEmailAddress" asp-route-resend="true" class="govuk-link">resend the email</a></li>
       </ul>
     </div>
   </div>
