@@ -141,7 +141,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Extensions
                         
             services.AddOptions<UrlOptions>().Bind(configuration).ValidateDataAnnotations(); 
 
-            services.AddOptions<VoucherSettings>().Bind(configuration.GetSection("VoucherSettings")).ValidateDataAnnotations(); 
+            services.AddOptions<VoucherSettings>().Bind(configuration.GetSection("VoucherSettings")).ValidateDataAnnotations();
+            services.AddOptions<NotifyServiceSettings>().Bind(configuration).ValidateDataAnnotations();
             services.AddOptions<VoucherWebAppNotifySettings>().Bind(configuration).ValidateDataAnnotations();
 
             services.Configure<ForwardedHeadersOptions>(options => options.ForwardedHeaders = ForwardedHeaders.All);
