@@ -1,5 +1,7 @@
 ﻿
 
+using FluentResults;
+
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
@@ -184,9 +186,29 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var companiesHouseNumberViewModel = new CompaniesHouseNumberViewModel { Number = "123" };
             var viewResult = await _sut.CheckCompanyDetails(companiesHouseNumberViewModel);
+            var actionResult = (RedirectToActionResult)viewResult;
             Assert.IsTrue(viewResult is RedirectToActionResult);
-            Assert.AreEqual("Vendor", (viewResult as RedirectToActionResult).ActionName);
+            Assert.AreEqual("CancelledCannotReApply", (viewResult as RedirectToActionResult).ActionName);
             Assert.AreEqual("InEligible", (viewResult as RedirectToActionResult).ControllerName);
+        }
+
+        [TestCase(ApplicationStatus.ActiveTokenNotRedeemed, "ActiveTokenNotRedeemed", "InEligible")]
+        [TestCase(ApplicationStatus.Ineligible, "Vendor", "InEligible")]
+        [TestCase(ApplicationStatus.EmailNotVerified, "EmailNotVerified", "InEligible")]
+        public async Task ApplicationStatusRedirectsToUserMessages(ApplicationStatus appStatus, string redirectAction, string redirectController)
+        {
+            _applicationStatus = appStatus;
+            var voucherDto = await SetupSelection(_productRepository, 1, 1, "Yes", "", "", "Yes");
+
+            _mockSessionService.Setup(x => x.Get<UserVoucherDto>(It.IsAny<string>(), _controllerContext.HttpContext)).Returns(voucherDto);
+            _mockEnterpriseService.Setup(x => x.CompanyNumberIsUnique(It.IsAny<string>())).Returns(Task.FromResult(false));
+
+            var companiesHouseNumberViewModel = new CompaniesHouseNumberViewModel { Number = "123" };
+            var viewResult = await _sut.CheckCompanyDetails(companiesHouseNumberViewModel);
+            var actionResult = (RedirectToActionResult)viewResult;
+            Assert.IsTrue(viewResult is RedirectToActionResult);
+            Assert.AreEqual(redirectAction, (viewResult as RedirectToActionResult).ActionName);
+            Assert.AreEqual(redirectController, (viewResult as RedirectToActionResult).ControllerName);
         }
 
         private CompaniesHouseNumberController NewCompaniesHouseNumberController() =>

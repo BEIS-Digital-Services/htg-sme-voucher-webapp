@@ -91,22 +91,33 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                             // continue
                             break;
                         }
-                    case ApplicationStatus.ActiveTokenNotRedeemed:
-                    case ApplicationStatus.CancelledCannotReApply:
+                    case ApplicationStatus.ActiveTokenNotRedeemed: 
+                        {
+                            return RedirectToAction("ActiveTokenNotRedeemed", "InEligible");
+                        }
+                    case ApplicationStatus.CancelledCannotReApply: 
+                        {
+                            return RedirectToAction("CancelledCannotReApply", "InEligible");
+                        }
                     case ApplicationStatus.Ineligible:
                         {
                             // return RedirectToAction("Deregistered", "InEligible"); // todo - we should have a more suitable content page
-                            return RedirectToAction("VoucherAlreadyApplied", "FCA");
+                            return RedirectToAction("Ineligible", "InEligible");
                         }
-                    case ApplicationStatus.EmailNotVerified:
+                    case ApplicationStatus.EmailNotVerified: 
+                        {
+                            return RedirectToAction("EmailNotVerified", "InEligible");
+                        }
                     case ApplicationStatus.EmailVerified:
                     case ApplicationStatus.ActiveTokenRedeemed:
                     case ApplicationStatus.TokenReconciled:
+                        {
+                            return RedirectToAction("TokenReconciled", "InEligible");
+                        }
                     case ApplicationStatus.TokenExpired:
                         {
-                 
                             return RedirectToAction("VoucherAlreadyApplied", "FCA");
-                       }
+                        }
                 }
             }
 

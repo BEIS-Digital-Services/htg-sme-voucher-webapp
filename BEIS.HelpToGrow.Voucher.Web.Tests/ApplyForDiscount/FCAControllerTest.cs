@@ -170,8 +170,37 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var actionResult = (RedirectToActionResult)result;
 
-            Assert.AreEqual("FCA", actionResult.ControllerName);
-            Assert.AreEqual("VoucherAlreadyApplied", actionResult.ActionName);
+            Assert.AreEqual("InEligible", actionResult.ControllerName);
+            Assert.AreEqual("TokenReconciled", actionResult.ActionName);
+        }
+
+        [TestCase(ApplicationStatus.ActiveTokenNotRedeemed, "ActiveTokenNotRedeemed", "InEligible")]
+        [TestCase(ApplicationStatus.CancelledCannotReApply, "CancelledCannotReApply", "InEligible")]
+        [TestCase(ApplicationStatus.Ineligible, "Ineligible", "InEligible")]
+        [TestCase(ApplicationStatus.EmailNotVerified, "EmailNotVerified", "InEligible")]
+        [TestCase(ApplicationStatus.TokenReconciled, "TokenReconciled", "InEligible")]
+        [TestCase(ApplicationStatus.TokenExpired, "VoucherAlreadyApplied", "FCA")]            
+        public async Task ApplicationStatusRedirectsToUserMessages(ApplicationStatus appStatus, string redirectAction, string redirectController)
+        {
+            _applicationStatus = appStatus;
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns(new UserVoucherDto());
+
+            var enterprise = new enterprise();
+
+            _enterpriseRepository
+                .Setup(_ => _.GetEnterpriseByFCANumber(It.IsAny<string>()))
+                .Returns(Task.FromResult(enterprise));
+
+            var viewModel = new FCAViewModel { FCAFullRegistrationNumber = "123456" };
+
+            var result = await _sut.GetFCANumber(viewModel);
+
+            var actionResult = (RedirectToActionResult)result;
+
+            Assert.AreEqual(redirectController, actionResult.ControllerName);
+            Assert.AreEqual(redirectAction, actionResult.ActionName);
         }
 
         [Test]
@@ -305,8 +334,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             var result = await _sut.GetFCANumber(model);
 
             Assert.That(result is RedirectToActionResult);
-            Assert.That((result as RedirectToActionResult).ControllerName == "FCA");
-            Assert.That((result as RedirectToActionResult).ActionName == "VoucherAlreadyApplied");
+            Assert.That((result as RedirectToActionResult).ControllerName == "InEligible");
+            Assert.That((result as RedirectToActionResult).ActionName == "CancelledCannotReApply");
         }
 
         [Test]

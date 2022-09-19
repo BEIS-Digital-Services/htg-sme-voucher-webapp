@@ -52,10 +52,19 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 case ApplicationStatus.CancelledInFreeTrialCanReApply:
                 case ApplicationStatus.CancelledNotRedeemedCanReApply:
                 case ApplicationStatus.CancelledCannotReApply:
+                    {
+                        return RedirectToAction("CancelledCannotReApply", "InEligible");
+                    }
                 case ApplicationStatus.Ineligible:
+                    {
+                        return RedirectToAction("Ineligible", "InEligible");
+                    }
                 case ApplicationStatus.EmailVerified:
                 case ApplicationStatus.ActiveTokenRedeemed:
                 case ApplicationStatus.TokenReconciled:
+                    {
+                        return RedirectToAction("TokenReconciled", "InEligible");
+                    }
                 case ApplicationStatus.TokenExpired:
                     {
                         return View("CheckEligibility"); // todo - we should have better content pages
@@ -63,9 +72,13 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 case ApplicationStatus.EmailNotVerified:
                     {
                         _logger.LogError("There was an error issuing the token. The enterprise has not been verified.");
-                        return RedirectToAction("CheckEmailAddress", "ApplicantEmailAddress");                        
+                        return RedirectToAction("EmailNotVerified", "InEligible");                        
                     }                             
                 case ApplicationStatus.ActiveTokenNotRedeemed:
+                    {
+                        return RedirectToAction("ActiveTokenNotRedeemed", "InEligible");
+                    }
+                default:
                     {
                         //continue
                         break;
