@@ -4,9 +4,10 @@
     {
         internal static void RegisterHealthcheckServices(this IServiceCollection services)
         {
+
             services.AddHealthChecks()
               .AddCheck<DependencyInjectionHealthCheckService>(
-                "Dependency Injection Health Checks",
+                HealthCheckConstants.DependencyInjectionName,
                 HealthStatus.Unhealthy,
                 tags: new[] 
                 { 
@@ -14,7 +15,7 @@
                     HealthCheckType.DI.ToString()            
                 })
               .AddCheck<IndesserHealthCheckService>(
-                "Indesser Service Health Checks",
+                HealthCheckConstants.IndesserName,
                 HealthStatus.Unhealthy,
                 tags: new[] 
                 {
@@ -23,7 +24,7 @@
                     HealthCheckType.Indesser.ToString()
                 })
               .AddCheck<CompanyHouseHealthCheckService>(
-                "Company House Api",
+                HealthCheckConstants.CompaniesHouseName,
                 HealthStatus.Unhealthy,
                 tags: new[] 
                 {
@@ -32,7 +33,7 @@
                     HealthCheckType.CompaniesHouse.ToString()
                 })
               .AddCheck<DatabaseHealthCheckService>(
-                "Database",
+                HealthCheckConstants.DatabaseName,
                 HealthStatus.Unhealthy,
                 tags: new[] 
                 {
@@ -41,13 +42,14 @@
                     HealthCheckType.Database.ToString()
                 })
               .AddCheck<EncryptionHealthCheckService>(
-                "Encryption",
+                HealthCheckConstants.EncryptionName,
                 failureStatus: HealthStatus.Unhealthy,
                 tags: new[] 
                 {
                     HealthCheckType.HighFrequency.ToString(),
                     HealthCheckType.Encryption.ToString()
                 });
+            services.AddScoped<IApplicationInsightsPublisher, ApplicationInsightsPublisher>();
 
         }
         internal static void MapSMEHealthChecks(this Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints)

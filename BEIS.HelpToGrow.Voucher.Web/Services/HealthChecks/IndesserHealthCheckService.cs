@@ -2,7 +2,7 @@
 
 namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
 {
-    public class IndesserHealthCheckService : IHealthCheck
+    public class IndesserHealthCheckService : HealthCheckServiceBase
     {
         private readonly ILogger<IndesserHealthCheckService> _logger;
         private readonly IIndesserHttpConnection<IndesserCompanyResponse> _indesserHttpConnection;
@@ -11,7 +11,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
 
         public IndesserHealthCheckService(ILogger<IndesserHealthCheckService> logger,
             IIndesserHttpConnection<IndesserCompanyResponse> indesserHttpConnection,
-            IOptions<CompanyHouseHealthCheckConfiguration> companyHouseHealthCheckOptions, ICheckEligibility eligibility)
+            IOptions<CompanyHouseHealthCheckConfiguration> companyHouseHealthCheckOptions, ICheckEligibility eligibility, IApplicationInsightsPublisher applicationInsightsPublisher)
+            : base(applicationInsightsPublisher, logger)
         {
             _logger = logger;
             _indesserHttpConnection = indesserHttpConnection;
@@ -19,7 +20,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
             _eligibility = eligibility;
         }
 
-        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        public override Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             var isHealthy = true;
 

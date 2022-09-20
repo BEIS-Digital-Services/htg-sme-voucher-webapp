@@ -77,6 +77,7 @@ global using Beis.HelpToGrow.Common.Voucher.Services;
 global using Beis.HelpToGrow.Common.Voucher.Config;
 
 global using Beis.HelpToGrow.Common.Config;
+global using Beis.HelpToGrow.Common.Constants;
 global using Beis.HelpToGrow.Common.Interfaces;
 global using Beis.HelpToGrow.Common.Helpers;
 global using Beis.HelpToGrow.Common.Services;
