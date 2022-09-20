@@ -29,10 +29,5 @@ namespace Beis.HelpToGrow.Voucher.Web.Models.Voucher
         public UserJourney UserJourney { get; set; }
     }
 
-    public enum UserJourney
-    {
-        Default = 0,
-        NewToSoftware = 1,
-        OneToOneAdvice = 2
-    }
+ 
 }
