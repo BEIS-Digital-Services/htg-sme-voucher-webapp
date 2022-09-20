@@ -1,7 +1,7 @@
 ﻿
 namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
 {
-    public class CompanyHouseHealthCheckService : IHealthCheck
+    public class CompanyHouseHealthCheckService : HealthCheckServiceBase
     {
         private readonly ILogger<CompanyHouseHealthCheckService> _logger;
         private readonly ICompanyHouseHttpConnection<CompanyHouseResponse> _companyHouseHttpConnection;
@@ -10,14 +10,16 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
         public CompanyHouseHealthCheckService(            
             ILogger<CompanyHouseHealthCheckService> logger,            
             ICompanyHouseHttpConnection<CompanyHouseResponse> companyHouseHttpConnection, 
-            IOptions<CompanyHouseHealthCheckConfiguration> companyHouseHealthCheckOptions)
+            IOptions<CompanyHouseHealthCheckConfiguration> companyHouseHealthCheckOptions,
+            IApplicationInsightsPublisher applicationInsightsPublisher)
+            : base(applicationInsightsPublisher, logger)
         {
             _logger = logger;
             _companyHouseHttpConnection = companyHouseHttpConnection;
             _companyHouseHealthCheckOptions = companyHouseHealthCheckOptions;
         }
 
-        public Task<HealthCheckResult> CheckHealthAsync(
+        public override Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             var isHealthy = true;
