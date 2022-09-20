@@ -25,5 +25,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Models.Voucher
         public string voucherCode { get; set; }
         public string tokenPurchaseLink { get; set; }
         public CookieBannerViewModel CookieBannerViewModel { get; set; }
+        
+        public UserJourney UserJourney { get; set; }
     }
+
+ 
 }
