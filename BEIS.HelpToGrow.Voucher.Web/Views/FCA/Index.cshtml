@@ -1,19 +1,17 @@
 @model Beis.HelpToGrow.Voucher.Web.Models.FCA.FCANumberViewModel;
 @{
     ViewData["Title"] = "Does the business have a Financial Conduct Authority number?";
-    var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
 }
-<div class="govuk-width-container">
+
     <nav class="govuk-!-margin-bottom-9">
         <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="companieshouse">Back</a>
     </nav>
-    <partial name="_ValidationSummary" model="ViewData.ModelState" />
-    <div tabindex="-1" role="group" id="errorSummary" class="govuk-error-summary moj-hidden" data-module="error-summary">
-    </div>
+
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
+            <partial name="_ValidationSummary" model="ViewData.ModelState" />
             <form class="form" asp-action="Forward" method="post">
-                <div class="govuk-form-group @verticalErrorStyle">
+                <div class="govuk-form-group" highlight-error-for="HasFCANumber" error-class="govuk-form-group--error">
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <h1 class="govuk-fieldset__heading">
@@ -26,13 +24,13 @@
                         <span asp-validation-for="HasFCANumber" id="hasFCANumber" class="govuk-error-message"></span>
                         <div class="govuk-radios govuk-radios--inline">
                             <div class="govuk-radios__item">
-                                <input asp-for="HasFCANumber" class="govuk-radios__input" id="hasfcanumber-yes" name="hasFCANumber" type="radio" value="Yes">
+                                <input asp-for="HasFCANumber" class="govuk-radios__input" id="hasfcanumber-yes" type="radio" value="Yes">
                                 <label class="govuk-label govuk-radios__label" for="hasfcanumber-yes">
                                     Yes
                                 </label>
                             </div>
                             <div class="govuk-radios__item">
-                                <input asp-for="HasFCANumber" class="govuk-radios__input" id="hasfcanumber-no" name="hasFCANumber" type="radio" value="No">
+                                <input asp-for="HasFCANumber" class="govuk-radios__input" id="hasfcanumber-no" type="radio" value="No">
                                 <label class="govuk-label govuk-radios__label" for="hasfcanumber-no">
                                     No
                                 </label>
@@ -44,4 +42,3 @@
             </form>
         </div>
     </div>
-</div>

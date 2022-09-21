@@ -3,13 +3,14 @@
     ViewData["Title"] = "Does the business have a Companies House number?";
     var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
 }
-<div class="govuk-width-container">
+
   <nav class="govuk-!-margin-bottom-9">
     <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="companysize">Back</a>
   </nav>
-  <partial name="_ValidationSummary" model="ViewData.ModelState" />
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <partial name="_ValidationSummary" model="ViewData.ModelState" />
       <form class="form" asp-action="GotANumber" method="post">
         <div class="govuk-form-group @verticalErrorStyle">
           <fieldset class="govuk-fieldset">
@@ -41,4 +42,3 @@
       </form>
     </div>
   </div>
-</div>
