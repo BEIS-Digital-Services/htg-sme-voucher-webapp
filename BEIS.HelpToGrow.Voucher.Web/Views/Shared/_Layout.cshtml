@@ -8,7 +8,7 @@
     var pageTitle = @ViewData["Title"];
 }
 <!DOCTYPE html>
-<html lang="en" class="govuk-template no-js">
+<html lang="en" class="govuk-template">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,13 +20,8 @@
     <script>window.dataLayer = window.dataLayer || []; window.dataLayer.push({ 'event': 'virtualPageview', 'content-key': '@(contentKey)', 'pageTitle': '@(pageTitle)' });</script>
     <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="~/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/css/main.css">
-    <link rel="stylesheet" href="~/css/application.css">
 </head>
-<body class="govuk-template__body nojs">
-    <script>
-        document.body.classList.remove('nojs');
-        document.body.classList.add('js');
-    </script>
+<body class="govuk-template__body">
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-WHNBFLG" height="0" width="0" style="display: none; visibility: hidden"></iframe>
@@ -34,9 +29,8 @@
     <!-- End Google Tag Manager (noscript) -->
     <partial name="_PartialCookieBannerNoJS" model="@viewModel" />
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
-    <header class="govuk-header " role="banner" data-module="govuk-header">
-        <div class="govuk-header__container govuk-width-container">
-
+    <header class="govuk-header app-header" role="banner" data-module="govuk-header">
+        <div class="govuk-header__container govuk-width-container app-header__container">
             <div class="govuk-header__logo">
                 <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
                     <span class="govuk-header__logotype">
@@ -46,23 +40,19 @@
                         </svg>
                         <!--<![endif]-->
                         <!--[if IE 8]>
-                          <img src="/assets/images/govuk-logotype-crown.png" class="govuk-header__logotype-crown-fallback-image" width="36" height="32">
+                        <img src="/assets/images/govuk-logotype-crown.png" class="govuk-header__logotype-crown-fallback-image" width="36" height="32">
                         <![endif]-->
-
-
                         <span class="govuk-header__logotype-text">
-                            GOV.UK
+                        GOV.UK
                         </span>
                     </span>
-
                 </a>
             </div>
-
             <div class="govuk-header__content">
-                <a href="@comparisonToolUrl" class="govuk-header__link govuk-header__link--service-name jsLink">
+                <a href="@comparisonToolUrl" class="govuk-header__link govuk-header__link--service-name app-js-show--inline-block">
                     Help to Grow: Digital
                 </a>
-                <a href="@comparisonToolNoJsUrl" class="govuk-header__link govuk-header__link--service-name noJsLink">
+                <a href="@comparisonToolNoJsUrl" class="govuk-header__link govuk-header__link--service-name app-js-hide" aria-hidden="true">
                     Help to Grow: Digital
                 </a>
             </div>
@@ -75,7 +65,7 @@
                     BETA
                 </strong>
                 <span class="govuk-phase-banner__text">
-                    This is not a live service – your <a href="@satisfactionSurveyUrl" class="govuk-link">feedback</a> will help us to improve it.
+                    This is not a live service - your <a href="@satisfactionSurveyUrl" class="govuk-link">feedback</a> will help us to improve it.
                 </span>
             </p>
         </div>

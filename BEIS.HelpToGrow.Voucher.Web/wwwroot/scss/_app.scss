@@ -1,5 +1,48 @@
+$beis-gold:     #ffb000;
+
+// Application
+
+.app-header {
+    border-bottom: 10px solid $beis-gold;
+}
+
+.app-header__container {
+    border: none;
+    padding-bottom: 10px;
+}
+
 .app-htg-logo {
     display: block;
-    margin: 20px 0;
+    margin: 10px 0;
     max-width: 100%;
+    @include govuk-media-query(tablet) {
+        width: 45%;
+    }
+}
+
+.app-related-items {
+    border-top: 2px solid govuk-colour("blue");
+    padding-top: 10px;
+}
+
+// Utility 
+
+.js-enabled {
+    .app-js-hide {
+        display: none;
+    }
+}
+
+.app-js-show {
+    display: none;
+    .js-enabled & {
+        display: block;
+    }
+}
+
+.app-js-show--inline-block {
+    display: none;
+    .js-enabled & {
+        display: inline-block;
+    }
 }
