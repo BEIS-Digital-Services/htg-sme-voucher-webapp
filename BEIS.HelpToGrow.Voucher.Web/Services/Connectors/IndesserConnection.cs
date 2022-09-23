@@ -6,7 +6,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 {
     public class IndesserConnection : IIndesserHttpConnection<IndesserCompanyResponse>
     {
-        private const string Accept = "application/json";
+        private const string Accept = "application/json";		
         private readonly string _tokenConnectionUrl;
         private readonly string _companyCheckUrl;
         private readonly IRestClientFactory _restClientFactory;
@@ -34,8 +34,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
         public Result<IndesserCompanyResponse> ProcessRequest(string companyId, HttpContext httpContext)
         {
             var attempts = 0;
-
             const int maxAttempts = 5;
+			var acceptedStatusCodes = new [] { HttpStatusCode.OK, HttpStatusCode.NoContent };
 
             try
             {
@@ -62,16 +62,18 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 
                     response = client.Execute(request);
 
-                    if (response.StatusCode != HttpStatusCode.OK)
+                    if (!acceptedStatusCodes.Contains(response.StatusCode))
                     {
                         Thread.Sleep(1000 * 2 ^ attempts); // exponential back off
                     }
 
-                } while (response.StatusCode != HttpStatusCode.OK && attempts < maxAttempts);
+                } while (!acceptedStatusCodes.Contains(response.StatusCode) && attempts < maxAttempts);
 
-                return response.StatusCode == HttpStatusCode.OK
-                    ? Result.Ok(JsonSerializer.Deserialize<IndesserCompanyResponse>(response.Content))
-                    : Result.Fail($"Indesser API call failed: {new IndesserErrorResponse(response).AsJson()}");
+				return response.StatusCode switch { 
+					HttpStatusCode.OK => Result.Ok(JsonSerializer.Deserialize<IndesserCompanyResponse>(response.Content)),
+					HttpStatusCode.NoContent => Result.Fail($"Indesser API call - no records found: {new IndesserErrorResponse(response).AsJson()}"),
+					_ => Result.Fail($"Indesser API call failed: {new IndesserErrorResponse(response).AsJson()}")
+				};
             }
             catch (Exception ex)
             {
