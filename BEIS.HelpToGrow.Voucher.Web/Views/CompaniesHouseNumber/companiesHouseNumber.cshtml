@@ -21,7 +21,7 @@
         <p class="govuk-body">You can find the Companies House number on the certificate of incorporation. You can also <a href="https://find-and-update.company-information.service.gov.uk" class="govuk-link" target="_blank">search the Companies House register (opens in new tab)</a>.</p>
         <div id="co-number-hint" class="govuk-hint">For example, 12345678</div>
         <span asp-validation-for="Number" class="govuk-error-message"></span>
-        <input asp-for="Number" class="govuk-input" type="text" maxlength="9" pattern="[0-9]*" inputmode="numeric" aria-describedby="co-number-hint">
+        <input asp-for="Number" class="govuk-input" type="text" maxlength="9" inputmode="numeric" aria-describedby="co-number-hint">
       </div>
       <button ga-data-action-id="btn-sme-company-house-number-continue" class="govuk-button company-house-number" data-module="govuk-button">Continue</button>
     </form>
