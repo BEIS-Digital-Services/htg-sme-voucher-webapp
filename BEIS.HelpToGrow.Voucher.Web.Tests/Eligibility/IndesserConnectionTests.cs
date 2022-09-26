@@ -89,6 +89,33 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Eligibility
             Assert.AreEqual("No Indesser connection established", result.Errors.Single().Message);
         }
 
+		[Test]
+        public void HandlesNoContentResponse()
+        {
+            var tokenBytes = GetValidTokenBytes();
+            var noContentResponse = new RestResponse
+            {
+                StatusCode = HttpStatusCode.NoContent
+            };
+
+            _fakeIMemoryCache.Set("connectionToken", tokenBytes);
+
+            _fakeRestClientFactory = new FakeRestClientFactory(noContentResponse).ResetResponses();
+
+            var logger = MockLogger.Factory(_fakeLogger).Object.CreateLogger<IndesserConnection>();
+
+            var connection = new IndesserConnection(
+                _fakeOptions,
+                _fakeRestClientFactory,
+                logger, _fakeIMemoryCache);
+
+            var result = connection.ProcessRequest(_companyId, new DefaultHttpContext());
+
+            Assert.That(result.IsFailed);
+			Assert.That(result.Errors.Count == 1);
+			Assert.That(result.Errors.Single().Message.Contains("Indesser API call - no records found"));
+        }
+
         [Test]
         public void HandlesTokenCacheMissAndRepeatedReadCompanyDataAttemptsUntilSuccess()
         {
