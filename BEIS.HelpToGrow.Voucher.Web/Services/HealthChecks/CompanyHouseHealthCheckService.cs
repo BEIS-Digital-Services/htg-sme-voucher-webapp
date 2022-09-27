@@ -19,9 +19,10 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
             _companyHouseHealthCheckOptions = companyHouseHealthCheckOptions;
         }
 
-        public override Task<HealthCheckResult> CheckHealthAsync(
+        public override async Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context, CancellationToken cancellationToken = default)
         {
+            HealthCheckResult result;
             var isHealthy = true;
 
             try
@@ -46,12 +47,17 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
 
             if (isHealthy)
             {
-                return Task.FromResult(HealthCheckResult.Healthy("Company house API health check passed."));
+                result = HealthCheckResult.Healthy("Company house API health check passed.");
+            }
+            else
+            {
+                result = new HealthCheckResult(
+                        context.Registration.FailureStatus, "Company house API health check failed.");
             }
 
-            return
-                Task.FromResult(new HealthCheckResult(
-                    context.Registration.FailureStatus, "Company house API health check failed."));
+            await base.LogHealthCheckResult(context, result);
+            return result;
+                
 
         }
     }
