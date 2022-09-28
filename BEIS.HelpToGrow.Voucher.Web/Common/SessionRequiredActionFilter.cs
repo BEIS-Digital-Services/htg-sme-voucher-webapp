@@ -16,14 +16,21 @@ namespace Beis.HelpToGrow.Voucher.Web.Common
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            if (context.Controller is HomeController or SessionExpiredController or VerifyEmailAddressController or CancelVoucherController)
+            if (context.Controller is HomeController 
+                or SessionExpiredController 
+                or VerifyEmailAddressController 
+                or CancelVoucherController 
+                or GuidanceController 
+                or TermsAndConditionsController 
+                or ContactUsController 
+                or GetInTouchController)
             {
                 return;
             }
 
             if (!_sessionService.HasValidSession(context.HttpContext) && context.Controller is Controller controller)
             {                
-                context.Result = controller.RedirectToAction("", "SessionExpired");              
+                context.Result = controller.RedirectToAction(String.Empty, "SessionExpired");              
             }
         }
     }
