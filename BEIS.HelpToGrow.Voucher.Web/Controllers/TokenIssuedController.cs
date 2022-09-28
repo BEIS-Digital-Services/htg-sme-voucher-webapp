@@ -51,6 +51,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                 case ApplicationStatus.NewApplication:
                 case ApplicationStatus.CancelledInFreeTrialCanReApply:
                 case ApplicationStatus.CancelledNotRedeemedCanReApply:
+                    {
+                        return RedirectToAction("Ineligible", "InEligible");
+                    }
                 case ApplicationStatus.CancelledCannotReApply:
                     {
                         return RedirectToAction("CancelledCannotReApply", "InEligible");
