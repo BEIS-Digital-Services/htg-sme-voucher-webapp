@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
+
 namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 {
     [TestFixture]
@@ -124,8 +126,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var actionResult = (RedirectToActionResult)result;
 
-            Assert.AreEqual("CheckEmailAddress", actionResult.ActionName);
-            Assert.AreEqual("ApplicantEmailAddress", actionResult.ControllerName);
+            Assert.AreEqual("EmailNotVerified", actionResult.ActionName);
+            Assert.AreEqual("InEligible", actionResult.ControllerName);
 
             _mockLogger.Verify(logger => logger.Log(
                     It.Is<LogLevel>(logLevel => logLevel == LogLevel.Error),
@@ -171,8 +173,8 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var actionResult = (RedirectToActionResult)result;
 
-            Assert.AreEqual("CheckEmailAddress", actionResult.ActionName);
-            Assert.AreEqual("ApplicantEmailAddress", actionResult.ControllerName);
+            Assert.AreEqual("EmailNotVerified", actionResult.ActionName);
+            Assert.AreEqual("InEligible", actionResult.ControllerName);
 
             _mockLogger.Verify(logger => logger.Log(
                     It.Is<LogLevel>(logLevel => logLevel == LogLevel.Error),
@@ -280,7 +282,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var result = await _sut.Index();
 
-            var viewResult = (ViewResult)result;
+            var actionResult = (RedirectToActionResult)result;
 
             _mockLogger.Verify(logger => logger.Log(
                     It.Is<LogLevel>(logLevel => logLevel == LogLevel.Information),
@@ -288,11 +290,53 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
                     It.Is<It.IsAnyType>((@object, type) => @object.ToString().Contains("Getting token for enterprise") && type.Name == "FormattedLogValues"),
                     It.IsAny<Exception>(),
                     It.IsAny<Func<It.IsAnyType, Exception, string>>()),
-                Times.Once);
+            Times.Once);
 
-            Assert.That(viewResult.ViewName == "CheckEligibility");
+            Assert.AreEqual("CancelledCannotReApply", actionResult.ActionName);
+            Assert.AreEqual("InEligible", actionResult.ControllerName);
         }
+                
+        [TestCase(ApplicationStatus.Ineligible, "Ineligible", "InEligible")]
+        [TestCase(ApplicationStatus.TokenReconciled, "TokenReconciled", "InEligible")]
+        [TestCase(ApplicationStatus.EmailNotVerified, "EmailNotVerified", "InEligible")]
+        [TestCase(ApplicationStatus.ActiveTokenNotRedeemed, "ActiveTokenNotRedeemed", "InEligible")]
+        public async Task ApplicationStatusRedirectsToMessages(ApplicationStatus appStatus, string redirectAction, string redirectController)
+        {
+            _applicationStatus = appStatus;
+            var userVoucherDto = new UserVoucherDto
+            {
+                SelectedProduct = new product { redemption_url = "https://fake.url/" }
+            };
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns(userVoucherDto);
 
+            var vendorCompany = new vendor_company();
+            _mockVendorCompanyRepository
+                .Setup(_ => _.GetVendorCompanySingle(It.IsAny<long>()))
+                .Returns(Task.FromResult(vendorCompany));
+
+            var enterprise = new enterprise { applicant_email_verified = false, eligibility_status_id = 2 };
+            _mockEnterpriseRepository
+                .Setup(_ => _.GetEnterprise(It.IsAny<long>()))
+                .Returns(Task.FromResult(enterprise));
+
+            _mockVoucherGeneratorService
+                .Setup(_ => _.GenerateVoucher(vendorCompany, enterprise, userVoucherDto.SelectedProduct, _voucherSettings, true))
+                .Returns(Task.FromResult("fake voucher code"));
+
+            var notificationResult = Result.Ok();
+            _mockNotifyService
+                .Setup(_ => _.SendVoucherToApplicant(userVoucherDto))
+                .Returns(Task.FromResult(notificationResult));
+
+            var result = await _sut.Index();
+
+            var actionResult = (RedirectToActionResult)result;
+
+            Assert.AreEqual(redirectAction, actionResult.ActionName);
+            Assert.AreEqual(redirectController, actionResult.ControllerName);
+        }
 
         [Test]
         public void HandlesBadUrl()

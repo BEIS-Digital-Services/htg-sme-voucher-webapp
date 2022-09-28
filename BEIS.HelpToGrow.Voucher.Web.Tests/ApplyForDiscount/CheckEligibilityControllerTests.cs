@@ -77,7 +77,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [Test]
         public async Task ExistingEligibilityPassed()
         {
-          
+            _applicationStatus = ApplicationStatus.EmailVerified;
             var voucherDto = new UserVoucherDto
             {
                 SelectedProduct = new product { redemption_url = "https://fake.url.org/" },
@@ -98,15 +98,15 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var result = await _sut.Index();
 
-            var actionResult = (RedirectToActionResult)result;
-
+            var actionResult = (RedirectToActionResult)result;            
             Assert.AreEqual("Index", actionResult.ActionName);
             Assert.AreEqual("TokenIssued", actionResult.ControllerName);
-        }
+        }       
 
         [Test]
         public async Task ExistingEligibilityFailed()
         {
+            _applicationStatus = ApplicationStatus.EmailVerified;
             var voucherDto = new UserVoucherDto
             {
                 SelectedProduct = new product { redemption_url = "https://fake.url.org/" },
@@ -132,10 +132,12 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             Assert.AreEqual("TokenNotIssued", actionResult.ControllerName);
         }
 
-        [Test]
-        public async Task VoucherCancelledCannotReApply()
+        [TestCase(ApplicationStatus.CancelledCannotReApply, "CancelledCannotReApply", "InEligible")]
+        [TestCase(ApplicationStatus.TokenReconciled, "TokenReconciled", "InEligible")]        
+        [TestCase(ApplicationStatus.ActiveTokenNotRedeemed, "ActiveTokenNotRedeemed", "InEligible")]        
+        public async Task ApplicationStatusRedirectsToMessages(ApplicationStatus appStatus, string redirectAction, string redirectController)
         {
-            _applicationStatus = ApplicationStatus.CancelledCannotReApply;
+            _applicationStatus = appStatus;
             var voucherDto = new UserVoucherDto
             {
                 SelectedProduct = new product { redemption_url = "https://fake.url.org/" },
@@ -157,13 +159,43 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
 
             var actionResult = (RedirectToActionResult)result;
 
-            Assert.AreEqual("Index", actionResult.ActionName);
-            Assert.AreEqual("TokenNotIssued", actionResult.ControllerName);
+            Assert.AreEqual(redirectAction, actionResult.ActionName);
+            Assert.AreEqual(redirectController, actionResult.ControllerName);
+        }
+        
+        [Test]
+        public async Task ApplicationStatusEmailNotVerified()
+        {
+            _applicationStatus = ApplicationStatus.EmailNotVerified;
+            var voucherDto = new UserVoucherDto
+            {
+                SelectedProduct = new product { redemption_url = "https://fake.url.org/" },
+                ApplicantDto = new ApplicantDto { IsVerified = false }
+            };
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns(voucherDto);
+
+            _mockEnterpriseService
+                .Setup(_ => _.GetUserVoucherFromEnterpriseAsync(It.IsAny<long>(), It.IsAny<long>()))
+                .Returns(Task.FromResult(voucherDto));
+
+            _mockEnterpriseService
+                .Setup(_ => _.GetEligibilityStatusAsync())
+                .Returns(Task.FromResult(EligibilityStatus.Eligible));
+
+            var result = await _sut.Index();
+
+            var actionResult = (RedirectToActionResult)result;
+
+            Assert.AreEqual("EmailNotVerified", actionResult.ActionName);
+            Assert.AreEqual("InEligible", actionResult.ControllerName);
         }
 
         [Test]
         public async Task FcaApplication()
         {
+            _applicationStatus = ApplicationStatus.EmailVerified;
             var missingSelectedProduct = new UserVoucherDto
             {
                 SelectedProduct = new product { redemption_url = "https://fake.url.org/" },
@@ -177,8 +209,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
             _mockSessionService.Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>())).Returns(missingSelectedProduct);
             _mockEnterpriseService.Setup(_ => _.GetUserVoucherFromEnterpriseAsync(It.IsAny<long>(), It.IsAny<long>())).ReturnsAsync(missingSelectedProduct);
 
-            var result = await _sut.Index();
-
+            var result = await _sut.Index();            
             Assert.AreEqual("TokenIssued", ((RedirectToActionResult)result).ControllerName);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
         }
@@ -186,6 +217,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [Test]
         public async Task IndesserFailure()
         {
+            _applicationStatus = ApplicationStatus.EmailVerified;
             var userVoucherDto = new UserVoucherDto
             {
                 SelectedProduct = new product { redemption_url = "https://fake.url.org/" },
@@ -214,6 +246,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [Test]
         public async Task IndesserResponsePersistenceFailure()
         {
+            _applicationStatus = ApplicationStatus.EmailVerified;
             var userVoucherDto = new UserVoucherDto
             {
                 SelectedProduct = new product { redemption_url = "https://fake.url.org/" },
@@ -254,7 +287,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [Test]
         public async Task ErrorsDuringEligibilityCheck()
         {
-            
+            _applicationStatus = ApplicationStatus.EmailVerified;
             var userVoucherDto = new UserVoucherDto
             {
                 SelectedProduct = new product { redemption_url = "https://fake.url.org/" },
@@ -296,6 +329,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount
         [Test]
         public async Task FailsEligibilityCheck()
         {
+            _applicationStatus = ApplicationStatus.EmailVerified;
             var userVoucherDto = new UserVoucherDto
             {
                 SelectedProduct = new product { redemption_url = "https://fake.url.org/" },

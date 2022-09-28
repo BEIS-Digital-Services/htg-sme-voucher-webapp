@@ -66,16 +66,24 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
                             break;
                         }
                     case ApplicationStatus.ActiveTokenNotRedeemed:
-                    case ApplicationStatus.CancelledCannotReApply:
+                        {
+                            return RedirectToAction("ActiveTokenNotRedeemed", "InEligible");
+                        }
+                    case ApplicationStatus.CancelledCannotReApply: 
+                        {
+                            return RedirectToAction("CancelledCannotReApply", "InEligible");
+                        }
                     case ApplicationStatus.Ineligible:
                         {
                             return RedirectToAction("Vendor", "InEligible");
                         }
-                    case ApplicationStatus.EmailNotVerified:
+                    case ApplicationStatus.EmailNotVerified: 
+                        {
+                            return RedirectToAction("EmailNotVerified", "InEligible");
+                        }
                     case ApplicationStatus.EmailVerified:
                     case ApplicationStatus.ActiveTokenRedeemed:
                     case ApplicationStatus.TokenReconciled:
-                    
                         {
                             return View("CompanyAlreadyExists", userVoucherDto);
 

@@ -50,20 +50,29 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             {
                 case ApplicationStatus.NewApplication:
                 case ApplicationStatus.CancelledInFreeTrialCanReApply:
-                case ApplicationStatus.CancelledNotRedeemedCanReApply:             
+                case ApplicationStatus.CancelledNotRedeemedCanReApply:
+                    {
+                        return RedirectToAction("Ineligible", "InEligible");
+                    }
                 case ApplicationStatus.CancelledCannotReApply:
-                case ApplicationStatus.Ineligible:
+                    {
+                        return RedirectToAction("CancelledCannotReApply", "InEligible");
+                    }                
                 case ApplicationStatus.ActiveTokenRedeemed:
                 case ApplicationStatus.TokenReconciled:                
                     {
-                        return RedirectToAction("Index", "TokenNotIssued");
+                        return RedirectToAction("TokenReconciled", "InEligible");
                     }
                 case ApplicationStatus.EmailNotVerified:
                     {
-                        return RedirectToAction("CheckEmailAddress", "ApplicantEmailAddress");
+                        return RedirectToAction("EmailNotVerified", "InEligible");
                     }
-                case ApplicationStatus.EmailVerified:
                 case ApplicationStatus.ActiveTokenNotRedeemed:
+                    {
+                        return RedirectToAction("ActiveTokenNotRedeemed", "InEligible");
+                    }
+                case ApplicationStatus.Ineligible:
+                case ApplicationStatus.EmailVerified:
                 case ApplicationStatus.TokenExpired:
                     {
                         //continue

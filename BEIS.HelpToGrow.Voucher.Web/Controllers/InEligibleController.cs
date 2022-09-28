@@ -39,5 +39,29 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
         {
             return View();
         }
+        public IActionResult ActiveTokenNotRedeemed()
+        {
+            return View();
+        }
+        public IActionResult EmailNotVerified()
+        {
+            return View();
+        }
+        public IActionResult CompanyAlreadyExists()
+        {
+            return View();
+        }
+        public IActionResult TokenReconciled()
+        {
+            return View();
+        }        
+        public IActionResult Ineligible()
+        {
+            return View();
+        }
+        public IActionResult CancelledCannotReApply()
+        {
+            return View();
+        }
     }
 }

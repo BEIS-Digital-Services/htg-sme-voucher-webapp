@@ -1,6 +1,8 @@
 ﻿
 
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace Beis.HelpToGrow.Voucher.Web.Tests.Applicant
 {
     [TestFixture]
@@ -160,10 +162,11 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Applicant
 
             _sut = new ApplicantEmailAddressController(_mockSessionService.Object, _mockEmailVerificationService.Object, _mockApplicationStatusService.Object, _options);
 
-            var result = await _sut.CheckEmailAddress();
-            var viewResult = (ViewResult)result;
-
-            Assert.AreEqual("CompanyAlreadyExists", viewResult.ViewName);
+            var result = await _sut.CheckEmailAddress();            
+            
+            var actionResult = (RedirectToActionResult)result;
+            Assert.AreEqual("EmailNotVerified", actionResult.ActionName);
+            Assert.AreEqual("InEligible", actionResult.ControllerName);
         }
 
         [Test]
@@ -191,12 +194,43 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.Applicant
             _sut = new ApplicantEmailAddressController(_mockSessionService.Object, _mockEmailVerificationService.Object, _mockApplicationStatusService.Object, _options);
 
             var result = await _sut.CheckEmailAddress();
-            var viewResult = (ViewResult)result;
-
-            Assert.AreEqual("CompanyAlreadyExists", viewResult.ViewName);
+            var actionResult = (RedirectToActionResult)result;
+            Assert.AreEqual("CancelledCannotReApply", actionResult.ActionName);
+            Assert.AreEqual("InEligible", actionResult.ControllerName);
         }
 
+        [TestCase(ApplicationStatus.CancelledCannotReApply, "CancelledCannotReApply", "InEligible")]
+        [TestCase(ApplicationStatus.TokenReconciled, "TokenReconciled", "InEligible")]
+        [TestCase(ApplicationStatus.ActiveTokenNotRedeemed, "ActiveTokenNotRedeemed", "InEligible")]
+        [TestCase(ApplicationStatus.Ineligible, "Ineligible", "InEligible")]        
+        public async Task ApplicationStatusRedirectsToUserMessages(ApplicationStatus appStatus, string redirectAction, string redirectController)
+        {
+            _applicationStatus = appStatus;
+            var userVoucherDto = new UserVoucherDto
+            {
+                ApplicantDto =
+                {
+                    EmailAddress = "fake.email@address.org",
+                    IsVerified = false,
+                    EnterpriseId = 0
+                }
+            };
 
+            _mockSessionService
+                .Setup(_ => _.Get<UserVoucherDto>(It.IsAny<string>(), It.IsAny<HttpContext>()))
+                .Returns(userVoucherDto);
+
+            _mockEmailVerificationService
+                .Setup(_ => _.CompanyNumberIsUnique(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(false));
+
+            _sut = new ApplicantEmailAddressController(_mockSessionService.Object, _mockEmailVerificationService.Object, _mockApplicationStatusService.Object, _options);
+
+            var result = await _sut.CheckEmailAddress();
+            var actionResult = (RedirectToActionResult)result;
+            Assert.AreEqual(redirectAction, actionResult.ActionName);
+            Assert.AreEqual(redirectController, actionResult.ControllerName);
+        }
 
         [Test]
         public async Task CheckEmailAddressFailedSavingEnterprise()
