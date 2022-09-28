@@ -20,8 +20,9 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
             _eligibility = eligibility;
         }
 
-        public override Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        public override async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
+            HealthCheckResult result;
             var isHealthy = true;
 
             var indesserCheckErrors = new StringBuilder();
@@ -54,12 +55,16 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.HealthChecks
 
             if (isHealthy)
             {
-                return Task.FromResult(HealthCheckResult.Healthy("Indesser service health check passed."));
+                result = HealthCheckResult.Healthy("Indesser service health check passed.");
             }
-
-            return
-                Task.FromResult(new HealthCheckResult(
-                    context.Registration.FailureStatus, $"Indesser service health check failed. Its failed with {indesserCheckErrors}"));
+            else
+            {
+                result = new HealthCheckResult(
+                    context.Registration.FailureStatus, $"Indesser service health check failed. Its failed with {indesserCheckErrors}");
+            }
+            await base.LogHealthCheckResult(context, result);
+            return result;
+                
         }
 
         private Result<IndesserCompanyResponse> RunIndesserCheck(string companyHouseNumber)

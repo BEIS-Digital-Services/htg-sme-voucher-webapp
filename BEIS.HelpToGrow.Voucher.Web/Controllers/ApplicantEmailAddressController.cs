@@ -45,14 +45,12 @@ namespace Beis.HelpToGrow.Voucher.Web.Controllers
             var model = new EmailAddressViewModel();
 
             if (string.IsNullOrWhiteSpace(userVoucherDto?.ApplicantDto.EmailAddress))
-            {
-                model = new EmailAddressViewModel
-                {
-                    EmailAddress = userVoucherDto?.ApplicantDto?.EmailAddress
-                };
-
+            {                              
                 return View(model);
             }
+
+            model.EmailAddress = userVoucherDto?.ApplicantDto?.EmailAddress;
+           
 
             var companyHouseNumber = userVoucherDto.CompanyHouseResponse?.CompanyNumber ?? userVoucherDto.CompanyHouseNumber;
 
