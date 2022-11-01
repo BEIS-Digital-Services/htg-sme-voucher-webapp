@@ -29,6 +29,7 @@
     <ItemGroup>      
         <Folder Include="wwwroot\assets" />
         <Folder Include="wwwroot\js\moj" />
+        <Folder Include="wwwroot\scss\" />
     </ItemGroup>
 
     <ItemGroup>
