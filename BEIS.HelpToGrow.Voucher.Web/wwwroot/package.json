@@ -22,7 +22,7 @@
   "dependencies": {
     "@ministryofjustice/frontend": "^0.2.5",
     "dart-sass": "^1.25.0",
-    "govuk-frontend": "3.13.0",
+    "govuk-frontend": "^3.13.0",
     "sass": "^1.37.5"
   }
 }
