@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.FeatureManagement;
+
 namespace Beis.HelpToGrow.Voucher.Web.Extensions
 {
     internal static class ServiceCollectionExtensions
@@ -21,6 +23,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Extensions
             });
             services.AddLogging(options => { options.AddConsole(); });            
             services.AddApplicationInsightsTelemetry(configuration["AzureMonitorInstrumentationKey"]);
+            services.AddFeatureManagement();
 
             services.AddControllersWithViews(config =>
             {

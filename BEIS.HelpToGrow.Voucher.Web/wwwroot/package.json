@@ -7,7 +7,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "compile-sass": "sass css/main.scss css/main.css",
+    "watch-sass": "sass --watch css/main.scss css/main.css"
   },
   "keywords": [
     "Help",
@@ -19,6 +21,8 @@
   "license": "ISC",
   "dependencies": {
     "@ministryofjustice/frontend": "^0.2.5",
-    "govuk-frontend": "^3.13.0"
+    "dart-sass": "^1.25.0",
+    "govuk-frontend": "^3.13.0",
+    "sass": "^1.37.5"
   }
 }

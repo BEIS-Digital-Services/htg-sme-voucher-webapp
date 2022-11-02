@@ -1,0 +1,23 @@
+.beis-global-hero-banner {
+    background: $beis-yellow;
+    padding: 15px 0;
+    @include govuk-media-query (tablet) {
+        padding: 30px 15px;
+    }
+}
+
+.beis-global-hero-banner__heading {
+    margin-top: 15px;
+    color: inherit;
+}
+
+.beis-global-hero-banner__content * {
+    @include govuk-font($size: 24);
+    color: inherit;
+}
+
+.beis-global-hero-banner__content a {
+    @include govuk-link-common;
+    font-weight: $govuk-font-weight-bold;
+    color: $govuk-text-colour;
+}

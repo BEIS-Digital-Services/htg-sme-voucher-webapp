@@ -4,7 +4,14 @@ builder.Host.ConfigureAppConfiguration(configBuilder =>
     var connectionString = configBuilder.Build().GetConnectionString("AppConfig");
     if (connectionString != null)
     {
-        configBuilder.AddAzureAppConfiguration(connectionString);
+        configBuilder.AddAzureAppConfiguration(options =>
+        {
+            options
+                .Connect(connectionString)
+                .UseFeatureFlags(featureFlagOptions => {
+                    featureFlagOptions.CacheExpirationInterval = TimeSpan.FromMinutes(5);
+                    });
+        });
     }
 });
 
