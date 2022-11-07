@@ -3,3 +3,5 @@ $govuk-global-styles: true;
 
 @import "../node_modules/govuk-frontend/govuk/all";
 @import "app";
+@import 'components/settings/_all.scss';
+@import 'components//global-hero-banner/_global-hero-banner.scss';

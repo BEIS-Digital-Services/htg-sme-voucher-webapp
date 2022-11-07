@@ -7192,4 +7192,78 @@ x:-moz-any-link {
   display: inline-block;
 }
 
+.beis-global-hero-banner {
+  background: #ffb000;
+  padding: 15px 0;
+}
+@media (min-width: 40.0625em) {
+  .beis-global-hero-banner {
+    padding: 30px 15px;
+  }
+}
+
+.beis-global-hero-banner__heading {
+  margin-top: 15px;
+  color: inherit;
+}
+
+.beis-global-hero-banner__content * {
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.1111111111;
+  color: inherit;
+}
+@media print {
+  .beis-global-hero-banner__content * {
+    font-family: sans-serif;
+  }
+}
+@media (min-width: 40.0625em) {
+  .beis-global-hero-banner__content * {
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+}
+@media print {
+  .beis-global-hero-banner__content * {
+    font-size: 18pt;
+    line-height: 1.15;
+  }
+}
+
+.beis-global-hero-banner__content a {
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-decoration: underline;
+  text-decoration-thickness: max(1px, .0625rem);
+  text-underline-offset: 0.1em;
+  font-weight: 700;
+  color: #0b0c0c;
+}
+@media print {
+  .beis-global-hero-banner__content a {
+    font-family: sans-serif;
+  }
+}
+.beis-global-hero-banner__content a:hover {
+  text-decoration-thickness: max(3px, .1875rem, .12em);
+  -webkit-text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip: none;
+}
+.beis-global-hero-banner__content a:focus {
+  outline: 3px solid transparent;
+  color: #0b0c0c;
+  background-color: #ffdd00;
+  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=main.css.map */
