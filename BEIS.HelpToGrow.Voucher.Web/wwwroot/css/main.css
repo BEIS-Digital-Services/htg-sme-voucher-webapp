@@ -7198,7 +7198,7 @@ x:-moz-any-link {
 }
 @media (min-width: 40.0625em) {
   .beis-global-hero-banner {
-    padding: 30px 15px;
+    padding: 30px 0;
   }
 }
 
