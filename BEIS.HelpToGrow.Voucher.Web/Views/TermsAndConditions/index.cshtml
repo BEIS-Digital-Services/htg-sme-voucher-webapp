@@ -3,13 +3,14 @@
     ViewData["Title"] = "Terms and conditions, privacy policy and subsidy control";
     var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
 }
-<div class="govuk-width-container">
+
   <nav class="govuk-!-margin-bottom-9">
     <a class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0" >Back</a>
   </nav>
-  <partial name="_ValidationSummary" model="ViewData.ModelState" />
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <partial name="_ValidationSummary" model="ViewData.ModelState" />
       <form class="form" asp-action="index" method="post">
         <div class="govuk-form-group @verticalErrorStyle">
           <fieldset class="govuk-fieldset">
@@ -27,19 +28,19 @@
               <div class="govuk-checkboxes__item">
                 <input class="govuk-checkboxes__input" asp-for="TermsAndConditions" />
 
-                <label class="govuk-label govuk-checkboxes__label" for="TermsConditions">
+                <label class="govuk-label govuk-checkboxes__label" asp-for="TermsAndConditions">
                   I have read and accept the terms and conditions
                 </label>
               </div>
               <div class="govuk-checkboxes__item">
                 <input class="govuk-checkboxes__input" asp-for="PrivacyPolicy" />
-                <label class="govuk-label govuk-checkboxes__label" for="PrivacyPolicy">
+                <label class="govuk-label govuk-checkboxes__label" asp-for="PrivacyPolicy">
                   I have read and accept the privacy policy
                 </label>
               </div>
               <div class="govuk-checkboxes__item">
                 <input class="govuk-checkboxes__input" asp-for="SubsidyControl">
-                <label class="govuk-label govuk-checkboxes__label" for="SubsidyControl">
+                <label class="govuk-label govuk-checkboxes__label" asp-for="SubsidyControl">
                   I have read and accept the subsidy control
                 </label>
               </div>
@@ -53,7 +54,7 @@
       </form>
     </div>
   </div>
-</div>
+
 @section Scripts {
 <script src="~/js/voucher/navigation.js"></script>
 }
