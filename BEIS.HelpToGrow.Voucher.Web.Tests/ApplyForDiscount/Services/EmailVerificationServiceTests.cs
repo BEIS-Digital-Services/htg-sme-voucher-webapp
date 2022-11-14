@@ -188,7 +188,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Tests.ApplyForDiscount.Services
 
             Assert.That(result.IsFailed);
             Assert.AreEqual(1, result.Errors.Count);
-            Assert.AreEqual("the Id does not match.", result.Errors.Single().Message);
+            Assert.AreEqual("The Id does not match.", result.Errors.Single().Message);
         }
 
         [Test]

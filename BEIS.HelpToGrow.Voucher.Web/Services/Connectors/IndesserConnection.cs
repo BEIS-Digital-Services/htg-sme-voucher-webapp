@@ -6,7 +6,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 {
     public class IndesserConnection : IIndesserHttpConnection<IndesserCompanyResponse>
     {
-        private const string Accept = "application/json";		
+        private const string Accept = "application/json";
         private readonly string _tokenConnectionUrl;
         private readonly string _companyCheckUrl;
         private readonly IRestClientFactory _restClientFactory;
@@ -18,7 +18,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 
         public IndesserConnection(IOptions<IndesserConnectionOptions> options,
             IRestClientFactory restClientFactory,
-            ILogger<IndesserConnection> logger, 
+            ILogger<IndesserConnection> logger,
             IMemoryCache memoryCache)
         {
             _tokenConnectionUrl = options.Value.TokenConnectionUrl;
@@ -35,7 +35,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
         {
             var attempts = 0;
             const int maxAttempts = 5;
-			var acceptedStatusCodes = new [] { HttpStatusCode.OK, HttpStatusCode.NoContent };
+            var acceptedStatusCodes = new[] { HttpStatusCode.OK, HttpStatusCode.NoContent };
 
             try
             {
@@ -43,6 +43,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 
                 if (connectionToken == null)
                 {
+                    _logger.LogError("No connection could be established to the Indesser API.");
                     return Result.Fail("No Indesser connection established");
                 }
 
@@ -69,11 +70,25 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
 
                 } while (!acceptedStatusCodes.Contains(response.StatusCode) && attempts < maxAttempts);
 
-				return response.StatusCode switch { 
-					HttpStatusCode.OK => Result.Ok(JsonSerializer.Deserialize<IndesserCompanyResponse>(response.Content)),
-					HttpStatusCode.NoContent => Result.Fail($"Indesser API call - no records found: {new IndesserErrorResponse(response).AsJson()}"),
-					_ => Result.Fail($"Indesser API call failed: {new IndesserErrorResponse(response).AsJson()}")
-				};
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.OK:
+                        {
+
+                            return Result.Ok(JsonSerializer.Deserialize<IndesserCompanyResponse>(response.Content));
+                        }
+
+                    case HttpStatusCode.NoContent:
+                        {
+                            _logger.LogError($"Indesser API call - no records found: {new IndesserErrorResponse(response).AsJson()}");
+                            return Result.Fail($"Indesser API call - no records found: {new IndesserErrorResponse(response).AsJson()}");
+                        }
+                    default:
+                        {
+                            _logger.LogError($"Indesser API call failed: {new IndesserErrorResponse(response).AsJson()}");
+                            return Result.Fail($"Indesser API call failed: {new IndesserErrorResponse(response).AsJson()}");
+                        }
+                };
             }
             catch (Exception ex)
             {
@@ -114,7 +129,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Connectors
                     return connectionToken;
                 }
 
-                if (connectionToken is {CurrentStatus: "UPDATING"})
+                if (connectionToken is { CurrentStatus: "UPDATING" })
                 {
                     Thread.Sleep(1000);
                     continue;
