@@ -3,46 +3,45 @@
     ViewData["Title"] = "Are you buying this product for the first time?";
     var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
 }
-<div class="govuk-width-container">
-  <nav class="govuk-!-margin-bottom-9">
-    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-action="" asp-controller="" asp-route-product_id="@Model.SelectedProduct.product_id" asp-route-product_type="@Model.SelectedProduct.product_type">Back</a>
-  </nav>
-  <partial name="_ValidationSummary" model="ViewData.ModelState" />
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <form class="form" asp-action="Forward" method="post">
-        <div class="govuk-form-group @verticalErrorStyle">
-          <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-              <h1 class="govuk-fieldset__heading">
-                Are you buying @Model.SelectedProduct.product_name for the first time?
-              </h1>
-            </legend>
-            <p class="govuk-body">
-              Your business must be purchasing the approved software for the first time. You cannot apply for a software product that you already own or have an active subscription to.
-            </p>
-            <p class="govuk-body">
-                If you already have software with a supplier listed on the <a href="@Urls.GetComparisonToolUrl(Model.LearningPlatformUrl)" target="_blank" class="govuk-link">Help to Grow: Digital website  (opens in new tab)</a>, you can still apply for other types of software provided by the same supplier. Major software upgrades are permitted.
-            </p>
-            <span asp-validation-for="FirstTime" id="firstTime" class="govuk-error-message"></span>
-            <div class="govuk-radios govuk-radios--inline">
-              <div class="govuk-radios__item">
-                <input asp-for="FirstTime" class="govuk-radios__input" id="firstTime-yes" name="firstTime" type="radio" value="Yes">
-                <label class="govuk-label govuk-radios__label" for="firstTime-yes">
-                  Yes
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input asp-for="FirstTime" class="govuk-radios__input" id="firstTime-no" name="firstTime" type="radio" value="No">
-                <label class="govuk-label govuk-radios__label" for="firstTime-no">
-                  No
-                </label>
-              </div>
+<nav class="govuk-!-margin-bottom-9">
+  <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-action="" asp-controller="" asp-route-product_id="@Model.SelectedProduct.product_id" asp-route-product_type="@Model.SelectedProduct.product_type">Back</a>
+</nav>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <partial name="_ValidationSummary" model="ViewData.ModelState" />
+    <form class="form" asp-action="Forward" method="post">
+      <div class="govuk-form-group" highlight-error-for="FirstTime" error-class="govuk-form-group--error">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Are you buying @Model.SelectedProduct.product_name for the first time?
+            </h1>
+          </legend>
+          <p class="govuk-body">
+            Your business must be purchasing the approved software for the first time. You cannot apply for a software product that you already own or have an active subscription to.
+          </p>
+          <p class="govuk-body">
+              If you already have software with a supplier listed on the <a href="@Urls.GetComparisonToolUrl(Model.LearningPlatformUrl)" target="_blank" class="govuk-link">Help to Grow: Digital website  (opens in new tab)</a>, you can still apply for other types of software provided by the same supplier. Major software upgrades are permitted.
+          </p>
+          <span asp-validation-for="FirstTime" id="firstTime" class="govuk-error-message"></span>
+          <div class="govuk-radios govuk-radios--inline">
+            <div class="govuk-radios__item">
+              <input asp-for="FirstTime" class="govuk-radios__input" id="firstTime-yes" name="firstTime" type="radio" value="Yes">
+              <label class="govuk-label govuk-radios__label" for="firstTime-yes">
+                Yes
+              </label>
             </div>
-          </fieldset>
-        </div>
-        <button ga-data-action-id="btn-sme-select-software-purchase-continue" class="govuk-button select-software-purchase" data-module="govuk-button">Continue</button>
-      </form>
-    </div>
+            <div class="govuk-radios__item">
+              <input asp-for="FirstTime" class="govuk-radios__input" id="firstTime-no" name="firstTime" type="radio" value="No">
+              <label class="govuk-label govuk-radios__label" for="firstTime-no">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button ga-data-action-id="btn-sme-select-software-purchase-continue" class="govuk-button select-software-purchase" data-module="govuk-button">Continue</button>
+    </form>
   </div>
 </div>

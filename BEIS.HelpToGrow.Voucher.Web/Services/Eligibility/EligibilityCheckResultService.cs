@@ -20,6 +20,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services.Eligibility
         {
             if (indesserCallSavedResult.IsFailed)
             {
+                _logger.LogError("Indesser API call result could not be saved.");
                 return Result.Fail("Indesser API call result not saved");
             }
 

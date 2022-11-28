@@ -2,17 +2,17 @@
 @{
   ViewData["Title"] = "What is your work email address?";
 }
-<div class="govuk-width-container">
+
   <nav class="govuk-!-margin-bottom-9">
     <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" href="/applicantrole">Back</a>
   </nav>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <partial name="_ValidationSummary" model="ViewData.ModelState" />
       <form class="form" asp-action="index" method="post">
-        <partial name="_ValidationSummary" model="ViewData.ModelState" />
-        <div class="govuk-form-group">
+        <div class="govuk-form-group" highlight-error-for="EmailAddress" error-class="govuk-form-group--error">
           <h1 class="govuk-label-wrapper">
-            <label class="govuk-label govuk-label--l" for="email">
+            <label class="govuk-label govuk-label--l" asp-for="EmailAddress">
               What is your work email address?
             </label>
           </h1>
@@ -22,10 +22,9 @@
           {
             <span class="govuk-error-message">Enter an email address in the correct format, like name@example.com</span>
           }
-          <input id="email" asp-for="@Model.EmailAddress" class="govuk-input govuk-!-width-three-quarters" type="text" spellcheck="false" aria-describedby="email-hint" autocomplete="email">
+          <input asp-for="EmailAddress" class="govuk-input govuk-!-width-three-quarters" type="text" spellcheck="false" aria-describedby="email-hint" autocomplete="email">
         </div>
         <button ga-data-action-id="btn-sme-work-email-continue" class="govuk-button work-email" data-module="govuk-button">Continue</button>
       </form>
     </div>
   </div>
-</div>

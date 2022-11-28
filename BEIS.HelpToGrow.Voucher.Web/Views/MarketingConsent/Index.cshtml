@@ -1,5 +1,8 @@
 ﻿@model MarketingConsentViewModel
-<div class="govuk-width-container">
+@{
+  ViewData["Title"] = "Would you like to receive marketing information?";
+}
+
     <nav class="govuk-!-margin-bottom-9">
         <a class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0">Back</a>
     </nav>
@@ -11,15 +14,12 @@
 
                 <div class="govuk-form-group">
 
-                    <div class="govuk-fieldset">
+                    <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <h1 class="govuk-fieldset__heading">
                                 Would you like to receive marketing information?
                             </h1>
                         </legend>
-                        <span style="display:none" id="terms-policy" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span>Select if you have read and accepted the terms and conditions, privacy policy and subsidy control
-                        </span>
 
                         <p>
                             From time to time the Department for Business, Energy &amp; Industrial Strategy (BEIS) may contact you to:<br>
@@ -38,35 +38,30 @@
                             processing and using your personal data to contact you (including through one or more of the third parties identified in the privacy policy).
                         </p>
 
-                    </div>
-
-                    <fieldset class="govuk-fieldset">
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" asp-for="AcceptMarketingByPhone" />
-                            <label class="govuk-label govuk-checkboxes__label" for="optional-phone">
-                                Phone number (optional)
-                            </label>
-                        </div>
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" asp-for="AcceptMarketingByEmail" />
-                            <label class="govuk-label govuk-checkboxes__label" for="optional-email">
-                                Email (optional)
-                            </label>
+                        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                            <div class="govuk-checkboxes__item">
+                                <input class="govuk-checkboxes__input" asp-for="AcceptMarketingByPhone" />
+                                <label class="govuk-label govuk-checkboxes__label"  asp-for="AcceptMarketingByPhone">
+                                    Phone number (optional)
+                                </label>
+                            </div>
+                            <div class="govuk-checkboxes__item">
+                                <input class="govuk-checkboxes__input" asp-for="AcceptMarketingByEmail" />
+                                <label class="govuk-label govuk-checkboxes__label" asp-for="AcceptMarketingByEmail">
+                                    Email (optional)
+                                </label>
+                            </div>
                         </div>
                     </fieldset>
-
-                    <div>
-                        <br>
-                        <p>If you do not want to receive updates, select 'Continue'</p>
-                    </div>
                 </div>
+                <p>If you do not want to receive updates, select 'Continue'</p>
                 <button ga-data-action-id="btn-sme-marketing-consent" class="govuk-button" data-module="govuk-button">
                     Continue
                 </button>
             </form>
         </div>
     </div>
-</div>
+
 @section Scripts {
 <script src="~/js/voucher/navigation.js"></script>
 }

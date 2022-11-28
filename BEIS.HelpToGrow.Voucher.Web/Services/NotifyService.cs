@@ -87,6 +87,7 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
         {
             if (string.IsNullOrWhiteSpace(userVoucher?.tokenPurchaseLink))
             {
+                _logger.LogError("Unable to send the voucher link : The link is not valid");
                 return Result.Fail("The link is not valid");
             }
 

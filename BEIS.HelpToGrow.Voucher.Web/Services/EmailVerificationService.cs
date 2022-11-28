@@ -82,11 +82,23 @@ namespace Beis.HelpToGrow.Voucher.Web.Services
                
                 var  dto = await _enterpriseService.GetUserVoucherFromEnterpriseAsync(verificationDetails.EnterpriseId, verificationDetails.ProductId);
                 if (dto == null)
+                {
+                    _logger.LogError("Email verification failed : The enterprise could not be found.");
                     return Result.Fail("The enterprise could not be found.");
+                }
+                    
                 if (dto.ApplicantDto.EmailAddress != verificationDetails.EmailAddress)
+                {
+                    _logger.LogError("Email verification failed : The email address does not match.");
                     return Result.Fail("The email address does not match.");
+                }
+                    
                 if (dto.ApplicantDto.EnterpriseId != verificationDetails.EnterpriseId)
-                    return Result.Fail(new Error("the Id does not match."));
+                {
+                    _logger.LogError("Email verification failed : The Id does not match.");
+                    return Result.Fail(new Error("The Id does not match."));
+                }
+                    
 
                 return await _enterpriseService.SetEnterpriseAsVerified(verificationDetails.EnterpriseId);
             }

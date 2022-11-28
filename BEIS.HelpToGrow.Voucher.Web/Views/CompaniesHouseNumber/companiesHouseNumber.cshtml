@@ -3,29 +3,27 @@
     ViewData["Title"] = "Enter the Companies House number";
     var verticalErrorStyle = !ViewData.ModelState.IsValid ? "govuk-form-group--error" : string.Empty;
 }
-<div class="govuk-width-container">
-  <nav class="govuk-!-margin-bottom-9">
-    <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-controller="CompaniesHouse" asp-action="Index">Back</a>
-  </nav>
-  <partial name="_ValidationSummary" model="ViewData.ModelState" />
-    <div tabindex="-1" role="group" id="errorSummary" class="govuk-error-summary moj-hidden" data-module="error-summary">
-    </div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <form class="form" asp-action="checkcompanydetails" method="post">
-          <div class="govuk-form-group @verticalErrorStyle">
-            <h1 class="govuk-label-wrapper">
-              <label class="govuk-label govuk-label--l" for="companies-house-number">
-                What is the Companies House number?
-              </label>
-            </h1>
-            <p class="govuk-body">You can find the Companies House number on the certificate of incorporation. You can also <a href="https://find-and-update.company-information.service.gov.uk" class="govuk-link" target="_blank">search the Companies House register (opens in new tab)</a>.</p>
-            <div id="co-number-hint" class="govuk-hint">For example, 12345678</div>
-            <span asp-validation-for="Number" class="govuk-error-message"></span>
-            <input asp-for="Number" class="govuk-input" id="companies-house-number" type="text" maxlength="9" pattern="[0-9]*" inputmode="numeric" aria-describedby="co-number-hint">
-          </div>
-          <button ga-data-action-id="btn-sme-company-house-number-continue" class="govuk-button company-house-number" data-module="govuk-button">Continue</button>
-        </form>
+
+<nav class="govuk-!-margin-bottom-9">
+  <a class="govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0" asp-controller="CompaniesHouse" asp-action="Index">Back</a>
+</nav>
+ 
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+      <partial name="_ValidationSummary" model="ViewData.ModelState" />
+    <form class="form" asp-action="checkcompanydetails" method="post">
+      <div class="govuk-form-group @verticalErrorStyle">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--l" asp-for="Number">
+            What is the Companies House number?
+          </label>
+        </h1>
+        <p class="govuk-body">You can find the Companies House number on the certificate of incorporation. You can also <a href="https://find-and-update.company-information.service.gov.uk" class="govuk-link" target="_blank">search the Companies House register (opens in new tab)</a>.</p>
+        <div id="co-number-hint" class="govuk-hint">For example, 12345678</div>
+        <span asp-validation-for="Number" class="govuk-error-message"></span>
+        <input asp-for="Number" class="govuk-input" type="text" maxlength="9" inputmode="numeric" aria-describedby="co-number-hint">
       </div>
-    </div>
+      <button ga-data-action-id="btn-sme-company-house-number-continue" class="govuk-button company-house-number" data-module="govuk-button">Continue</button>
+    </form>
+  </div>
 </div>

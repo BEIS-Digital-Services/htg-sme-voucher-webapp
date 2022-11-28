@@ -2,58 +2,37 @@
 @{
     ViewData["Title"] = "Apply for discount on business software";
 }
-<div class="govuk-width-container">
-    <nav class="govuk-!-margin-bottom-9">
-      <a href="@Urls.GetComparisonToolUrl(Model.LearningPlatformUrl)" class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0 jsLink">Back</a>
-      <a href="@Urls.GetComparisonToolNoJsUrl(Model.LearningPlatformUrl)" class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0 noJsLink">Back</a>
-    </nav>
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-            <h1 class="govuk-heading-l">Apply for your Help to Grow: Digital discount on approved software</h1>
 
-            <p class="govuk-body">Eligible businesses can apply for a discount of up to 50% or £5,000 (exclusive of VAT) on the cost of buying <strong>one</strong> approved software product. </p>
-            <p class="govuk-body">The financial discount covers 12 months&#700; worth of approved software product core costs.</p>
+<nav class="govuk-!-margin-bottom-9">
+    <a href="@Urls.GetComparisonToolUrl(Model.LearningPlatformUrl)" class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0 app-js-show--inline-block">Back</a>
+    <a href="@Urls.GetComparisonToolNoJsUrl(Model.LearningPlatformUrl)" class="govuk-back-link  govuk-!-margin-top-0 govuk-!-margin-bottom-0 app-js-hide" aria-hidden="true">Back</a>
+</nav>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Apply for your Help to Grow: Digital discount on approved software</h1>
+        <p class="govuk-body">Eligible businesses can apply for a discount of up to 50% or £5,000 (exclusive of VAT) on the cost of buying <strong>one</strong> approved software product. </p>
+        <p class="govuk-body">The financial discount covers 12 months&#700; worth of approved software product core costs.</p>
 
-            <h2 class="govuk-heading-m">Purchasing your software</h2>
+        <h2 class="govuk-heading-m">Purchasing your software</h2>
+        <p class="govuk-body">After you have completed the online application and passed all fraud and eligibility checks, you will receive a unique discount link to purchase the software directly from your chosen supplier’s website. These fraud and eligibility checks will not affect your business&#700; credit score.</p>
+        <p class="govuk-body">For full terms and conditions, please visit: <a asp-controller="TermsAndConditions" asp-action="Terms" class="govuk-link">terms and conditions</a>.</p>
 
-            <p class="govuk-body">After you have completed the online application and passed all fraud and eligibility checks, you will receive a unique discount link to purchase the software directly from your chosen supplier’s website. These fraud and eligibility checks will not affect your business&#700; credit score.</p>
+        <a asp-controller="newtosoftware" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
+            Apply now
+            <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+            </svg>
+        </a>
 
-            <p class="govuk-body">For full terms and conditions, please visit: <a asp-controller="TermsAndConditions" asp-action="Terms" class="govuk-link">terms and conditions</a>.</p>
-
-            <form class="form">
-                <a asp-controller="newtosoftware" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
-                    Apply now
-                    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-                        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
-                    </svg>
-                </a>
-            </form>
-
-            <h2 class="govuk-heading-m">Eligibility</h2>
-            <p class="govuk-body">This financial discount is available to UK businesses that meet <strong>all four</strong> eligibility criteria below:</p>
-            <ul class="govuk-list govuk-list--number">
-                <li>Your business must have a registered office in the UK and be registered at the relevant Companies House or be a registered society listed on the Financial Conduct Authority’s Mutuals Register.</li>
-                <li>Your business must have been actively trading for over 12 months prior to the date of application and have an incorporation date of, at minimum, 365 days prior to the date of application.</li>
-                <li>Your business must have a total of between 1 and 249 employees. <a href="/guidance" class="govuk-link"> Read our General Guidance for more information about employee criteria</a></li>
-                <li>Your business must be purchasing the approved software for the first time.</li>
-            </ul>
-
-            <p class="govuk-body">Check that your <a target="_blank" href="@Urls.GetBusinessEligibilityUrl(Model.LearningPlatformUrl)" class="govuk-link">business is eligible (opens in new tab)</a>.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-        <partial name="_UsefulLinks" view-data="ViewData" />
+        <h2 class="govuk-heading-m">Eligibility</h2>
+        <p class="govuk-body">This financial discount is available to UK businesses that meet <strong>all four</strong> eligibility criteria below:</p>
+        <ol class="govuk-list govuk-list--number">
+            <li>Your business must have a registered office in the UK and be registered at the relevant Companies House or be a registered society listed on the Financial Conduct Authority's Mutuals Register.</li>
+            <li>Your business must have been actively trading for over 12 months prior to the date of application and have an incorporation date of, at minimum, 365 days prior to the date of application.</li>
+            <li>Your business must have a total of between 1 and 249 employees. <a href="/guidance" class="govuk-link"> Read our General Guidance for more information about employee criteria</a></li>
+            <li>Your business must be purchasing the approved software for the first time.</li>
+        </ol>
+        <p class="govuk-body">Check that your <a target="_blank" href="@Urls.GetBusinessEligibilityUrl(Model.LearningPlatformUrl)" class="govuk-link">business is eligible (opens in new tab)</a>.</p>
     </div>
+    <partial name="_UsefulLinks" view-data="ViewData" />
 </div>
